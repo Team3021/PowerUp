@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3021.robot.controller;
+package org.usfirst.frc.team3021.robot.controller.station;
 
 public class DefaultController extends BaseController {
 	

@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Vector;
 
 import org.usfirst.frc.team3021.robot.commands.auto.*;
-
-import org.usfirst.frc.team3021.robot.controller.AttackThreeController;
-import org.usfirst.frc.team3021.robot.controller.AuxController;
-import org.usfirst.frc.team3021.robot.controller.Controller;
-import org.usfirst.frc.team3021.robot.controller.DefaultController;
-import org.usfirst.frc.team3021.robot.controller.Xbox360Controller;
+import org.usfirst.frc.team3021.robot.controller.station.AttackThreeController;
+import org.usfirst.frc.team3021.robot.controller.station.AuxController;
+import org.usfirst.frc.team3021.robot.controller.station.Controller;
+import org.usfirst.frc.team3021.robot.controller.station.DefaultController;
+import org.usfirst.frc.team3021.robot.controller.station.Xbox360Controller;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;

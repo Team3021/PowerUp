@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3021.robot.subsystem;
 
-import org.usfirst.frc.team3021.robot.controller.Controller;
+import org.usfirst.frc.team3021.robot.controller.station.Controller;
 
 public abstract class Subsystem extends edu.wpi.first.wpilibj.command.Subsystem {
 	

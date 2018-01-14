@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3021.robot;
 
-import org.usfirst.frc.team3021.robot.controller.Controller;
+import org.usfirst.frc.team3021.robot.controller.station.Controller;
 import org.usfirst.frc.team3021.robot.subsystem.Drive;
 import org.usfirst.frc.team3021.robot.subsystem.Vision;
 
