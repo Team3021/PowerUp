@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3021.robot.commands.driving;
 
-import org.usfirst.frc.team3021.robot.Stanley;
+import org.usfirst.frc.team3021.robot.QBert;
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
 
 public class MoveForwardForDistance extends DriveCommand {
@@ -31,16 +31,16 @@ public class MoveForwardForDistance extends DriveCommand {
 			moveValue = -1.0 * moveValue;
 		}
 		
-		Stanley.robotDrive.moveWithGyro(moveValue);
+		QBert.robotDrive.moveWithGyro(moveValue);
 	}
 	
 	@Override
 	protected void end() {
-		System.out.println("End moving " + direction + " for distance : " + desiredDistance + " and moved distance : " + Stanley.robotDrive.getDistance());
+		System.out.println("End moving " + direction + " for distance : " + desiredDistance + " and moved distance : " + QBert.robotDrive.getDistance());
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs(Stanley.robotDrive.getDistance()) >= Math.abs(desiredDistance));
+		return (Math.abs(QBert.robotDrive.getDistance()) >= Math.abs(desiredDistance));
 	}
 }

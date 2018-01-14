@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import org.usfirst.frc.team3021.robot.commands.DriveCommand;
 import org.usfirst.frc.team3021.robot.commands.auto.*;
-import org.usfirst.frc.team3021.robot.commands.device.*;
-import org.usfirst.frc.team3021.robot.commands.driving.*;
-import org.usfirst.frc.team3021.robot.commands.test.*;
 
 import org.usfirst.frc.team3021.robot.controller.AttackThreeController;
 import org.usfirst.frc.team3021.robot.controller.AuxController;
@@ -44,12 +40,6 @@ public class Configuration {
 	private SendableChooser<String> autonomousChooser = new SendableChooser<>();
 	private SendableChooser<String> controllerChooser = new SendableChooser<>();
 	
-	private List<Subsystem> subsystems = new ArrayList<Subsystem>();
-
-	private List<Command> testCommands = new ArrayList<Command>();
-	private List<Command> moveCommands = new ArrayList<Command>();
-	private List<Command> turnCommands = new ArrayList<Command>();
-	private List<Command> deviceCommands = new ArrayList<Command>();
 	private List<Command> autoCommands = new ArrayList<Command>();
 
 	public void addAutonmousChoices() {
@@ -74,7 +64,7 @@ public class Configuration {
 		
 	}
 
-	private void addSubsystemsToSmartDashboard(List<Subsystem> subsystems) {
+	public void addSubsystemsToSmartDashboard(List<Subsystem> subsystems) {
 		boolean isDashboardSubsystemsEnabled = Preferences.getInstance().getBoolean(DASHBAORD_SUBSYSTEMS_ENABLED, false);
 		
 		if (!isDashboardSubsystemsEnabled) {
@@ -87,25 +77,19 @@ public class Configuration {
 	}
 	
 	public void addCommandsToDashboard() {
-		double speed = DriveCommand.getAutonomousMoveSpeed();
-		double time = DriveCommand.getAutonomousMoveTime();
-		double distance = DriveCommand.getAutonomousMoveDistance();
-		
 		SmartDashboard.putData(Scheduler.getInstance());
 
 		// ****************************************************************************
-		// **********************        AUTO COMMANDS           **********************
+		// **********************      AUTO COMMANDS RED         **********************
 		// ****************************************************************************
 		
-		autoCommands.add(new RedStartLeftToLeftGear());
-		autoCommands.add(new RedStartCenterToCenterGear());
-		autoCommands.add(new RedStartRightToRightGear());
-		autoCommands.add(new RedStartCenterToCenterGearToCrossLine());
+		autoCommands.add(new RedStartLeftToLeftSwitchPlate());
+
+		// ****************************************************************************
+		// **********************      AUTO COMMANDS BLUE        **********************
+		// ****************************************************************************
 		
-		autoCommands.add(new BlueStartLeftToLeftGear());
-		autoCommands.add(new BlueStartCenterToCenterGear());
-		autoCommands.add(new BlueStartRightToRightGear());
-		autoCommands.add(new BlueStartCenterToCenterGearToCrossLine());
+		autoCommands.add(new BlueStartLeftToLeftSwitchPlate());
 
 		// Add commands to dashboard
 		addCommandsToSmartDashboard("Autonomous", autoCommands);

@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3021.robot.commands;
 
-import org.usfirst.frc.team3021.robot.Stanley;
+import org.usfirst.frc.team3021.robot.QBert;
 
 import edu.wpi.first.wpilibj.Preferences;
 
@@ -24,13 +24,13 @@ public abstract class DriveCommand extends Command {
 	public DriveCommand() {
 		super();
 		
-		requires(Stanley.robotDrive);
+		requires(QBert.robotDrive);
 	}
 
 	@Override
 	protected void initialize() {
-		Stanley.robotDrive.zeroGyro();
-		Stanley.robotDrive.zeroEncoders();
+		QBert.robotDrive.zeroGyro();
+		QBert.robotDrive.zeroEncoders();
 
 		hasStarted = false;
 
@@ -65,22 +65,22 @@ public abstract class DriveCommand extends Command {
 		}
 		
 		// Checks to see if the robot has started moving.
-		if (Stanley.robotDrive.isGyroMoving() && hasMoved == false) {
+		if (QBert.robotDrive.isGyroMoving() && hasMoved == false) {
 			isMoving = true;
 			hasMoved = true;
 			System.out.println("started checking movement at time: " + timeSinceInitialized());
 		}
 		// False will not be returned unless the robot has already started moving.
 		else if (hasMoved == true) {
-			if (!Stanley.robotDrive.isGyroMoving()) {
+			if (!QBert.robotDrive.isGyroMoving()) {
 				System.out.println("gyro status caused command to stop moving at time: " + timeSinceInitialized());
 				
 				isMoving = false;
 				hasMoved = false;
 			}
 			
-			if (Stanley.robotDrive.getMotorOutput() < 0.05) {
-				System.out.println("motor status of " + Stanley.robotDrive.getMotorOutput() + " caused command to stop moving at time: " + timeSinceInitialized());
+			if (QBert.robotDrive.getMotorOutput() < 0.05) {
+				System.out.println("motor status of " + QBert.robotDrive.getMotorOutput() + " caused command to stop moving at time: " + timeSinceInitialized());
 				
 				isMoving = false;
 				hasMoved = false;

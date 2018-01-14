@@ -1,12 +1,12 @@
 package org.usfirst.frc.team3021.robot.commands;
 
-import org.usfirst.frc.team3021.robot.Stanley;
+import org.usfirst.frc.team3021.robot.QBert;
 
 public class VisionCommand extends Command {
 	
 	public VisionCommand() {
 		super();
 		
-		requires(Stanley.vision);
+		requires(QBert.getVisionSubSystem());
 	}
 }

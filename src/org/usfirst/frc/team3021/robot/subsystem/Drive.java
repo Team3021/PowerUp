@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3021.robot.subsystem;
 
-import org.usfirst.frc.team3021.robot.Stanley;
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
 import org.usfirst.frc.team3021.robot.commands.driving.DriveWithJoystick;
 import org.usfirst.frc.team3021.robot.commands.driving.TurnLeftToAngle45;
@@ -157,11 +156,11 @@ public class Drive extends Subsystem {
         }
 		
         if (mainController.isZeroGyro() || auxController.isZeroGyro()) {
-        	Stanley.robotDrive.zeroGyro();
+        	zeroGyro();
         }
 		
         if (mainController.isZeroEncoders() || auxController.isZeroEncoders()) {
-        	Stanley.robotDrive.zeroEncoders();
+        	zeroEncoders();
         }
 		
         // Lets the current autonomous command continue to run.

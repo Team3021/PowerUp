@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3021.robot.controller;
 
-import org.usfirst.frc.team3021.robot.Stanley;
+import org.usfirst.frc.team3021.robot.QBert;
 
 public class AuxController extends BaseController {
 	
@@ -31,7 +31,7 @@ public class AuxController extends BaseController {
 	
 	@Override
 	public boolean getRawButton(String action) {
-		if (!Stanley.configuration.isAuxPanelEnabled()) {
+		if (!QBert.getConfiguration().isAuxPanelEnabled()) {
 			return false;
 		}
 		
