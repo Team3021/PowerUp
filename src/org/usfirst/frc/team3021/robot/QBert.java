@@ -1,8 +1,8 @@
 package org.usfirst.frc.team3021.robot;
 
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
-import org.usfirst.frc.team3021.robot.subsystem.Drive;
-import org.usfirst.frc.team3021.robot.subsystem.Vision;
+import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
+import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,21 +13,23 @@ public class QBert extends IterativeRobot {
 	// Member Attributes
 	public static Configuration configuration;
 	
-	public static Drive robotDrive;
+	private static DriveSystem driveSystem;
 	
-	public static Vision vision;
+	private static VisionSystem visionSystem;
 	
 	public static Controller mainController;
 	public static Controller auxController;
 
 	public QBert() {
 		super();
+
+		// Create the sub systems
+		visionSystem = new VisionSystem();
 		
+		driveSystem = new DriveSystem();
+		
+		// Create the configuration and initialize
 		configuration = new Configuration();
-		
-		vision = new Vision();
-		
-		robotDrive = new Drive();
 		
 		configuration.addSubsystemsToDashboard();
 		
@@ -50,8 +52,8 @@ public class QBert extends IterativeRobot {
 
 		auxController = configuration.initializeAuxController();
 
-		robotDrive.setControllers(mainController, auxController);
-		vision.setControllers(mainController, auxController);
+		driveSystem.setControllers(mainController, auxController);
+		visionSystem.setControllers(mainController, auxController);
 	}
 
 	// ****************************************************************************
@@ -91,8 +93,8 @@ public class QBert extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		robotDrive.teleopPeriodic();
-		vision.teleopPeriodic();
+		driveSystem.teleopPeriodic();
+		visionSystem.teleopPeriodic();
 	}
 
 	// ****************************************************************************
@@ -137,12 +139,12 @@ public class QBert extends IterativeRobot {
 		return configuration;
 	}
 
-	public static Vision getVisionSubSystem() {
-		return vision;
+	public static VisionSystem getVisionSystem() {
+		return visionSystem;
 	}
 
-	public static Drive getDriveSubSystem() {
-		return robotDrive;
+	public static DriveSystem getDriveSystem() {
+		return driveSystem;
 	}
 }
 

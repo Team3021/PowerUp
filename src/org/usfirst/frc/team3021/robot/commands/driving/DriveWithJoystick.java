@@ -1,9 +1,17 @@
 package org.usfirst.frc.team3021.robot.commands.driving;
 
-import org.usfirst.frc.team3021.robot.QBert;
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
+import org.usfirst.frc.team3021.robot.controller.station.Controller;
 
 public class DriveWithJoystick extends DriveCommand {
+
+	private Controller mainController = null;
+	
+	public DriveWithJoystick(Controller mainController) {
+		super();
+		
+		this.mainController = mainController;
+	}
 
 	@Override
 	protected void initialize() {
@@ -12,7 +20,7 @@ public class DriveWithJoystick extends DriveCommand {
 	
 	@Override
 	protected void execute() {
-		QBert.robotDrive.drive(getMoveValue(), getTurnValue());
+		driveSystem.drive(getMoveValue(), getTurnValue());
 	}
 
 	@Override
@@ -21,14 +29,14 @@ public class DriveWithJoystick extends DriveCommand {
 	}
 
 	private double getMoveValue() {
-		if (QBert.mainController == null) {
+		if (mainController == null) {
 			return 0;
 		}
 		
-		double moveValue = QBert.mainController.getMoveValue();
+		double moveValue = mainController.getMoveValue();
 		
 		// Determines whether the output of expSpeed should be positive or negative.
-		int verticalDirection = getDirection(QBert.mainController.getMoveValue());
+		int verticalDirection = getDirection(mainController.getMoveValue());
 
 		// These equations are modified versions of the standard exponential form, ab^x. 
 		// The equations here are of the form d(ab^|x| - a) where d is the respective direction value (note above). 
@@ -40,11 +48,11 @@ public class DriveWithJoystick extends DriveCommand {
 	}
 
 	private double getTurnValue() {
-		if (QBert.mainController == null) {
+		if (mainController == null) {
 			return 0;
 		}
 		
-		double turnValue = QBert.mainController.getTurnValue();
+		double turnValue = mainController.getTurnValue();
 
 		int turnDirection = getDirection(turnValue);
 

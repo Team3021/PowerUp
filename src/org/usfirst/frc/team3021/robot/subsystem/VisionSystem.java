@@ -10,7 +10,7 @@ import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Preferences;
 
-public class Vision extends Subsystem {
+public class VisionSystem extends Subsystem {
 	
 	private final String PREF_VISION_CAMERA_0_ENABLED = "Vision.camera.0.enabled";
 	private final String PREF_VISION_CAMERA_1_ENABLED = "Vision.camera.1.enabled";
@@ -39,7 +39,7 @@ public class Vision extends Subsystem {
 	// our robot vision processing
 	private VisionProcessor visionProcessor;
 	
-	public Vision() {
+	public VisionSystem() {
 		initialize();
 	}
 	

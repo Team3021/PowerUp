@@ -3,17 +3,23 @@ package org.usfirst.frc.team3021.robot.controller.station;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.usfirst.frc.team3021.robot.Configuration;
+import org.usfirst.frc.team3021.robot.QBert;
+
 import edu.wpi.first.wpilibj.Joystick;
 
 public abstract class BaseController implements Controller {
-	
-	List<ButtonAction> buttonActions = new ArrayList<ButtonAction>();
-	
+
 	// Member Attributes
-	Joystick controller;
+
+	protected List<ButtonAction> buttonActions = new ArrayList<ButtonAction>();
+	
+	protected Joystick controller;
+	
+	protected Configuration configuration;
 	
 	public BaseController() {
-		
+		this.configuration = QBert.getConfiguration();
 	}
 	
 	public BaseController(int port) {

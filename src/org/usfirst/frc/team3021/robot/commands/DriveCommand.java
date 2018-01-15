@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3021.robot.commands;
 
 import org.usfirst.frc.team3021.robot.QBert;
+import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
 
 import edu.wpi.first.wpilibj.Preferences;
 
@@ -17,6 +18,8 @@ public abstract class DriveCommand extends Command {
 	protected static final String FORWARD = "forward";
 	protected static final String BACKWARD = "backward";
 	
+	protected DriveSystem driveSystem = null;
+	
 	protected boolean hasStarted = false;
 	
 	protected boolean hasMoved = false;
@@ -24,13 +27,15 @@ public abstract class DriveCommand extends Command {
 	public DriveCommand() {
 		super();
 		
-		requires(QBert.robotDrive);
+		this.driveSystem = QBert.getDriveSystem();
+		
+		requires(this.driveSystem);
 	}
 
 	@Override
 	protected void initialize() {
-		QBert.robotDrive.zeroGyro();
-		QBert.robotDrive.zeroEncoders();
+		driveSystem.zeroGyro();
+		driveSystem.zeroEncoders();
 
 		hasStarted = false;
 
@@ -65,22 +70,22 @@ public abstract class DriveCommand extends Command {
 		}
 		
 		// Checks to see if the robot has started moving.
-		if (QBert.robotDrive.isGyroMoving() && hasMoved == false) {
+		if (driveSystem.isGyroMoving() && hasMoved == false) {
 			isMoving = true;
 			hasMoved = true;
 			System.out.println("started checking movement at time: " + timeSinceInitialized());
 		}
 		// False will not be returned unless the robot has already started moving.
 		else if (hasMoved == true) {
-			if (!QBert.robotDrive.isGyroMoving()) {
+			if (!driveSystem.isGyroMoving()) {
 				System.out.println("gyro status caused command to stop moving at time: " + timeSinceInitialized());
 				
 				isMoving = false;
 				hasMoved = false;
 			}
 			
-			if (QBert.robotDrive.getMotorOutput() < 0.05) {
-				System.out.println("motor status of " + QBert.robotDrive.getMotorOutput() + " caused command to stop moving at time: " + timeSinceInitialized());
+			if (driveSystem.getMotorOutput() < 0.05) {
+				System.out.println("motor status of " + driveSystem.getMotorOutput() + " caused command to stop moving at time: " + timeSinceInitialized());
 				
 				isMoving = false;
 				hasMoved = false;

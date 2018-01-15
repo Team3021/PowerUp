@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3021.robot.commands.driving;
 
-import org.usfirst.frc.team3021.robot.QBert;
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
 
 public abstract class TurnToAngle extends DriveCommand {
@@ -22,16 +21,16 @@ public abstract class TurnToAngle extends DriveCommand {
 	
 	@Override
 	protected void execute() {
-		QBert.robotDrive.turnToAngle(desiredAngle);
+		driveSystem.turnToAngle(desiredAngle);
 	}
 	
 	@Override
 	protected void end() {
-		System.out.println("Finished TurnToAngle for : " + desiredAngle + " degrees; turned : " + QBert.robotDrive.getGyroRotation());
+		System.out.println("Finished TurnToAngle for : " + desiredAngle + " degrees; turned : " + driveSystem.getGyroRotation());
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs(QBert.robotDrive.getGyroRotation()) >= Math.abs(desiredAngle));
+		return (Math.abs(driveSystem.getGyroRotation()) >= Math.abs(desiredAngle));
 	}
 }

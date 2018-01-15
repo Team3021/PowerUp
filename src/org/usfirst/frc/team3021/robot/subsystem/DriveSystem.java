@@ -12,7 +12,7 @@ import org.usfirst.frc.team3021.robot.controller.onboard.GyroController;
 
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-public class Drive extends Subsystem {
+public class DriveSystem extends Subsystem {
 
 	private DriveController driveController;
 	
@@ -22,7 +22,7 @@ public class Drive extends Subsystem {
 
 	private DriveCommand autonomousCommand;
 	
-	public Drive() {
+	public DriveSystem() {
 		driveController = new DriveController();
 		
 		gyroController = new GyroController();
@@ -30,7 +30,8 @@ public class Drive extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		defaultCommand = new DriveWithJoystick();
+		defaultCommand = new DriveWithJoystick(mainController);
+		
 		setDefaultCommand(defaultCommand);
 	}
 
