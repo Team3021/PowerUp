@@ -78,14 +78,6 @@ public class DriveSystem extends Subsystem {
 		drive(0, turnValue);
 	}
 
-	public void turnToTarget(double desirecPosition) {
-		setDesiredTargetPostion(desirecPosition);
-		
-		double turnValue = getTargetTurnValue();
-		
-		drive(0, turnValue);
-	}
-
 	// ****************************************************************************
 	// **********************              GYRO              **********************
 	// ****************************************************************************
@@ -123,23 +115,7 @@ public class DriveSystem extends Subsystem {
 	}
 	
 	// ****************************************************************************
-	// **********************             TARGET             **********************
-	// ****************************************************************************
-
-	public double getDesiredTargetPosition() {
-		return 0;
-	}
-	
-	private void setDesiredTargetPostion(double value) {
-		return;
-	}
-	
-	private double getTargetTurnValue() {
-		return 0;
-	}
-	
-	// ****************************************************************************
-	// **********************             TELEOP            **********************
+	// **********************             TELEOP             **********************
 	// ****************************************************************************
 
 	@Override
