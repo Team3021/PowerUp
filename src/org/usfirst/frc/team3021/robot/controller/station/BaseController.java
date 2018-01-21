@@ -24,6 +24,7 @@ public abstract class BaseController implements Controller {
 	
 	public BaseController(int port) {
 		controller = new Joystick(port);
+		this.configuration = QBert.getConfiguration();
 	}
 
 	@Override
