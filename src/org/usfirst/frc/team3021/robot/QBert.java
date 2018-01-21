@@ -12,14 +12,14 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class QBert extends IterativeRobot {
 	
 	// Member Attributes
-	public static Configuration configuration;
+	private static Configuration configuration;
 	
 	private static DriveSystem driveSystem;
-	public static CollectorSystem collectorSystem;	
+	private static CollectorSystem collectorSystem;	
 	private static VisionSystem visionSystem;
 	
-	public static Controller mainController;
-	public static Controller auxController;
+	private static Controller mainController;
+	private static Controller auxController;
 
 	public QBert() {
 		super();
