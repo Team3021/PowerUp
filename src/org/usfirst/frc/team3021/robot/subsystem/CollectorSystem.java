@@ -1,12 +1,12 @@
 package org.usfirst.frc.team3021.robot.subsystem;
 
-//import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
+import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
 
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Preferences;
 
-public class Collector extends Subsystem {
+public class CollectorSystem extends Subsystem {
 	
 	private static final String PREF_VOLTAGE = "Collector.motor.voltage";
 	private static final double DEFAULT_VOLTAGE = 0.55;
@@ -14,10 +14,9 @@ public class Collector extends Subsystem {
 	private CANTalon right_motor;
 	private CANTalon left_motor;
 	
-	public Collector() {		
+	public CollectorSystem() {		
 		right_motor = new CANTalon(21);
 		left_motor = new CANTalon(27);
-
 	}
 	
 	@Override
@@ -62,6 +61,6 @@ public class Collector extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
-		//setDefaultCommand(new CollectorCommand());
+		setDefaultCommand(new CollectorCommand());
 	}	
 }
