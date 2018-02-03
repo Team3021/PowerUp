@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3021.robot;
 
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
+import org.usfirst.frc.team3021.robot.subsystem.CollectorSystem;
 import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
 import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
 
@@ -11,14 +12,14 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class QBert extends IterativeRobot {
 	
 	// Member Attributes
-	public static Configuration configuration;
+	private static Configuration configuration;
 	
 	private static DriveSystem driveSystem;
-	
+	private static CollectorSystem collectorSystem;	
 	private static VisionSystem visionSystem;
 	
-	public static Controller mainController;
-	public static Controller auxController;
+	private static Controller mainController;
+	private static Controller auxController;
 
 	public QBert() {
 		super();
@@ -27,6 +28,8 @@ public class QBert extends IterativeRobot {
 		visionSystem = new VisionSystem();
 		
 		driveSystem = new DriveSystem();
+		
+		collectorSystem = new CollectorSystem();
 		
 		// Create the configuration and initialize
 		configuration = new Configuration();
@@ -54,6 +57,7 @@ public class QBert extends IterativeRobot {
 
 		driveSystem.setControllers(mainController, auxController);
 		visionSystem.setControllers(mainController, auxController);
+		collectorSystem.setControllers(mainController, auxController);
 	}
 
 	// ****************************************************************************
@@ -95,6 +99,8 @@ public class QBert extends IterativeRobot {
 		
 		driveSystem.teleopPeriodic();
 		visionSystem.teleopPeriodic();
+		collectorSystem.teleopPeriodic();
+		
 	}
 
 	// ****************************************************************************
@@ -145,6 +151,10 @@ public class QBert extends IterativeRobot {
 
 	public static DriveSystem getDriveSystem() {
 		return driveSystem;
+	}
+
+	public static CollectorSystem getCollectorSystem() {
+		return collectorSystem;
 	}
 }
 

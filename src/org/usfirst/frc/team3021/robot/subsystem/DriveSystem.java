@@ -81,14 +81,6 @@ public class DriveSystem extends Subsystem {
 		drive(input);
 	}
 
-	public void turnToTarget(double desiredPosition) {
-		setDesiredTargetPostion(desiredPosition);
-		
-		ArcadeDriveInput input = new ArcadeDriveInput(0, getTargetTurnValue());
-		
-		drive(input);
-	}
-
 	// ****************************************************************************
 	// **********************              GYRO              **********************
 	// ****************************************************************************
@@ -126,23 +118,7 @@ public class DriveSystem extends Subsystem {
 	}
 	
 	// ****************************************************************************
-	// **********************             TARGET             **********************
-	// ****************************************************************************
-
-	public double getDesiredTargetPosition() {
-		return 0;
-	}
-	
-	private void setDesiredTargetPostion(double value) {
-		return;
-	}
-	
-	private double getTargetTurnValue() {
-		return 0;
-	}
-	
-	// ****************************************************************************
-	// **********************             TELEOP            **********************
+	// **********************             TELEOP             **********************
 	// ****************************************************************************
 
 	@Override
