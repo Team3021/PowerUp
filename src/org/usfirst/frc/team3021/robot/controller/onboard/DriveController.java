@@ -3,6 +3,7 @@ package org.usfirst.frc.team3021.robot.controller.onboard;
 import org.usfirst.frc.team3021.robot.inputs.ArcadeDriveInput;
 import org.usfirst.frc.team3021.robot.inputs.DriveInput;
 import org.usfirst.frc.team3021.robot.inputs.LeftRightDriveInput;
+import org.usfirst.frc.team3021.robot.inputs.TankDriveInput;
 
 import com.ctre.CANTalon;
 
@@ -169,7 +170,8 @@ public class DriveController {
 			robotDrive.setLeftRightMotorOutputs(voltageInput.getLeftInput(), voltageInput.getRightInput());
 		}
 		else if (input instanceof TankDriveInput) {
-			
+			TankDriveInput tankInput = (TankDriveInput) input;
+			robotDrive.tankDrive(tankInput.getLeftInput(), tankInput.getRightInput());
 		}
 		
 	}
