@@ -1,5 +1,9 @@
 package org.usfirst.frc.team3021.robot.controller.onboard;
 
+import org.usfirst.frc.team3021.robot.inputs.ArcadeDriveInput;
+import org.usfirst.frc.team3021.robot.inputs.DriveInput;
+import org.usfirst.frc.team3021.robot.inputs.VoltageDriveInput;
+
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -155,8 +159,15 @@ public class DriveController {
 	// **********************            ACTIONS             **********************
 	// ****************************************************************************
 
-	public void drive(double moveValue, double turnValue) {
-		robotDrive.arcadeDrive(moveValue, turnValue, false);
+	public void drive(DriveInput input) {
+		if (input instanceof ArcadeDriveInput) {
+			ArcadeDriveInput arcadeInput = (ArcadeDriveInput) input;
+			robotDrive.arcadeDrive(arcadeInput.getMoveValue(), arcadeInput.getTurnValue(), false);
+		}
+		else if (input instanceof VoltageDriveInput) {
+			// Not yet implemented
+		}
+		
 	}
 	
 	public void stop() {

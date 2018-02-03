@@ -2,6 +2,7 @@ package org.usfirst.frc.team3021.robot.commands.driving;
 
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
+import org.usfirst.frc.team3021.robot.inputs.ArcadeDriveInput;
 
 public class DriveWithJoystick extends DriveCommand {
 
@@ -20,7 +21,8 @@ public class DriveWithJoystick extends DriveCommand {
 	
 	@Override
 	protected void execute() {
-		driveSystem.drive(getMoveValue(), getTurnValue());
+		ArcadeDriveInput input = new ArcadeDriveInput(getMoveValue(), getTurnValue());
+		driveSystem.drive(input);
 	}
 
 	@Override

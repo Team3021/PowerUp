@@ -9,6 +9,8 @@ import org.usfirst.frc.team3021.robot.commands.driving.TurnRightToAngle90;
 import org.usfirst.frc.team3021.robot.commands.driving.TurnToAngle180;
 import org.usfirst.frc.team3021.robot.controller.onboard.DriveController;
 import org.usfirst.frc.team3021.robot.controller.onboard.GyroController;
+import org.usfirst.frc.team3021.robot.inputs.ArcadeDriveInput;
+import org.usfirst.frc.team3021.robot.inputs.DriveInput;
 
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -47,8 +49,8 @@ public class DriveSystem extends Subsystem {
 		return driveController.getEncoderDistance();
 	}
 
-	public void drive(double moveValue, double turnValue) {
-		driveController.drive(moveValue, turnValue);
+	public void drive(DriveInput input) {
+		driveController.drive(input);
 	}
 	
 	public double getMotorOutput() {
@@ -59,7 +61,8 @@ public class DriveSystem extends Subsystem {
 	// This assumes that forward is set to zero degrees
 	// and thus the gyro offset is is a deviation from going straight forward
 	public void moveWithGyro(double moveValue) {
-		drive(moveValue, gyroController.getTurnValue());
+		ArcadeDriveInput input = new ArcadeDriveInput(moveValue, gyroController.getTurnValue());
+		drive(input);
 	}
 
 	public void stop() {
@@ -73,17 +76,17 @@ public class DriveSystem extends Subsystem {
 	public void turnToAngle(double desiredAngle) {
 		setGyroDesiredAngle(desiredAngle);
 		
-		double turnValue = getGyroTurnValue();
+		ArcadeDriveInput input = new ArcadeDriveInput(0, getGyroTurnValue());
 		
-		drive(0, turnValue);
+		drive(input);
 	}
 
-	public void turnToTarget(double desirecPosition) {
-		setDesiredTargetPostion(desirecPosition);
+	public void turnToTarget(double desiredPosition) {
+		setDesiredTargetPostion(desiredPosition);
 		
-		double turnValue = getTargetTurnValue();
+		ArcadeDriveInput input = new ArcadeDriveInput(0, getTargetTurnValue());
 		
-		drive(0, turnValue);
+		drive(input);
 	}
 
 	// ****************************************************************************
