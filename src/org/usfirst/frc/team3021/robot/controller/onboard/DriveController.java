@@ -2,7 +2,7 @@ package org.usfirst.frc.team3021.robot.controller.onboard;
 
 import org.usfirst.frc.team3021.robot.inputs.ArcadeDriveInput;
 import org.usfirst.frc.team3021.robot.inputs.DriveInput;
-import org.usfirst.frc.team3021.robot.inputs.VoltageDriveInput;
+import org.usfirst.frc.team3021.robot.inputs.LeftRightDriveInput;
 
 import com.ctre.CANTalon;
 
@@ -164,8 +164,12 @@ public class DriveController {
 			ArcadeDriveInput arcadeInput = (ArcadeDriveInput) input;
 			robotDrive.arcadeDrive(arcadeInput.getMoveValue(), arcadeInput.getTurnValue(), false);
 		}
-		else if (input instanceof VoltageDriveInput) {
-			// Not yet implemented
+		else if (input instanceof LeftRightDriveInput) {
+			LeftRightDriveInput voltageInput = (LeftRightDriveInput) input;
+			robotDrive.setLeftRightMotorOutputs(voltageInput.getLeftInput(), voltageInput.getRightInput());
+		}
+		else if (input instanceof TankDriveInput) {
+			
 		}
 		
 	}
