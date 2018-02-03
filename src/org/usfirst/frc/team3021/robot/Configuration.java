@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.usfirst.frc.team3021.robot.commands.auto.*;
+import org.usfirst.frc.team3021.robot.commands.driving.MoveForwardEscalateSpeed;
 import org.usfirst.frc.team3021.robot.controller.station.AttackThreeController;
 import org.usfirst.frc.team3021.robot.controller.station.AuxController;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
@@ -40,6 +41,8 @@ public class Configuration {
 	private SendableChooser<String> controllerChooser = new SendableChooser<>();
 	
 	private List<Command> autoCommands = new ArrayList<Command>();
+	// Part of Nathan's drive experiments
+	private List<Command> experimentCommands = new ArrayList<Command>();
 
 	public void addAutonmousChoices() {
 		autonomousChooser.addDefault("[Red] [Left] to [Left Gear]", "[Red] [Left] to [Left Gear]");
@@ -53,6 +56,12 @@ public class Configuration {
 		SmartDashboard.putData("Autonomous Mode", autonomousChooser);
 	}
 
+	public void addExperimentCommands() {
+		experimentCommands.add(new MoveForwardEscalateSpeed());
+		
+		addCommandsToSmartDashboard("Experiments", experimentCommands);
+	}
+	
 	public void addControllerChoices() {
 		controllerChooser.addDefault(ATTACK_THREE, ATTACK_THREE);
 		
