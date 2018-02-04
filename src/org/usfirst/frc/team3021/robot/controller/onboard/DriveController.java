@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveController {
@@ -78,9 +77,6 @@ public class DriveController {
 		rightEncoder = new Encoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B, true, Encoder.EncodingType.k4X);
 		rightEncoder.setMinRate(10);
 		rightEncoder.setDistancePerPulse(distancePerPulse);
-
-		LiveWindow.addSensor("Drive Encoders", "Left Encoder", leftEncoder);
-		LiveWindow.addSensor("Drive Encoders", "Right Encoder", rightEncoder);
 	}
 
 	// ****************************************************************************
