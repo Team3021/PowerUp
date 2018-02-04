@@ -80,8 +80,6 @@ public class GyroController implements PIDOutput {
         
         pidController.setOutputRange(-turnRateMax, turnRateMax);
         
-        pidController.setToleranceBuffer(25);
-        
         enable();
         
 	}
