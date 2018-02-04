@@ -2,13 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/niVisionWPI.jar" sourcepath="lib/niVisionWPI-sources.jar"/>
 	<classpathentry kind="lib" path="lib/cscore.jar" sourcepath="lib/cscore-sources.jar"/>
-	<classpathentry kind="lib" path="lib/NetworkTables.jar" sourcepath="lib/NetworkTables-sources.jar"/>
 	<classpathentry kind="lib" path="lib/opencv.jar" sourcepath="lib/opencv-sources.jar"/>
 	<classpathentry kind="lib" path="lib/WPILib.jar" sourcepath="lib/WPILib-sources.jar"/>
 	<classpathentry kind="lib" path="lib/navx_frc.jar" sourcepath="lib/navx_frc_sources.jar"/>
-	<classpathentry kind="lib" path="lib/sf2-frc.jar"/>
-	<classpathentry kind="lib" path="lib/TalonSRXLibJava.jar"/>
+	<classpathentry kind="lib" path="lib/CTRE_Phoenix.jar" sourcepath="lib/CTRE_Phoenix-sources.jar"/>
+	
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -6,6 +6,7 @@ import java.util.List;
 import org.usfirst.frc.team3021.robot.Configuration;
 import org.usfirst.frc.team3021.robot.QBert;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 
 public abstract class BaseController implements Controller {
@@ -40,7 +41,7 @@ public abstract class BaseController implements Controller {
 	@Override
 	public boolean isXbox() {
 		if (controller != null) {
-			return controller.getIsXbox();
+			return DriverStation.getInstance().getJoystickIsXbox(controller.getPort());
 		}
 		
 		return false;
