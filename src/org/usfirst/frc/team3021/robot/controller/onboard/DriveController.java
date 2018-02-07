@@ -62,10 +62,10 @@ public class DriveController {
 		robotDrive.setExpiration(0.1);
 
 		// MOTOR INVERSIONS
-		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+		/** robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true); **/
 		
 		// Calculate encoder distance
 		double wheelDiameter = Preferences.getInstance().getDouble(PREF_DRIVE_WHEEL_SIZE, 6.0);
