@@ -145,6 +145,13 @@ public class DriveController {
 		return distanceTraveledAverage;
 	}
 
+	public double getLeftEncoderDistance() {
+		return getDistanceTraveled(leftEncoder);
+	}
+	
+	public double getRightEncoderDistance() {
+		return getDistanceTraveled(rightEncoder);
+	}
 	public void zeroDistance() {
 		System.out.println("Zero encoders");
 		

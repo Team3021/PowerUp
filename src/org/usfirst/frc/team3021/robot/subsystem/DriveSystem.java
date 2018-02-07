@@ -48,7 +48,15 @@ public class DriveSystem extends Subsystem {
 	public double getDistance() {
 		return driveController.getEncoderDistance();
 	}
+	
+	public double getLeftEncoderDistance() {
+		return driveController.getLeftEncoderDistance();
+	}
 
+	public double getRightEncoderDistance() {
+		return driveController.getRightEncoderDistance();
+	}
+	
 	public void drive(DriveInput input) {
 		driveController.drive(input);
 	}

@@ -60,10 +60,11 @@ public class Configuration {
 		experimentCommands.add(new MoveForwardEscalateSpeed());
 		
 		addCommandsToSmartDashboard("Experiments", experimentCommands);
+		System.out.println("Adding experiment command to dashboard");
 	}
 	
 	public void addControllerChoices() {
-		controllerChooser.addDefault(ATTACK_THREE, ATTACK_THREE);
+		controllerChooser.addDefault(XBOX360, XBOX360);
 		
 		SmartDashboard.putData("Main Controller Mode", controllerChooser);
 	}
@@ -104,7 +105,7 @@ public class Configuration {
 	}
 
 	private void addCommandsToSmartDashboard(String commandType, List<Command> commands) {
-		boolean isDashboardCommandsEnabled = Preferences.getInstance().getBoolean(DASHBOARD_COMMANDS_ENABLED, false);
+		boolean isDashboardCommandsEnabled = Preferences.getInstance().getBoolean(DASHBOARD_COMMANDS_ENABLED, true);
 		
 		if (!isDashboardCommandsEnabled) {
 			return;

@@ -3,9 +3,9 @@ package org.usfirst.frc.team3021.robot.commands.driving;
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
 import org.usfirst.frc.team3021.robot.inputs.ArcadeDriveInput;
 
-public class MoveForwardEscalateSpeed extends DriveCommand{
+public class MoveForwardEscalateSpeed extends DriveCommand {
 	
-	private double currentMoveValue = 0;
+	private double currentMoveValue;
 	
 	public MoveForwardEscalateSpeed() {
 		super();
@@ -15,18 +15,19 @@ public class MoveForwardEscalateSpeed extends DriveCommand{
 		System.out.println("Beginning Experiment 1; driving forward at increasing rate");
 		
 		super.initialize();
+		currentMoveValue = 0;
 		
-		System.out.println("(Input Voltage, Encoder Distance)");
+		System.out.println("(Input Voltage, Left Encoder Distance, Right Encoder Distance)");
 	}
 	
 	protected void execute() {
 		driveSystem.drive(new ArcadeDriveInput(currentMoveValue, 0));
-		System.out.println(currentMoveValue + ", " + driveSystem.getDistance());
+		System.out.println(currentMoveValue + ", " + driveSystem.getLeftEncoderDistance() + ", " + driveSystem.getRightEncoderDistance());
 		currentMoveValue += 0.01;
 	}
 	
 	protected boolean isFinished() {
-		return (currentMoveValue == 1);
+		return (currentMoveValue >= 1);
 	}
 	
 	protected void end() {
