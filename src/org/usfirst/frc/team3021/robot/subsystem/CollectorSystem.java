@@ -2,7 +2,7 @@ package org.usfirst.frc.team3021.robot.subsystem;
 
 import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Preferences;
 
@@ -11,12 +11,12 @@ public class CollectorSystem extends Subsystem {
 	private static final String PREF_VOLTAGE = "Collector.motor.voltage";
 	private static final double DEFAULT_VOLTAGE = 0.55;
 	
-	private CANTalon right_motor;
-	private CANTalon left_motor;
+	private WPI_TalonSRX right_motor;
+	private WPI_TalonSRX left_motor;
 	
 	public CollectorSystem() {		
-		right_motor = new CANTalon(21);
-		left_motor = new CANTalon(27);
+		right_motor = new WPI_TalonSRX(21);
+		left_motor = new WPI_TalonSRX(27);
 	}
 	
 	@Override

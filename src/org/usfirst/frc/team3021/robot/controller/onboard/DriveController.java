@@ -18,7 +18,7 @@ public class DriveController {
 	private static final String PREF_DRIVE_WHEEL_SIZE = "DriveController.wheel.diameter";
 
 	// DRIVE SYSTEM
-	private RobotDrive robotDrive;
+	private DifferentialDrive robotDrive;
 	
 	// TALON PORTS
 	private static final int RIGHT_FRONT_PORT = 25;
@@ -27,10 +27,14 @@ public class DriveController {
 	private static final int LEFT_FRONT_PORT = 23;
 
 	// TALONS
-	private CANTalon rightRearTalon;
-	private CANTalon rightFrontTalon;
-	private CANTalon leftRearTalon;
-	private CANTalon leftFrontTalon;
+	private WPI_TalonSRX rightRearTalon;
+	private WPI_TalonSRX rightFrontTalon;
+	private WPI_TalonSRX leftRearTalon;
+	private WPI_TalonSRX leftFrontTalon;
+	
+	// SPEED CONTROLLERS
+	private SpeedControllerGroup leftSpeedController;
+	private SpeedControllerGroup rightSpeedController;
 	
 	// ENCODER CHANNELS
 	private static final int RIGHT_ENCODER_CHANNEL_A = 0;
@@ -52,21 +56,18 @@ public class DriveController {
 
 	public DriveController() {
 		// TALONS
-		leftFrontTalon = new CANTalon(LEFT_FRONT_PORT);
-		leftRearTalon = new CANTalon(LEFT_REAR_PORT);
-		rightFrontTalon = new CANTalon(RIGHT_FRONT_PORT);
-		rightRearTalon = new CANTalon(RIGHT_REAR_PORT);
+		leftFrontTalon = new WPI_TalonSRX(LEFT_FRONT_PORT);
+		leftRearTalon = new WPI_TalonSRX(LEFT_REAR_PORT);
+		rightFrontTalon = new WPI_TalonSRX(RIGHT_FRONT_PORT);
+		rightRearTalon = new WPI_TalonSRX(RIGHT_REAR_PORT);
 		
 		// DRIVE DECLARATION
-		robotDrive = new RobotDrive(leftFrontTalon, leftRearTalon, rightFrontTalon, rightRearTalon);
+		leftSpeedController = new SpeedControllerGroup(leftFrontTalon, leftRearTalon);
+		rightSpeedController = new SpeedControllerGroup(rightFrontTalon, rightRearTalon);
+		
+		robotDrive = new DifferentialDrive(leftSpeedController, rightSpeedController);
 		robotDrive.setExpiration(0.1);
 
-		// MOTOR INVERSIONS
-		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-		
 		// Calculate encoder distance
 		double wheelDiameter = Preferences.getInstance().getDouble(PREF_DRIVE_WHEEL_SIZE, 6.0);
 		
@@ -81,14 +82,6 @@ public class DriveController {
 		rightEncoder = new Encoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B, true, Encoder.EncodingType.k4X);
 		rightEncoder.setMinRate(10);
 		rightEncoder.setDistancePerPulse(distancePerPulse);
-
-		LiveWindow.addActuator("Drive", "Front Left Talon", leftFrontTalon);
-		LiveWindow.addActuator("Drive", "Front Right Talon", rightFrontTalon);
-		LiveWindow.addActuator("Drive", "Rear Left Talon", leftRearTalon);
-		LiveWindow.addActuator("Drive", "Rear Right Talon", rightRearTalon);
-
-		LiveWindow.addSensor("Drive Encoders", "Left Encoder", leftEncoder);
-		LiveWindow.addSensor("Drive Encoders", "Right Encoder", rightEncoder);
 	}
 
 	// ****************************************************************************
@@ -189,11 +182,11 @@ public class DriveController {
 
 	public double getMotorOutput() {
 		
-		SmartDashboard.putNumber("Drive : Motor Voltage : Left Front", leftFrontTalon.getOutputVoltage());
-		SmartDashboard.putNumber("Drive : Motor Voltage : Left Rear", leftRearTalon.getOutputVoltage());
-		SmartDashboard.putNumber("Drive : Motor Voltage : Right Front", rightFrontTalon.getOutputVoltage());
-		SmartDashboard.putNumber("Drive : Motor Voltage : Right Rear", rightRearTalon.getOutputVoltage());
+		SmartDashboard.putNumber("Drive : Motor Voltage : Left Front", leftFrontTalon.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Drive : Motor Voltage : Left Rear", leftRearTalon.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Drive : Motor Voltage : Right Front", rightFrontTalon.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Drive : Motor Voltage : Right Rear", rightRearTalon.getMotorOutputVoltage());
 		
-		return (leftFrontTalon.getOutputVoltage() + leftRearTalon.getOutputVoltage() + rightFrontTalon.getOutputVoltage() + rightRearTalon.getOutputVoltage()) / 4;
+		return (leftFrontTalon.getMotorOutputVoltage() + leftRearTalon.getMotorOutputVoltage() + rightFrontTalon.getMotorOutputVoltage() + rightRearTalon.getMotorOutputVoltage()) / 4;
 	}
 }
