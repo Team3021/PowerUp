@@ -17,6 +17,8 @@ public abstract class TurnToAngle extends DriveCommand {
 		System.out.println("Start TurnToAngle at: " + timeSinceInitialized());
 		
 		super.initialize();
+		
+		driveSystem.enableGyro();
 	}
 	
 	@Override
@@ -27,10 +29,12 @@ public abstract class TurnToAngle extends DriveCommand {
 	@Override
 	protected void end() {
 		System.out.println("Finished TurnToAngle for : " + desiredAngle + " degrees; turned : " + driveSystem.getGyroRotation());
+		
+		driveSystem.resetGyro();
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs(driveSystem.getGyroRotation()) >= Math.abs(desiredAngle));
+		return driveSystem.isGyroOnTarget();
 	}
 }
