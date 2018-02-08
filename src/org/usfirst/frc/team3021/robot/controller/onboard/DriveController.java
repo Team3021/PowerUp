@@ -5,12 +5,12 @@ import org.usfirst.frc.team3021.robot.inputs.DriveInput;
 import org.usfirst.frc.team3021.robot.inputs.LeftRightDriveInput;
 import org.usfirst.frc.team3021.robot.inputs.TankDriveInput;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveController {
@@ -167,7 +167,9 @@ public class DriveController {
 		}
 		else if (input instanceof LeftRightDriveInput) {
 			LeftRightDriveInput voltageInput = (LeftRightDriveInput) input;
-			robotDrive.setLeftRightMotorOutputs(voltageInput.getLeftInput(), voltageInput.getRightInput());
+			
+			leftSpeedController.set(voltageInput.getLeftInput());
+			rightSpeedController.set(voltageInput.getRightInput());
 		}
 		else if (input instanceof TankDriveInput) {
 			TankDriveInput tankInput = (TankDriveInput) input;
