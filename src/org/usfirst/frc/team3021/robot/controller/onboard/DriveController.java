@@ -21,10 +21,10 @@ public class DriveController {
 	private DifferentialDrive robotDrive;
 	
 	// TALON PORTS
-	private static final int RIGHT_FRONT_PORT = 25;
-	private static final int RIGHT_REAR_PORT = 24;
-	private static final int LEFT_REAR_PORT = 22;
-	private static final int LEFT_FRONT_PORT = 23;
+	private static final int RIGHT_FRONT_PORT = 22;
+	private static final int RIGHT_REAR_PORT = 23;
+	private static final int LEFT_REAR_PORT = 24;
+	private static final int LEFT_FRONT_PORT = 25;
 
 	// TALONS
 	private WPI_TalonSRX rightRearTalon;
