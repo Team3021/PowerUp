@@ -5,6 +5,7 @@ import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class CollectorSystem extends Subsystem {
 	
@@ -13,25 +14,32 @@ public class CollectorSystem extends Subsystem {
 	
 	private WPI_TalonSRX right_motor;
 	private WPI_TalonSRX left_motor;
+	private Solenoid     climber_lift;
 	
-	public CollectorSystem() {		
+	public CollectorSystem() {	
+		climber_lift = new Solenoid(1);
 		right_motor = new WPI_TalonSRX(21);
 		left_motor = new WPI_TalonSRX(27);
 	}
 	
 	@Override
 	public void teleopPeriodic() {
-		// Control the motor
-		if (mainController.isCollecting() || auxController.isCollecting()) {
-			startMotor();
-		}
-		else if (mainController.isLaunching() || auxController.isLaunching()) {
-			reverseMotor();
+		
+		if (auxController.isClimberSafteyOn())  {
+			climber_lift.set(false);
 		}
 		else {
-			stopMotor();
+			// Control the motor
+			if (auxController.isCollectorDeploying() && (mainController.isCollecting() || auxController.isCollecting())) {
+				startMotor();
+			}
+			else if (auxController.isCollectorDeploying() && (mainController.isLaunching() || auxController.isLaunching())) {
+				reverseMotor();
+			}
+			else {
+				stopMotor();
+			}
 		}
-		
 	}
 
 	public void startMotor() {

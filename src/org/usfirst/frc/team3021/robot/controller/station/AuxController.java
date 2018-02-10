@@ -12,12 +12,12 @@ public class AuxController extends BaseController {
 		setButtons();
 	}
 	private void setButtons() {
-		buttonActions.add(new ButtonAction(1, "RIGHT_TOGGLE_BUTTON", "unassigned"));
-		buttonActions.add(new ButtonAction(2, "MIDDLE_TOGGLE_BUTTON", "isTargetLocatorEnabled"));
-		buttonActions.add(new ButtonAction(3, "LEFT_TOGGLE_BUTTON", "isScopeEnabled"));
+		buttonActions.add(new ButtonAction(1, "JOYSTICK_UP", "isClimberGoingUp"));
+		buttonActions.add(new ButtonAction(2, "JOYSTICK_DOWN", "isClimberGoingDown"));
+		buttonActions.add(new ButtonAction(3, "SAFETY_TRIGGER", "isClimberSafteyOn"));
+
+		buttonActions.add(new ButtonAction(4, "PNEUMATIC_SWITCH", "isCollectorDeploying"));
 	
-		buttonActions.add(new ButtonAction(4, "SAFETY_TRIGGER", "isClimberSafteyOn"));
-		
 		buttonActions.add(new ButtonAction(5, "TOP_BLUE_BUTTON", "isClimbing"));
 		buttonActions.add(new ButtonAction(6, "MIDDLE_BLUE_BUTTON", "isLaunching"));
 		buttonActions.add(new ButtonAction(7, "BOTTOM_BLUE_BUTTON", "isCollecting"));

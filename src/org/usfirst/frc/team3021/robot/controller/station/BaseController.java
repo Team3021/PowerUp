@@ -108,8 +108,18 @@ public abstract class BaseController implements Controller {
 	}
 
 	@Override
-	public boolean isClimbing() {
-		return getRawButton("isClimbing");
+	public boolean isClimberGoingUp() {
+		return getRawButton("isClimberGoingUp");
+	}
+	
+	@Override
+	public boolean isClimberGoingDown() {
+		return getRawButton("isClimberGoingDown");
+	}
+	
+	@Override
+	public boolean isCollectorDeploying() {
+		return getRawButton("isCollectorDeploying");
 	}
 
 	@Override

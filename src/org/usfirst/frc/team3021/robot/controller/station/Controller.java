@@ -28,10 +28,14 @@ public interface Controller {
 
 	boolean isClimberSafteyOn();
 
-	boolean isClimbing();
+	boolean isClimberGoingUp();
+	
+	boolean isClimberGoingDown();
+	
+	boolean isCollectorDeploying();
 
 	void printButtonActions(String controller);
-
+ 
 	boolean isScopeEnabled();
 
 	boolean isTargetLocatorEnabled();
