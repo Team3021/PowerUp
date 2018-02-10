@@ -13,15 +13,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class GyroController implements PIDOutput {
 	
 	private final String PREF_GYRO_USB_ENABLED = "Gyro.usb.enabled";
+	private final boolean GYRO_USB_ENABLED_DEFAULT = false;
+	
 	private final String PREF_GYRO_MXP_ENABLED = "Gyro.mxp.enabled";
+	private final boolean GYRO_MXP_ENABLED_DEFAULT = true;
 	
 	private final String PREF_GYRO_TURN_VALUE_MIN = "Gyro.turn.rate.min";
+	private final double GYRO_TURN_VALUE_MIN_DEFAULT = 0.15;
 	
 	private final String PREF_GYRO_TURN_RATE_MAX = "Gyro.turn.rate.max";
-	
 	private final double GYRO_TURN_RATE_DEFAULT = 0.375;
 	
-	private double turnRateMin = 0.0;
+	private double turnRateMin = GYRO_TURN_VALUE_MIN_DEFAULT;
 	private double turnRateMax = GYRO_TURN_RATE_DEFAULT;
 
 	// Member Attributes
@@ -52,18 +55,17 @@ public class GyroController implements PIDOutput {
 			System.out.println("gyro port enabled");
 		}
 		
-        try {
-        	
-        	if (isUSBEnabled()) {
-        		// The Navx--connected by USB port
-        		System.out.println("Using NavX on USB port");
-        		navx = new AHRS(Port.kUSB); 
-        	} else {
-        		// The Navx--connected by MXP port
-        		System.out.println("Using NavX on MXP port");
-        		navx = new AHRS(SPI.Port.kMXP); 
-        	}
-        } catch (RuntimeException ex ) {
+		try {
+			if (isUSBEnabled()) {
+				// The Navx--connected by USB port
+				System.out.println("Using NavX on USB port");
+				navx = new AHRS(Port.kUSB); 
+			} else {
+				// The Navx--connected by MXP port
+				System.out.println("Using NavX on MXP port");
+				navx = new AHRS(SPI.Port.kMXP); 
+			}
+		} catch (RuntimeException ex ) {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }
         
@@ -75,21 +77,18 @@ public class GyroController implements PIDOutput {
         pidController.setAbsoluteTolerance(kToleranceDegrees);
         pidController.setContinuous(true);
 
-		turnRateMin = Preferences.getInstance().getDouble(PREF_GYRO_TURN_VALUE_MIN, 0.0);
+		turnRateMin = Preferences.getInstance().getDouble(PREF_GYRO_TURN_VALUE_MIN, GYRO_TURN_VALUE_MIN_DEFAULT);
         turnRateMax = Preferences.getInstance().getDouble(PREF_GYRO_TURN_RATE_MAX, GYRO_TURN_RATE_DEFAULT);
         
         pidController.setOutputRange(-turnRateMax, turnRateMax);
-        
-        enable();
-        
 	}
 	
 	private boolean isUSBEnabled() {
-		return Preferences.getInstance().getBoolean(PREF_GYRO_USB_ENABLED, false);
+		return Preferences.getInstance().getBoolean(PREF_GYRO_USB_ENABLED, GYRO_USB_ENABLED_DEFAULT);
 	}
 	
 	private boolean isMXPEnabled() {
-		return Preferences.getInstance().getBoolean(PREF_GYRO_MXP_ENABLED, true);
+		return Preferences.getInstance().getBoolean(PREF_GYRO_MXP_ENABLED, GYRO_MXP_ENABLED_DEFAULT);
 	}
 	
 	private boolean isGyroEnabled() {
