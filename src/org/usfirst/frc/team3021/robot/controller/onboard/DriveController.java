@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveController {
 	
 	private static final String PREF_DRIVE_WHEEL_SIZE = "DriveController.wheel.diameter";
+	private static final double DRIVE_WHEEL_SIZE_DEFAULT = 6.0;
 
 	// DRIVE SYSTEM
 	private DifferentialDrive robotDrive;
@@ -64,7 +65,7 @@ public class DriveController {
 		robotDrive.setExpiration(0.1);
 
 		// Calculate encoder distance
-		double wheelDiameter = Preferences.getInstance().getDouble(PREF_DRIVE_WHEEL_SIZE, 6.0);
+		double wheelDiameter = Preferences.getInstance().getDouble(PREF_DRIVE_WHEEL_SIZE, DRIVE_WHEEL_SIZE_DEFAULT);
 		
 		final double wheelCircumerence = wheelDiameter * Math.PI;
 		final double distancePerPulse = (wheelCircumerence / PULSE_PER_ROTATION) / INCHES_PER_FOOT;
