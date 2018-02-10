@@ -29,15 +29,22 @@ public class Configuration {
 	private final String PREF_MAIN_CONTROLLER_PORT = "Controller.main.port";
 	private final int MAIN_CONTROLLER_PORT_DEFAULT = 0;
 
-	private  final String PREF_AUX_PANEL_STATUS = "Controller.aux.enabled";
+	private  final String PREF_CONTROLLER_XBOX_ENABLED = "Controller.xbox.enabled";
+	private  final boolean CONTROLLER_XBOX_ENABLED_DEFAULT = false;
+
+	private  final String PREF_AUX_PANEL_ENABLED = "Controller.aux.enabled";
+	private  final boolean AUX_PANEL_ENABLED_DEFAULT = false;
+	
 	private final String PREF_AUX_PANEL_PORT = "Controller.aux.port";
 	private final int AUX_PANEL_PORT_DEFAULT = 1;
 
-	private  final String DASHBOARD_COMMANDS_ENABLED = "Config.dashboard.commands.enabled";
-	private  final String DASHBAORD_SUBSYSTEMS_ENABLED = "Config.dashboard.subsystems.enabled";
+	private  final String PREF_DASHBOARD_COMMANDS_ENABLED = "Config.dashboard.commands.enabled";
+	private  final boolean DASHBOARD_COMMANDS_ENABLED_DEFAULT = false;
+	
+	private  final String PREF_DASHBAORD_SUBSYSTEMS_ENABLED = "Config.dashboard.subsystems.enabled";
+	private  final boolean DASHBAORD_SUBSYSTEMS_ENABLED_DEFAULT = false;
 	
 	private SendableChooser<String> autonomousChooser = new SendableChooser<>();
-	private SendableChooser<String> controllerChooser = new SendableChooser<>();
 	
 	private List<Command> autoCommands = new ArrayList<Command>();
 
@@ -53,18 +60,8 @@ public class Configuration {
 		SmartDashboard.putData("Autonomous Mode", autonomousChooser);
 	}
 
-	public void addControllerChoices() {
-		controllerChooser.addDefault(ATTACK_THREE, ATTACK_THREE);
-		
-		SmartDashboard.putData("Main Controller Mode", controllerChooser);
-	}
-
-	public void addSubsystemsToDashboard() {
-		
-	}
-
 	public void addSubsystemsToSmartDashboard(List<Subsystem> subsystems) {
-		boolean isDashboardSubsystemsEnabled = Preferences.getInstance().getBoolean(DASHBAORD_SUBSYSTEMS_ENABLED, false);
+		boolean isDashboardSubsystemsEnabled = Preferences.getInstance().getBoolean(PREF_DASHBAORD_SUBSYSTEMS_ENABLED, DASHBAORD_SUBSYSTEMS_ENABLED_DEFAULT);
 		
 		if (!isDashboardSubsystemsEnabled) {
 			return;
@@ -95,7 +92,7 @@ public class Configuration {
 	}
 
 	private void addCommandsToSmartDashboard(String commandType, List<Command> commands) {
-		boolean isDashboardCommandsEnabled = Preferences.getInstance().getBoolean(DASHBOARD_COMMANDS_ENABLED, false);
+		boolean isDashboardCommandsEnabled = Preferences.getInstance().getBoolean(PREF_DASHBOARD_COMMANDS_ENABLED, DASHBOARD_COMMANDS_ENABLED_DEFAULT);
 		
 		if (!isDashboardCommandsEnabled) {
 			return;
@@ -124,7 +121,13 @@ public class Configuration {
 	}
 
 	public String getMainControllerMode() {
-		String selected = controllerChooser.getSelected();
+		String selected = ATTACK_THREE;
+
+		boolean xboxEnabled = Preferences.getInstance().getBoolean(PREF_CONTROLLER_XBOX_ENABLED, CONTROLLER_XBOX_ENABLED_DEFAULT);
+
+		if (xboxEnabled) {
+			selected = XBOX360;
+		}
 		
 		SmartDashboard.putString("Configuration : joystick mode",  selected);
 		
@@ -140,7 +143,7 @@ public class Configuration {
 	}
 	
 	public boolean isAuxPanelEnabled() {
-		return Preferences.getInstance().getBoolean(PREF_AUX_PANEL_STATUS, false);
+		return Preferences.getInstance().getBoolean(PREF_AUX_PANEL_ENABLED, AUX_PANEL_ENABLED_DEFAULT);
 	}
 
 	public static void printButtonActions() {
