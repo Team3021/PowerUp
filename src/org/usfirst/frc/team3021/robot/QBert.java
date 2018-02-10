@@ -36,11 +36,7 @@ public class QBert extends IterativeRobot {
 		
 		configuration.addExperimentCommands();
 		
-		configuration.addSubsystemsToDashboard();
-		
 		configuration.addCommandsToDashboard();
-		
-		configuration.addControllerChoices();
 		
 		configuration.addAutonmousChoices();
 	}
