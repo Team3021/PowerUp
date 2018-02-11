@@ -1,13 +1,13 @@
-package org.usfirst.frc.team3021.robot.commands.driving;
+package org.usfirst.frc.team3021.robot.commands.test;
 
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
 import org.usfirst.frc.team3021.robot.inputs.ArcadeDriveInput;
 
-public class MoveForwardEscalateSpeed extends DriveCommand {
+public class MoveForwardEscalateSpeedTest extends DriveCommand {
 	
 	private double currentMoveValue;
 	
-	public MoveForwardEscalateSpeed() {
+	public MoveForwardEscalateSpeedTest() {
 		super();
 	}
 	

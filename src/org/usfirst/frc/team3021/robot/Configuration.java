@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.usfirst.frc.team3021.robot.commands.auto.*;
-import org.usfirst.frc.team3021.robot.commands.driving.MoveForwardEscalateSpeed;
+import org.usfirst.frc.team3021.robot.commands.test.MoveForwardEscalateSpeedTest;
 import org.usfirst.frc.team3021.robot.controller.station.AttackThreeController;
 import org.usfirst.frc.team3021.robot.controller.station.AuxController;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
@@ -48,8 +48,11 @@ public class Configuration {
 	private SendableChooser<String> autonomousChooser = new SendableChooser<>();
 	
 	private List<Command> autoCommands = new ArrayList<Command>();
-	// Part of Nathan's drive experiments
-	private List<Command> experimentCommands = new ArrayList<Command>();
+	private List<Command> testCommands = new ArrayList<Command>();
+
+	// ****************************************************************************
+	// **********************             CHOICES            **********************
+	// ****************************************************************************
 
 	public void addAutonmousChoices() {
 		autonomousChooser.addDefault("[Red] [Left] to [Left Gear]", "[Red] [Left] to [Left Gear]");
@@ -63,12 +66,9 @@ public class Configuration {
 		SmartDashboard.putData("Autonomous Mode", autonomousChooser);
 	}
 
-	public void addExperimentCommands() {
-		experimentCommands.add(new MoveForwardEscalateSpeed());
-		
-		addCommandsToSmartDashboard("Experiments", experimentCommands);
-		System.out.println("Adding experiment command to dashboard");
-	}
+	// ****************************************************************************
+	// **********************           SUBSYSTEMS           **********************
+	// ****************************************************************************
 	
 	public void addSubsystemsToSmartDashboard(List<Subsystem> subsystems) {
 		boolean isDashboardSubsystemsEnabled = Preferences.getInstance().getBoolean(PREF_DASHBAORD_SUBSYSTEMS_ENABLED, DASHBAORD_SUBSYSTEMS_ENABLED_DEFAULT);
@@ -81,24 +81,31 @@ public class Configuration {
 			SmartDashboard.putData(subsystem);
 		}
 	}
+
+	// ****************************************************************************
+	// **********************            COMMANDS            **********************
+	// ****************************************************************************
 	
-	public void addCommandsToDashboard() {
+	public void addAutoCommandsToDashboard() {
 		SmartDashboard.putData(Scheduler.getInstance());
 
-		// ****************************************************************************
-		// **********************      AUTO COMMANDS RED         **********************
-		// ****************************************************************************
+		// RED ALLIANCE COMMANDS
 		
 		autoCommands.add(new RedStartLeftToLeftSwitchPlate());
 
-		// ****************************************************************************
-		// **********************      AUTO COMMANDS BLUE        **********************
-		// ****************************************************************************
+		// BLUE ALLIANCE COMMANDS
 		
 		autoCommands.add(new BlueStartLeftToLeftSwitchPlate());
 
 		// Add commands to dashboard
 		addCommandsToSmartDashboard("Autonomous", autoCommands);
+	}
+
+	public void addTestCommandsToDashboard() {
+		testCommands.add(new MoveForwardEscalateSpeedTest());
+		
+		addCommandsToSmartDashboard("Tests", testCommands);
+		System.out.println("Adding test commands to dashboard");
 	}
 
 	private void addCommandsToSmartDashboard(String commandType, List<Command> commands) {
@@ -130,6 +137,10 @@ public class Configuration {
 		return null;
 	}
 
+	// ****************************************************************************
+	// **********************          CONTROLLERS           **********************
+	// ****************************************************************************
+
 	public String getMainControllerMode() {
 		String selected = ATTACK_THREE;
 
@@ -154,36 +165,6 @@ public class Configuration {
 	
 	public boolean isAuxPanelEnabled() {
 		return Preferences.getInstance().getBoolean(PREF_AUX_PANEL_ENABLED, AUX_PANEL_ENABLED_DEFAULT);
-	}
-
-	public static void printButtonActions() {
-		new AttackThreeController().printButtonActions("Attack Three");
-		new Xbox360Controller().printButtonActions("Xbox360");
-		new AuxController().printButtonActions("Aux Panel");
-	}
-
-	public void printPreferences() {
-		Preferences prefs = Preferences.getInstance();
-		
-		@SuppressWarnings("rawtypes")
-		Vector keys = prefs.getKeys();
-		
-		System.out.println("******************* Prefernces *******************");
-		
-		for (Object obj : keys) {
-			String key = null;
-			
-			// cast from object to String
-			if (obj instanceof String) {
-				key = (String) obj;
-			}
-			
-			if (key != null) {
-				String value = prefs.getString(key, "");
-			
-				System.out.println(key + " : " + value);
-			}
-		}
 	}
 
 	public Controller initializeMainController() {
@@ -225,6 +206,40 @@ public class Configuration {
 		Controller auxController = new AuxController(auxControllerPort);
 		
 		return auxController;
+	}
+
+	// ****************************************************************************
+	// **********************              DATA              **********************
+	// ****************************************************************************
+
+	public static void printButtonActions() {
+		new AttackThreeController().printButtonActions("Attack Three");
+		new Xbox360Controller().printButtonActions("Xbox360");
+		new AuxController().printButtonActions("Aux Panel");
+	}
+
+	public void printPreferences() {
+		Preferences prefs = Preferences.getInstance();
+		
+		@SuppressWarnings("rawtypes")
+		Vector keys = prefs.getKeys();
+		
+		System.out.println("******************* Prefernces *******************");
+		
+		for (Object obj : keys) {
+			String key = null;
+			
+			// cast from object to String
+			if (obj instanceof String) {
+				key = (String) obj;
+			}
+			
+			if (key != null) {
+				String value = prefs.getString(key, "");
+			
+				System.out.println(key + " : " + value);
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
