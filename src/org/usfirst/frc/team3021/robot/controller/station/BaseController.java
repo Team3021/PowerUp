@@ -47,6 +47,10 @@ public abstract class BaseController implements Controller {
 		return false;
 	}
 	
+	public boolean isCollectingData() {
+		return false;
+	}
+	
 	@Override
 	public boolean isLaunching() {
 		return getRawButton("isLaunching");

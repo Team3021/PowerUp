@@ -8,6 +8,9 @@ public class DriveWithJoystick extends DriveCommand {
 
 	private Controller mainController = null;
 	
+	private boolean isPrintingData;
+	private boolean printButtonPressed;
+	
 	public DriveWithJoystick(Controller mainController) {
 		super();
 		
@@ -16,13 +19,38 @@ public class DriveWithJoystick extends DriveCommand {
 
 	@Override
 	protected void initialize() {
-		//Override to do nothing
+		System.out.println("Beginning DriveWithJoystick; outputting data with following structure:");
+		System.out.println("(MoveValue, TurnValue, Left Motor Voltage, Right Motor Voltage, Gyro Angle)");
+		
+		isPrintingData = false;
+		printButtonPressed = false;
 	}
 	
 	@Override
 	protected void execute() {
 		ArcadeDriveInput input = new ArcadeDriveInput(getMoveValue(), getTurnValue());
 		driveSystem.drive(input);
+		
+		//Checks to see if print button is pressed, but doesn't start printing yet
+		if (mainController.isCollectingData() && !printButtonPressed) {
+			printButtonPressed = true;
+		}
+		
+		// Starts printing data as soon as the activation button is released
+		if (!mainController.isCollectingData() && printButtonPressed && !isPrintingData) {
+			isPrintingData = true;
+			printButtonPressed = false;
+		}
+	
+		//Works the same as the if statement above this one, but turns printing off instead
+		if (!mainController.isCollectingData() && printButtonPressed && isPrintingData) {
+			isPrintingData = false;
+			printButtonPressed = false;
+		}
+		
+		if(isPrintingData) {
+			driveSystem.printData();
+		}
 	}
 
 	@Override
