@@ -8,8 +8,9 @@ public class DriveWithJoystick extends DriveCommand {
 
 	private Controller mainController = null;
 	
-	private boolean isPrintingData;
-	private boolean printButtonPressed;
+	private boolean isPrintingData = false;
+	private boolean hasPrintedHeader = false;
+	private boolean printButtonPressed = false;
 	
 	public DriveWithJoystick(Controller mainController) {
 		super();
@@ -19,10 +20,8 @@ public class DriveWithJoystick extends DriveCommand {
 
 	@Override
 	protected void initialize() {
-		System.out.println("Beginning DriveWithJoystick; outputting data with following structure:");
-		System.out.println("(MoveValue, TurnValue, Left Motor Voltage, Right Motor Voltage, Gyro Angle)");
-		
 		isPrintingData = false;
+		hasPrintedHeader =  false;
 		printButtonPressed = false;
 	}
 	
@@ -48,7 +47,15 @@ public class DriveWithJoystick extends DriveCommand {
 			printButtonPressed = false;
 		}
 		
-		if(isPrintingData) {
+		if (isPrintingData) {
+			
+			if (!hasPrintedHeader) {
+				System.out.println("Beginning DriveWithJoystick; outputting data with following structure:");
+				System.out.println("MoveValue, TurnValue, Left Motor Voltage, Right Motor Voltage, Gyro Angle");
+				
+				hasPrintedHeader = true;
+			}
+			
 			driveSystem.printData();
 		}
 	}

@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Vector;
 
 import org.usfirst.frc.team3021.robot.commands.auto.*;
-import org.usfirst.frc.team3021.robot.commands.test.MoveForwardEscalateSpeedTest;
+import org.usfirst.frc.team3021.robot.commands.test.MoveForwardEscalateInputTest;
+import org.usfirst.frc.team3021.robot.commands.test.TurnRightEscalateInputTest;
 import org.usfirst.frc.team3021.robot.controller.station.AttackThreeController;
 import org.usfirst.frc.team3021.robot.controller.station.AuxController;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
@@ -102,18 +103,23 @@ public class Configuration {
 	}
 
 	public void addTestCommandsToDashboard() {
-		testCommands.add(new MoveForwardEscalateSpeedTest());
+		testCommands.add(new MoveForwardEscalateInputTest());
+		testCommands.add(new TurnRightEscalateInputTest());
 		
 		addCommandsToSmartDashboard("Tests", testCommands);
-		System.out.println("Adding test commands to dashboard");
 	}
 
 	private void addCommandsToSmartDashboard(String commandType, List<Command> commands) {
 		boolean isDashboardCommandsEnabled = Preferences.getInstance().getBoolean(PREF_DASHBOARD_COMMANDS_ENABLED, DASHBOARD_COMMANDS_ENABLED_DEFAULT);
 		
+		// Dont add commands to dashboard if the preferences is not enabled
 		if (!isDashboardCommandsEnabled) {
+			System.out.println("Command preference is not enabled. No commands add to dashboard from the group: " + commandType);
+			
 			return;
 		}
+
+		System.out.println("Command preference is enabled. Adding commands to dashboard from the group: " + commandType);
 
 		for (Command command : commands) {
 			SmartDashboard.putData(command);
