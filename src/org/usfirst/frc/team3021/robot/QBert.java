@@ -9,6 +9,7 @@ import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.Compressor;
 
 public class QBert extends IterativeRobot {
 	
@@ -22,6 +23,7 @@ public class QBert extends IterativeRobot {
 	
 	private static Controller mainController;
 	private static Controller auxController;
+	private static Compressor c;
 
 	public QBert() {
 		super();
@@ -37,6 +39,8 @@ public class QBert extends IterativeRobot {
 		
 		// Create the configuration and initialize
 		configuration = new Configuration();
+		
+		c = new Compressor(0);
 		
 		configuration.addCommandsToDashboard();
 		
@@ -59,6 +63,8 @@ public class QBert extends IterativeRobot {
 		visionSystem.setControllers(mainController, auxController);
 		collectorSystem.setControllers(mainController, auxController);
 		climberSystem.setControllers(mainController, auxController);
+		c.setClosedLoopControl(true);
+
 	}
 
 	// ****************************************************************************
