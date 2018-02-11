@@ -38,12 +38,8 @@ public class DriveSystem extends Subsystem {
 	}
 
 	// ****************************************************************************
-	// **********************              MOVE              **********************
+	// **********************              DATA              **********************
 	// ****************************************************************************
-
-	public void zeroEncoders() {
-		driveController.zeroDistance();
-	}
 
 	public double getDistance() {
 		return driveController.getEncoderDistance();
@@ -57,12 +53,30 @@ public class DriveSystem extends Subsystem {
 		return driveController.getRightEncoderDistance();
 	}
 	
-	public void drive(DriveInput input) {
-		driveController.drive(input);
-	}
-	
 	public double getMotorOutput() {
 		return Math.abs(driveController.getMotorOutput());
+	}
+	
+	public void printData() {
+		String logMessage = mainController.getMoveValue() + ", " 
+				+ mainController.getTurnValue() + ", " 
+				+ driveController.getLeftMotorVoltage() + ", " 
+				+ driveController.getRightMotorVoltage() + ", " 
+				+ gyroController.getGyroRotation();
+		
+		System.out.println(logMessage);
+	}
+
+	// ****************************************************************************
+	// **********************              MOVE              **********************
+	// ****************************************************************************
+
+	public void zeroEncoders() {
+		driveController.zeroDistance();
+	}
+	
+	public void drive(DriveInput input) {
+		driveController.drive(input);
 	}
 	
 	// Drive forward using the gyro to maintain course
@@ -183,4 +197,5 @@ public class DriveSystem extends Subsystem {
         	Scheduler.getInstance().add(autonomousCommand);
         }
 	}
+
 }

@@ -183,6 +183,10 @@ public class DriveController {
 		robotDrive.arcadeDrive(0, 0, false);
 	}
 
+	// ****************************************************************************
+	// **********************            MOTORS              **********************
+	// ****************************************************************************
+
 	public double getMotorOutput() {
 		
 		SmartDashboard.putNumber("Drive : Motor Voltage : Left Front", leftFrontTalon.getMotorOutputVoltage());
@@ -191,5 +195,13 @@ public class DriveController {
 		SmartDashboard.putNumber("Drive : Motor Voltage : Right Rear", rightRearTalon.getMotorOutputVoltage());
 		
 		return (leftFrontTalon.getMotorOutputVoltage() + leftRearTalon.getMotorOutputVoltage() + rightFrontTalon.getMotorOutputVoltage() + rightRearTalon.getMotorOutputVoltage()) / 4;
+	}
+
+	public double getLeftMotorVoltage() {
+		return leftFrontTalon.getBusVoltage();
+	}
+
+	public double getRightMotorVoltage() {
+		return rightFrontTalon.getBusVoltage();
 	}
 }
