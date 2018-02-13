@@ -81,7 +81,7 @@ public class GyroController implements PIDOutput {
         
         recalibrateGyro();
 
-        pidController = new PIDController(kP, kI, kD, kF, navx, this, 0.01); 
+        pidController = new PIDController(kP, kI, kD, kF, navx, this, 0.005); 
         
         pidController.setInputRange(-180.0f, 180.0f);
         pidController.setAbsoluteTolerance(kToleranceDegrees);
@@ -163,11 +163,16 @@ public class GyroController implements PIDOutput {
 		// wait for the navx to complete the zero of the yaw value
 		int checkCount = 0;
 		
-		while (getGyroRotation() != 0.0) {
+		while (Math.abs(getGyroRotation()) > 1.0) {
 			checkCount++;
 
+			driveSystem.stop();
+			
+			System.out.println(getGyroRotation());
+			
 			// End the checking after a given number of checks
-			if (checkCount >= 5) {
+			if (checkCount >= 250) {
+				DriverStation.reportError("breaking from zero gyro", false);
 				break;
 			}
 			
@@ -182,7 +187,7 @@ public class GyroController implements PIDOutput {
 	}
 	
 	public void reset() {
-		System.out.println("Reset the gyro");
+		System.out.println("Disable the gyro");
 		
 		pidController.reset();
 	}
