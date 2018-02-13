@@ -28,6 +28,7 @@ public class DriveWithJoystick extends DriveCommand {
 	@Override
 	protected void execute() {
 		ArcadeDriveInput input = new ArcadeDriveInput(getMoveValue(), getTurnValue());
+		
 		driveSystem.drive(input);
 		
 		//Checks to see if print button is pressed, but doesn't start printing yet

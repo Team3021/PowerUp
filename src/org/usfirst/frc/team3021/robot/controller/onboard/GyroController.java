@@ -1,6 +1,10 @@
 package org.usfirst.frc.team3021.robot.controller.onboard;
 
+import org.usfirst.frc.team3021.robot.inputs.ArcadeDriveInput;
+import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
+
 import com.kauailabs.navx.frc.AHRS;
+import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
@@ -8,6 +12,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GyroController implements PIDOutput {
@@ -44,11 +49,16 @@ public class GyroController implements PIDOutput {
     static final double kD = 0.02; // Derivative
     static final double kF = 0.00; // Feedback
     
-    public static final double kToleranceDegrees = 4.0f; // Tolerance--Precision of turning with the Navx
+    public static final double kToleranceDegrees = 1.0f; // Tolerance--Precision of turning with the Navx
 	
-	public GyroController() {
+    // Parent drive system reference
+    private DriveSystem driveSystem = null;
+    
+	public GyroController(DriveSystem driveSystem) {
+		this.driveSystem = driveSystem;
+		
 		if (!isGyroEnabled()) {
-			System.out.println("WARNING !!! NO GYRO PORT ENABLED");
+			DriverStation.reportWarning("WARNING !!! NO GYRO PORT ENABLED", false);
 			return;  
 		}
 		else {
@@ -59,11 +69,11 @@ public class GyroController implements PIDOutput {
 			if (isUSBEnabled()) {
 				// The Navx--connected by USB port
 				System.out.println("Using NavX on USB port");
-				navx = new AHRS(Port.kUSB); 
+				navx = new AHRS(Port.kUSB, SerialDataType.kProcessedData, (byte) 100); 
 			} else {
 				// The Navx--connected by MXP port
 				System.out.println("Using NavX on MXP port");
-				navx = new AHRS(SPI.Port.kMXP); 
+				navx = new AHRS(SPI.Port.kMXP, (byte) 100); 
 			}
 		} catch (RuntimeException ex ) {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
@@ -101,6 +111,13 @@ public class GyroController implements PIDOutput {
 
 	// Input is the range of -180 to 180 to control the PID Controller
 	public void setDesiredAngle(double setpoint) {
+		
+		// if the in coming se tpoint matches the current set point value of pid controller
+		// then there is nothing to do and this method can return right away
+		if (setpoint == pidController.getSetpoint()) {
+			return;
+		}
+		
 		pidController.setSetpoint(setpoint);
 	}
 
@@ -113,19 +130,19 @@ public class GyroController implements PIDOutput {
 		return rotation;
 	}
 
-	public double getTurnValue() {
+	private double getTurnValue() {
 
-		int turnDirection = getDirection(rotateToAngleRate);
-		
 		double turnValue = rotateToAngleRate;
 		
 		if (Math.abs(turnValue) > turnRateMax) {
-			turnValue = turnRateMax * turnDirection;
+			turnValue = turnRateMax;
 		}
 		
 		if (Math.abs(turnValue) < turnRateMin) {
-			turnValue = turnRateMin * turnDirection;
+			turnValue = turnRateMin;
 		}
+		
+		turnValue = Math.copySign(turnValue, pidController.getSetpoint());
 		
 		SmartDashboard.putNumber("GyroController : currentRotationRate",  turnValue);
 
@@ -142,6 +159,20 @@ public class GyroController implements PIDOutput {
 		System.out.println("Zero the gyro");
 		
 		navx.zeroYaw();
+		
+		// wait for the navx to complete the zero of the yaw value
+		int checkCount = 0;
+		
+		while (getGyroRotation() != 0.0) {
+			checkCount++;
+
+			// End the checking after a given number of checks
+			if (checkCount >= 5) {
+				break;
+			}
+			
+			Timer.delay(0.01);
+		}
 	}
 	
 	public void enable() {
@@ -165,26 +196,19 @@ public class GyroController implements PIDOutput {
     /* based upon navX MXP yaw angle input and PID Coefficients.    */
     public void pidWrite(double rotateToAngleRate) {
         this.rotateToAngleRate = rotateToAngleRate;
-    }
-    
-	private int getDirection(double n) {
-		// Returns either 1, -1, or 0 depending on whether the argument is 
-		// positive, negative, or neutral respectively.
-		// Returns 0 when given -0 as an argument.
-
-		int result = 0;
-
-		if (n > 0) {
-			result = 1;
-		}
-		else if (n < -0) {
-			result = -1;
-		}
-		else {
-			result = 0;
-		}
-
-		return result;
-	}
-   
+        
+        // Stop driving as soon as set point is achieved
+        if (isOnTarget()) {
+        		driveSystem.stop();
+        		
+        		return;
+        }
+        
+        // otherwise keep turning
+        double turnValue = getTurnValue();
+        
+		ArcadeDriveInput input = new ArcadeDriveInput(0, turnValue);
+		
+		driveSystem.drive(input);
+    }   
 }
