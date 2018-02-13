@@ -40,11 +40,11 @@ public class QBert extends IterativeRobot {
 		// Create the configuration and initialize
 		configuration = new Configuration();
 		
-		c = new Compressor(0);
-		
 		configuration.addCommandsToDashboard();
 		
 		configuration.addAutonmousChoices();
+		
+		c = new Compressor(0);
 	}
 
 	// ****************************************************************************

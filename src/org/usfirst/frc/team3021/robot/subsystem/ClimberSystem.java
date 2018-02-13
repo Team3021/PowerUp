@@ -1,15 +1,13 @@
 package org.usfirst.frc.team3021.robot.subsystem;
 
-import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
+import org.usfirst.frc.team3021.robot.commands.ClimberCommand;
 import edu.wpi.first.wpilibj.Preferences;
-//import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 
 public class ClimberSystem extends Subsystem {
 	
 	private static final String PREF_VOLTAGE = "Climber.motor.voltage";
 	private static final double DEFAULT_VOLTAGE = 0.55;
-	//private Solenoid     climber_lift;
 	
 	private Spark right_motor;
 	//private Spark left_motor;
@@ -17,7 +15,6 @@ public class ClimberSystem extends Subsystem {
 	public ClimberSystem() {		
 		right_motor = new Spark(1);
 		//left_motor = new Spark(2);
-		//climber_lift = new Solenoid(1);
 	}
 	
 	@Override
@@ -66,6 +63,6 @@ public class ClimberSystem extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new CollectorCommand());
+		setDefaultCommand(new ClimberCommand());
 	}	
 }
