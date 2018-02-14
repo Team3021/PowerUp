@@ -13,8 +13,8 @@ public class ClimberSystem extends Subsystem {
 	//private Spark left_motor;
 	
 	public ClimberSystem() {		
-		right_motor = new Spark(1);
-		//left_motor = new Spark(2);
+		right_motor = new Spark(0);
+		//left_motor = new Spark(1);
 	}
 	
 	@Override
@@ -22,12 +22,12 @@ public class ClimberSystem extends Subsystem {
 		// Control the motor
 
 		if (auxController.isClimberSafteyOn())  {
+			//startMotor();
+		}
+		else if (auxController.isClimberExtending()) {//!auxController.isClimberSafteyOn() && auxController.isClimberExtending()) { //mainController.isCollecting() || 
 			startMotor();
 		}
-		else if (!auxController.isClimberSafteyOn() && auxController.isClimberGoingUp()) { //mainController.isCollecting() || 
-			startMotor();
-		}
-		else if (!auxController.isClimberSafteyOn() && auxController.isClimberGoingDown()) { //mainController.isLaunching() ||
+		else if (auxController.isClimberContracting()) { //!auxController.isClimberSafteyOn() &&  auxController.isClimberContracting()) { //mainController.isLaunching() ||
 			reverseMotor();
 		}
 		else {
@@ -38,12 +38,12 @@ public class ClimberSystem extends Subsystem {
 
 	public void startMotor() {
 		right_motor.set(getVoltage());
-		//left_motor.set(-getVoltage());
+		//left_motor.set(getVoltage());
 		
 	}
 	public void reverseMotor() {
 		right_motor.set(-getVoltage());
-		//left_motor.set(getVoltage());
+		//left_motor.set(-getVoltage());
 
 	}
 	public void stopMotor() {

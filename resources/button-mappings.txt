@@ -19,12 +19,12 @@ ButtonAction { 'number':'1', 'name':'RIGHT_TOGGLE_BUTTON, 'action':'unassigned' 
 ButtonAction { 'number':'2', 'name':'MIDDLE_TOGGLE_BUTTON, 'action':'isTargetLocatorEnabled' }
 ButtonAction { 'number':'3', 'name':'LEFT_TOGGLE_BUTTON, 'action':'isScopeEnabled' }
 ButtonAction { 'number':'4', 'name':'SAFETY_TRIGGER, 'action':'isClimberSafteyOn' }
-ButtonAction { 'number':'5', 'name':'TOP_BLUE_BUTTON, 'action':'isClimbing' }
+ButtonAction { 'number':'5', 'name':'TOP_BLUE_BUTTON, 'action':'isCollectorDeploying' }
 ButtonAction { 'number':'6', 'name':'MIDDLE_BLUE_BUTTON, 'action':'isLaunching' }
 ButtonAction { 'number':'7', 'name':'BOTTOM_BLUE_BUTTON, 'action':'isCollecting' }
-ButtonAction { 'number':'8', 'name':'TOP_RED_BUTTON, 'action':'isSwitchingCamera' }
-ButtonAction { 'number':'9', 'name':'MIDDLE_RED_BUTTON, 'action':'isResettingNavx' }
-ButtonAction { 'number':'10', 'name':'BOTTOM_RED_BUTTON, 'action':'isStoppingCommands' }
+ButtonAction { 'number':'8', 'name':'TOP_RED_BUTTON, 'action':'isCollectorStowing' }
+ButtonAction { 'number':'9', 'name':'MIDDLE_RED_BUTTON, 'action':'isClimberExtending' }
+ButtonAction { 'number':'10', 'name':'BOTTOM_RED_BUTTON, 'action':'isClimberContracting' }
 
 ******************* Xbox360 *******************
 ButtonAction { 'number':'1', 'name':'A_BUTTON, 'action':'isRotatingToOneHundredEighty' }

@@ -14,11 +14,14 @@ public class CollectorSystem extends Subsystem {
 	
 	private WPI_TalonSRX right_motor;
 	private WPI_TalonSRX left_motor;
-	private Solenoid     climber_lift;
+	private Solenoid     collector_deploy;
+	private Solenoid     collector_stow;
+	boolean collecter_deployed = false;
 	
 	public CollectorSystem() {	
-		climber_lift = new Solenoid(1);
-		right_motor = new WPI_TalonSRX(21);
+		collector_deploy = new Solenoid(1);
+		collector_stow = new Solenoid(2);
+		right_motor = new WPI_TalonSRX(26);
 		left_motor = new WPI_TalonSRX(27);
 	}
 	
@@ -26,9 +29,21 @@ public class CollectorSystem extends Subsystem {
 	public void teleopPeriodic() {
 		
 		if (auxController.isClimberSafteyOn())  {
-			climber_lift.set(false);
+			collector_deploy.set(false);
+			collector_stow.set(true);	
 		}
 		else {
+			if (!collecter_deployed && auxController.isCollectorDeploying()) {
+		    	collector_deploy.set(true);
+			    collector_stow.set(false);
+			    collecter_deployed = true;
+		    }
+			if (collecter_deployed && auxController.isCollectorStowing()) {
+		    	collector_deploy.set(false);
+			    collector_stow.set(true);	
+			    collecter_deployed = false;
+		    }
+
 			// Control the motor
 			if (auxController.isCollectorDeploying() && (mainController.isCollecting() || auxController.isCollecting())) {
 				startMotor();
