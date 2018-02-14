@@ -24,10 +24,10 @@ public class GyroController implements PIDOutput {
 	private final boolean GYRO_MXP_ENABLED_DEFAULT = true;
 	
 	private final String PREF_GYRO_TURN_VALUE_MIN = "Gyro.turn.rate.min";
-	private final double GYRO_TURN_VALUE_MIN_DEFAULT = 0.15;
+	private final double GYRO_TURN_VALUE_MIN_DEFAULT = 0.25;
 	
 	private final String PREF_GYRO_TURN_RATE_MAX = "Gyro.turn.rate.max";
-	private final double GYRO_TURN_RATE_DEFAULT = 0.375;
+	private final double GYRO_TURN_RATE_DEFAULT = 0.4;
 	
 	private double turnRateMin = GYRO_TURN_VALUE_MIN_DEFAULT;
 	private double turnRateMax = GYRO_TURN_RATE_DEFAULT;
@@ -142,7 +142,12 @@ public class GyroController implements PIDOutput {
 			turnValue = turnRateMin;
 		}
 		
-		turnValue = Math.copySign(turnValue, pidController.getSetpoint());
+		turnValue = Math.copySign(turnValue, rotateToAngleRate);
+        
+        // Stop driving as soon as set point is achieved
+        if (isOnTarget()) {
+        		turnValue = 0;
+        }
 		
 		SmartDashboard.putNumber("GyroController : currentRotationRate",  turnValue);
 
@@ -171,7 +176,7 @@ public class GyroController implements PIDOutput {
 			System.out.println(getGyroRotation());
 			
 			// End the checking after a given number of checks
-			if (checkCount >= 250) {
+			if (checkCount >= 25) {
 				DriverStation.reportError("breaking from zero gyro", false);
 				break;
 			}
@@ -202,14 +207,6 @@ public class GyroController implements PIDOutput {
     public void pidWrite(double rotateToAngleRate) {
         this.rotateToAngleRate = rotateToAngleRate;
         
-        // Stop driving as soon as set point is achieved
-        if (isOnTarget()) {
-        		driveSystem.stop();
-        		
-        		return;
-        }
-        
-        // otherwise keep turning
         double turnValue = getTurnValue();
         
 		ArcadeDriveInput input = new ArcadeDriveInput(0, turnValue);
