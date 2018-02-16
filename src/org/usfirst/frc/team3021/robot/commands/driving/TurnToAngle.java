@@ -21,11 +21,16 @@ public abstract class TurnToAngle extends DriveCommand {
 		driveSystem.setGyroDesiredAngle(desiredAngle);
 		
 		driveSystem.enableGyro();
+		
+		driveSystem.printHeaderData();
 	}
 	
 	@Override
 	protected void execute() {
 		// Command does not perform action as the GyroController is executing drive actions in a PID loop
+		
+		// print some data
+		driveSystem.printData();
 	}
 	
 	@Override

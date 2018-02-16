@@ -22,6 +22,9 @@ public class DriveSystem extends Subsystem {
 	private DriveCommand defaultCommand;
 
 	private DriveCommand autonomousCommand;
+	
+	private boolean isPrintingData = false;
+	private boolean printButtonPressed = false;
 
 	public DriveSystem() {
 		driveController = new DriveController();
@@ -56,6 +59,14 @@ public class DriveSystem extends Subsystem {
 		return Math.abs(driveController.getMotorOutput());
 	}
 
+	public boolean isPrintingData() {
+		return isPrintingData;
+	}
+
+	public void printHeaderData() {
+		System.out.println("MoveValue, TurnValue, Left Motor Voltage, Right Motor Voltage, Gyro Angle");
+	}
+	
 	public void printData() {
 		String logMessage = driveController.getMoveValue() + ", " 
 				+ driveController.getTurnValue() + ", " 
@@ -138,6 +149,23 @@ public class DriveSystem extends Subsystem {
 
 		if (mainController.isZeroEncoders() || auxController.isZeroEncoders()) {
 			zeroEncoders();
+		}
+		
+		//Checks to see if print button is pressed, but doesn't start printing yet
+		if (mainController.isCollectingData() && !printButtonPressed) {
+			printButtonPressed = true;
+		}
+		
+		// Starts printing data as soon as the activation button is released
+		if (!mainController.isCollectingData() && printButtonPressed && !isPrintingData) {
+			isPrintingData = true;
+			printButtonPressed = false;
+		}
+	
+		//Works the same as the if statement above this one, but turns printing off instead
+		if (!mainController.isCollectingData() && printButtonPressed && isPrintingData) {
+			isPrintingData = false;
+			printButtonPressed = false;
 		}
 
 		// Lets the current autonomous command continue to run.
