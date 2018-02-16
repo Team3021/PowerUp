@@ -4,6 +4,7 @@ import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -18,6 +19,8 @@ public class CollectorSystem extends Subsystem {
 	private static final double VOLTAGE_DEFAULT = 0.55;
 
 	private double voltage = VOLTAGE_DEFAULT;
+	
+	private static Compressor compressor;
 
 	private WPI_TalonSRX right_motor;
 	private WPI_TalonSRX left_motor;
@@ -34,8 +37,12 @@ public class CollectorSystem extends Subsystem {
 		if (isEnabled) {
 			collector_deploy = new Solenoid(1);
 			collector_stow = new Solenoid(2);
+			
 			right_motor = new WPI_TalonSRX(26);
 			left_motor = new WPI_TalonSRX(27);
+			
+			compressor = new Compressor(0);
+			compressor.setClosedLoopControl(true);
 		}
 	}
 

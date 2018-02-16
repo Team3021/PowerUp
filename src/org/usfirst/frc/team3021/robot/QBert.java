@@ -23,7 +23,6 @@ public class QBert extends IterativeRobot {
 	
 	private static Controller mainController;
 	private static Controller auxController;
-	private static Compressor c;
 
 	public QBert() {
 		super();
@@ -45,8 +44,6 @@ public class QBert extends IterativeRobot {
 		configuration.addTestCommandsToDashboard();
 		
 		configuration.addAutonmousChoices();
-		
-		c = new Compressor(0);
 	}
 
 	// ****************************************************************************
@@ -65,8 +62,6 @@ public class QBert extends IterativeRobot {
 		visionSystem.setControllers(mainController, auxController);
 		collectorSystem.setControllers(mainController, auxController);
 		climberSystem.setControllers(mainController, auxController);
-		c.setClosedLoopControl(true);
-
 	}
 
 	// ****************************************************************************
@@ -110,8 +105,6 @@ public class QBert extends IterativeRobot {
 		visionSystem.teleopPeriodic();
 		collectorSystem.teleopPeriodic();
 		climberSystem.teleopPeriodic();
-		
-		
 	}
 
 	// ****************************************************************************
