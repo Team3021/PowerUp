@@ -1,5 +1,10 @@
 package org.usfirst.frc.team3021.robot.controller.onboard;
 
+import org.usfirst.frc.team3021.robot.inputs.ArcadeDriveInput;
+import org.usfirst.frc.team3021.robot.inputs.DriveInput;
+import org.usfirst.frc.team3021.robot.inputs.LeftRightDriveInput;
+import org.usfirst.frc.team3021.robot.inputs.TankDriveInput;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -50,6 +55,10 @@ public class DriveController {
 	// RATE
 	private double maxRateAchieved = 0.0;
 
+	// CURRENT VALUES
+	private double currentMoveValue = 0.0f;
+	private double currentTurnValue = 0.0f;
+	
 	public DriveController() {
 		// TALONS
 		leftFrontTalon = new WPI_TalonSRX(LEFT_FRONT_PORT);
@@ -78,6 +87,40 @@ public class DriveController {
 		rightEncoder = new Encoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B, true, Encoder.EncodingType.k4X);
 		rightEncoder.setMinRate(10);
 		rightEncoder.setDistancePerPulse(distancePerPulse);
+	}
+
+	// ****************************************************************************
+	// **********************         CURRENT VALUES         **********************
+	// ****************************************************************************
+
+	public double getMoveValue() {
+		return currentMoveValue;
+	}
+
+	public double getTurnValue() {
+		return currentTurnValue;
+	}
+	
+	// ****************************************************************************
+	// **********************            MOTORS              **********************
+	// ****************************************************************************
+
+	public double getMotorOutput() {
+		
+		SmartDashboard.putNumber("Drive : Motor Voltage : Left Front", leftFrontTalon.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Drive : Motor Voltage : Left Rear", leftRearTalon.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Drive : Motor Voltage : Right Front", rightFrontTalon.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Drive : Motor Voltage : Right Rear", rightRearTalon.getMotorOutputVoltage());
+		
+		return (leftFrontTalon.getMotorOutputVoltage() + leftRearTalon.getMotorOutputVoltage() + rightFrontTalon.getMotorOutputVoltage() + rightRearTalon.getMotorOutputVoltage()) / 4;
+	}
+
+	public double getLeftMotorVoltage() {
+		return leftFrontTalon.getBusVoltage();
+	}
+
+	public double getRightMotorVoltage() {
+		return rightFrontTalon.getBusVoltage();
 	}
 
 	// ****************************************************************************
@@ -134,6 +177,13 @@ public class DriveController {
 		return distanceTraveledAverage;
 	}
 
+	public double getLeftEncoderDistance() {
+		return getDistanceTraveled(leftEncoder);
+	}
+	
+	public double getRightEncoderDistance() {
+		return getDistanceTraveled(rightEncoder);
+	}
 	public void zeroDistance() {
 		System.out.println("Zero encoders");
 		
@@ -149,21 +199,33 @@ public class DriveController {
 	// **********************            ACTIONS             **********************
 	// ****************************************************************************
 
-	public void drive(double moveValue, double turnValue) {
-		robotDrive.arcadeDrive(moveValue, turnValue, false);
+	public void drive(DriveInput input) {
+		if (input instanceof ArcadeDriveInput) {
+			ArcadeDriveInput arcadeInput = (ArcadeDriveInput) input;
+			
+			currentMoveValue = arcadeInput.getMoveValue();
+			currentTurnValue = arcadeInput.getTurnValue();
+			
+			robotDrive.arcadeDrive(currentMoveValue, currentTurnValue, false);
+		}
+		else if (input instanceof LeftRightDriveInput) {
+			LeftRightDriveInput voltageInput = (LeftRightDriveInput) input;
+			
+			leftSpeedController.set(voltageInput.getLeftInput());
+			rightSpeedController.set(voltageInput.getRightInput());
+		}
+		else if (input instanceof TankDriveInput) {
+			TankDriveInput tankInput = (TankDriveInput) input;
+			
+			robotDrive.tankDrive(tankInput.getLeftInput(), tankInput.getRightInput());
+		}
+		
 	}
 	
 	public void stop() {
-		robotDrive.arcadeDrive(0, 0, false);
-	}
-
-	public double getMotorOutput() {
+		currentMoveValue = 0.0;
+		currentTurnValue = 0.0;
 		
-		SmartDashboard.putNumber("Drive : Motor Voltage : Left Front", leftFrontTalon.getMotorOutputVoltage());
-		SmartDashboard.putNumber("Drive : Motor Voltage : Left Rear", leftRearTalon.getMotorOutputVoltage());
-		SmartDashboard.putNumber("Drive : Motor Voltage : Right Front", rightFrontTalon.getMotorOutputVoltage());
-		SmartDashboard.putNumber("Drive : Motor Voltage : Right Rear", rightRearTalon.getMotorOutputVoltage());
-		
-		return (leftFrontTalon.getMotorOutputVoltage() + leftRearTalon.getMotorOutputVoltage() + rightFrontTalon.getMotorOutputVoltage() + rightRearTalon.getMotorOutputVoltage()) / 4;
+		robotDrive.arcadeDrive(currentMoveValue, currentTurnValue, false);
 	}
 }

@@ -34,7 +34,9 @@ public class QBert extends IterativeRobot {
 		// Create the configuration and initialize
 		configuration = new Configuration();
 		
-		configuration.addCommandsToDashboard();
+		configuration.addAutoCommandsToDashboard();
+		
+		configuration.addTestCommandsToDashboard();
 		
 		configuration.addAutonmousChoices();
 	}

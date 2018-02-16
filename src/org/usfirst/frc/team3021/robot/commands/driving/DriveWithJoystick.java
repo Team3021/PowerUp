@@ -2,10 +2,13 @@ package org.usfirst.frc.team3021.robot.commands.driving;
 
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
+import org.usfirst.frc.team3021.robot.inputs.ArcadeDriveInput;
 
 public class DriveWithJoystick extends DriveCommand {
 
 	private Controller mainController = null;
+	
+	private boolean hasPrintedHeader = false;
 	
 	public DriveWithJoystick(Controller mainController) {
 		super();
@@ -15,12 +18,26 @@ public class DriveWithJoystick extends DriveCommand {
 
 	@Override
 	protected void initialize() {
-		//Override to do nothing
+		hasPrintedHeader =  false;
 	}
 	
 	@Override
 	protected void execute() {
-		driveSystem.drive(getMoveValue(), getTurnValue());
+		ArcadeDriveInput input = new ArcadeDriveInput(getMoveValue(), getTurnValue());
+		
+		driveSystem.drive(input);
+		
+		if (driveSystem.isPrintingData()) {
+			
+			if (!hasPrintedHeader) {
+				System.out.println("Beginning DriveWithJoystick; outputting data with following structure:");
+				driveSystem.printHeaderData();
+				
+				hasPrintedHeader = true;
+			}
+			
+			driveSystem.printData();
+		}
 	}
 
 	@Override

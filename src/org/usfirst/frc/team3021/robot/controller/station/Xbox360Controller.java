@@ -34,7 +34,7 @@ public class Xbox360Controller extends BaseController {
 		buttonActions.add(new ButtonAction(7, "BACK_BUTTON", "isZeroGyro"));
 		buttonActions.add(new ButtonAction(8, "START_BUTTON", "isZeroEncoders"));
 		
-		buttonActions.add(new ButtonAction(9, "LEFT_STICK_CLICK", "isZeroGyro"));
+		buttonActions.add(new ButtonAction(9, "LEFT_STICK_CLICK", "isCollectingData"));
 		buttonActions.add(new ButtonAction(10, "RIGHT_STICK_CLICK", "isSwitchingCamera"));
 	}
 	
@@ -48,6 +48,11 @@ public class Xbox360Controller extends BaseController {
 		return controller.getRawAxis(LEFT_STICK_X);
 	}
 
+	@Override
+	public boolean isCollectingData() {
+		return getRawButton("isCollectingData");
+	}
+	
 	@Override
 	public boolean isLaunching() {
 		if (controller.getRawAxis(LEFT_TRIGGER) > 0.9) {

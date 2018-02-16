@@ -6,6 +6,8 @@ public interface Controller {
 
 	double getTurnValue();
 
+	boolean isCollectingData();
+	
 	boolean isLaunching();
 
 	boolean isSwitchingCamera();

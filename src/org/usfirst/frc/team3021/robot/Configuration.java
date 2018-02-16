@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Vector;
 
 import org.usfirst.frc.team3021.robot.commands.auto.*;
+import org.usfirst.frc.team3021.robot.commands.test.MoveForwardEscalateInputTest;
+import org.usfirst.frc.team3021.robot.commands.test.TurnRightEscalateInputTest;
 import org.usfirst.frc.team3021.robot.controller.station.AttackThreeController;
 import org.usfirst.frc.team3021.robot.controller.station.AuxController;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
 import org.usfirst.frc.team3021.robot.controller.station.DefaultController;
 import org.usfirst.frc.team3021.robot.controller.station.Xbox360Controller;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -38,8 +41,11 @@ public class Configuration {
 	private final String PREF_AUX_PANEL_PORT = "Controller.aux.port";
 	private final int AUX_PANEL_PORT_DEFAULT = 1;
 
-	private  final String PREF_DASHBOARD_COMMANDS_ENABLED = "Config.dashboard.commands.enabled";
-	private  final boolean DASHBOARD_COMMANDS_ENABLED_DEFAULT = false;
+	private  final String PREF_AUTO_COMMANDS_ENABLED = "Config.auto.commands.enabled";
+	private  final boolean AUTO_COMMANDS_ENABLED_DEFAULT = false;
+
+	private  final String PREF_TEST_COMMANDS_ENABLED = "Config.test.commands.enabled";
+	private  final boolean TEST_COMMANDS_ENABLED_DEFAULT = false;
 	
 	private  final String PREF_DASHBAORD_SUBSYSTEMS_ENABLED = "Config.dashboard.subsystems.enabled";
 	private  final boolean DASHBAORD_SUBSYSTEMS_ENABLED_DEFAULT = false;
@@ -47,6 +53,11 @@ public class Configuration {
 	private SendableChooser<String> autonomousChooser = new SendableChooser<>();
 	
 	private List<Command> autoCommands = new ArrayList<Command>();
+	private List<Command> testCommands = new ArrayList<Command>();
+
+	// ****************************************************************************
+	// **********************             CHOICES            **********************
+	// ****************************************************************************
 
 	public void addAutonmousChoices() {
 		autonomousChooser.addDefault("[Red] [Left] to [Left Gear]", "[Red] [Left] to [Left Gear]");
@@ -60,6 +71,10 @@ public class Configuration {
 		SmartDashboard.putData("Autonomous Mode", autonomousChooser);
 	}
 
+	// ****************************************************************************
+	// **********************           SUBSYSTEMS           **********************
+	// ****************************************************************************
+	
 	public void addSubsystemsToSmartDashboard(List<Subsystem> subsystems) {
 		boolean isDashboardSubsystemsEnabled = Preferences.getInstance().getBoolean(PREF_DASHBAORD_SUBSYSTEMS_ENABLED, DASHBAORD_SUBSYSTEMS_ENABLED_DEFAULT);
 		
@@ -71,32 +86,44 @@ public class Configuration {
 			SmartDashboard.putData(subsystem);
 		}
 	}
+
+	// ****************************************************************************
+	// **********************            COMMANDS            **********************
+	// ****************************************************************************
 	
-	public void addCommandsToDashboard() {
+	public void addAutoCommandsToDashboard() {
 		SmartDashboard.putData(Scheduler.getInstance());
 
-		// ****************************************************************************
-		// **********************      AUTO COMMANDS RED         **********************
-		// ****************************************************************************
-		
+		// RED ALLIANCE COMMANDS
 		autoCommands.add(new RedStartLeftToLeftSwitchPlate());
 
-		// ****************************************************************************
-		// **********************      AUTO COMMANDS BLUE        **********************
-		// ****************************************************************************
-		
+		// BLUE ALLIANCE COMMANDS
 		autoCommands.add(new BlueStartLeftToLeftSwitchPlate());
 
 		// Add commands to dashboard
-		addCommandsToSmartDashboard("Autonomous", autoCommands);
+		boolean enabled = Preferences.getInstance().getBoolean(PREF_AUTO_COMMANDS_ENABLED, AUTO_COMMANDS_ENABLED_DEFAULT);
+		addCommandsToSmartDashboard("Autonomous", autoCommands, enabled);
 	}
 
-	private void addCommandsToSmartDashboard(String commandType, List<Command> commands) {
-		boolean isDashboardCommandsEnabled = Preferences.getInstance().getBoolean(PREF_DASHBOARD_COMMANDS_ENABLED, DASHBOARD_COMMANDS_ENABLED_DEFAULT);
+	public void addTestCommandsToDashboard() {
+		testCommands.add(new MoveForwardEscalateInputTest());
+		testCommands.add(new TurnRightEscalateInputTest());
+
+		boolean enabled = Preferences.getInstance().getBoolean(PREF_TEST_COMMANDS_ENABLED, TEST_COMMANDS_ENABLED_DEFAULT);
+
+		addCommandsToSmartDashboard("Tests", testCommands, enabled);
+	}
+
+	private void addCommandsToSmartDashboard(String commandType, List<Command> commands, boolean enabled) {
 		
-		if (!isDashboardCommandsEnabled) {
+		// Dont add commands to dashboard if the preferences is not enabled
+		if (!enabled) {
+			System.out.println("Commands not enabled for the group: " + commandType);
+			
 			return;
 		}
+
+		System.out.println("Commands enabled for the group: " + commandType);
 
 		for (Command command : commands) {
 			SmartDashboard.putData(command);
@@ -120,12 +147,18 @@ public class Configuration {
 		return null;
 	}
 
+	// ****************************************************************************
+	// **********************          CONTROLLERS           **********************
+	// ****************************************************************************
+
 	public String getMainControllerMode() {
 		String selected = ATTACK_THREE;
 
 		boolean xboxEnabled = Preferences.getInstance().getBoolean(PREF_CONTROLLER_XBOX_ENABLED, CONTROLLER_XBOX_ENABLED_DEFAULT);
 
-		if (xboxEnabled) {
+		System.out.println("xboxEnabled" + xboxEnabled);
+		
+		if (xboxEnabled == true) {
 			selected = XBOX360;
 		}
 		
@@ -145,6 +178,49 @@ public class Configuration {
 	public boolean isAuxPanelEnabled() {
 		return Preferences.getInstance().getBoolean(PREF_AUX_PANEL_ENABLED, AUX_PANEL_ENABLED_DEFAULT);
 	}
+
+	public Controller initializeMainController() {
+		int mainControllerPort = getMainControllerPort();
+
+		Controller mainController = new AttackThreeController(mainControllerPort);
+		
+		String selectedController = getMainControllerMode();
+
+		if (selectedController.equals(Configuration.ATTACK_THREE)) {
+			System.out.println("*************** ATTACK THREE ***************");
+			
+			if (mainController.isXbox()) {
+				DriverStation.reportWarning("Dahboard choice is not an XBOX controller, but this is an XBOX CONTROLLER on port " + getMainControllerPort(), false);
+			}
+		}
+		else if (selectedController.equals(Configuration.XBOX360)) {
+			System.out.println("*************** XBOX ***************");
+			mainController = new Xbox360Controller(mainControllerPort);
+			
+			if (!mainController.isXbox()) {
+				DriverStation.reportWarning("Dahboard choice is XBOX controller, but this is NOT an XBOX CONTROLLER on port " + getMainControllerPort(), false);
+			}
+		} else if (selectedController.equals(Configuration.NO_CONTROLLER)) {
+			DriverStation.reportError("*************** NO CONTROLLER ***************", false);
+			mainController = new DefaultController(mainControllerPort);
+		}
+		
+		return mainController;
+	}
+
+	public Controller initializeAuxController() {
+		System.out.println("*************** AUX ***************");
+		
+		int auxControllerPort = getAuxPanelPort();
+
+		Controller auxController = new AuxController(auxControllerPort);
+		
+		return auxController;
+	}
+
+	// ****************************************************************************
+	// **********************              DATA              **********************
+	// ****************************************************************************
 
 	public static void printButtonActions() {
 		new AttackThreeController().printButtonActions("Attack Three");
@@ -174,47 +250,6 @@ public class Configuration {
 				System.out.println(key + " : " + value);
 			}
 		}
-	}
-
-	public Controller initializeMainController() {
-		int mainControllerPort = getMainControllerPort();
-
-		Controller mainController = new AttackThreeController(mainControllerPort);
-		
-		String selectedController = getMainControllerMode();
-
-		if (selectedController.equals(Configuration.ATTACK_THREE)) {
-			System.out.println("*************** ATTACK THREE ***************");
-			
-			if (mainController.isXbox()) {
-				System.out.println("*************** WARNING !!! ***************");
-				System.out.println("Dahboard choice is not an XBOX controller, but this is an XBOX CONTROLLER on port " + getMainControllerPort());
-			}
-		}
-		else if (selectedController.equals(Configuration.XBOX360)) {
-			System.out.println("*************** XBOX ***************");
-			mainController = new Xbox360Controller(mainControllerPort);
-			
-			if (!mainController.isXbox()) {
-				System.out.println("*************** WARNING !!! ***************");
-				System.out.println("Dahboard choice is XBOX controller, but this is NOT an XBOX CONTROLLER on port " + getMainControllerPort());
-			}
-		} else if (selectedController.equals(Configuration.NO_CONTROLLER)) {
-			System.out.println("*************** NO CONTROLLER ***************");
-			mainController = new DefaultController(mainControllerPort);
-		}
-		
-		return mainController;
-	}
-
-	public Controller initializeAuxController() {
-		System.out.println("*************** AUX ***************");
-		
-		int auxControllerPort = getAuxPanelPort();
-
-		Controller auxController = new AuxController(auxControllerPort);
-		
-		return auxController;
 	}
 	
 	public static void main(String[] args) {
