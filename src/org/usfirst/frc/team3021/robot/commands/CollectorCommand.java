@@ -12,6 +12,6 @@ public class CollectorCommand extends Command {
 		
 		this.collectorSystem = QBert.getCollectorSystem();
 		
-		requires(collectorSystem);
+		requires(this.collectorSystem);
 	}
 }

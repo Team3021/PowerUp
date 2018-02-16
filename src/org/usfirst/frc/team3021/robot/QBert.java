@@ -2,12 +2,14 @@ package org.usfirst.frc.team3021.robot;
 
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
 import org.usfirst.frc.team3021.robot.subsystem.CollectorSystem;
+import org.usfirst.frc.team3021.robot.subsystem.ClimberSystem;
 import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
 import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.Compressor;
 
 public class QBert extends IterativeRobot {
 	
@@ -16,10 +18,12 @@ public class QBert extends IterativeRobot {
 	
 	private static DriveSystem driveSystem;
 	private static CollectorSystem collectorSystem;	
+	private static ClimberSystem climberSystem;
 	private static VisionSystem visionSystem;
 	
 	private static Controller mainController;
 	private static Controller auxController;
+	private static Compressor c;
 
 	public QBert() {
 		super();
@@ -31,6 +35,8 @@ public class QBert extends IterativeRobot {
 		
 		collectorSystem = new CollectorSystem();
 		
+		climberSystem = new ClimberSystem();
+		
 		// Create the configuration and initialize
 		configuration = new Configuration();
 		
@@ -39,6 +45,8 @@ public class QBert extends IterativeRobot {
 		configuration.addTestCommandsToDashboard();
 		
 		configuration.addAutonmousChoices();
+		
+		c = new Compressor(0);
 	}
 
 	// ****************************************************************************
@@ -56,6 +64,9 @@ public class QBert extends IterativeRobot {
 		driveSystem.setControllers(mainController, auxController);
 		visionSystem.setControllers(mainController, auxController);
 		collectorSystem.setControllers(mainController, auxController);
+		climberSystem.setControllers(mainController, auxController);
+		c.setClosedLoopControl(true);
+
 	}
 
 	// ****************************************************************************
@@ -98,6 +109,8 @@ public class QBert extends IterativeRobot {
 		driveSystem.teleopPeriodic();
 		visionSystem.teleopPeriodic();
 		collectorSystem.teleopPeriodic();
+		climberSystem.teleopPeriodic();
+		
 		
 	}
 
@@ -153,6 +166,10 @@ public class QBert extends IterativeRobot {
 
 	public static CollectorSystem getCollectorSystem() {
 		return collectorSystem;
+	}
+	
+	public static ClimberSystem getClimberSystem() {
+		return climberSystem;
 	}
 }
 
