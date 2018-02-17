@@ -206,7 +206,7 @@ public class DriveController {
 			currentMoveValue = arcadeInput.getMoveValue();
 			currentTurnValue = arcadeInput.getTurnValue();
 			
-			robotDrive.arcadeDrive(currentMoveValue, currentTurnValue, false);
+			robotDrive.curvatureDrive(currentMoveValue, currentTurnValue, true);
 		}
 		else if (input instanceof LeftRightDriveInput) {
 			LeftRightDriveInput voltageInput = (LeftRightDriveInput) input;

@@ -12,7 +12,7 @@ public class ClimberSystem extends Subsystem {
 	private boolean isEnabled = ENABLED_DEFAULT;
 	
 	private static final String PREF_VOLTAGE = "Climber.motor.voltage";
-	private static final double VOLTAGE_DEFAULT = 1.0;
+	private static final double VOLTAGE_DEFAULT = 0.5;
 	private double voltage = VOLTAGE_DEFAULT;
 	
 	private Spark motor;

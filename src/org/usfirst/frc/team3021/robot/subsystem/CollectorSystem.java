@@ -40,6 +40,7 @@ public class CollectorSystem extends Subsystem {
 			
 			right_motor = new WPI_TalonSRX(26);
 			left_motor = new WPI_TalonSRX(27);
+			left_motor.setInverted(true);
 			
 			compressor = new Compressor(0);
 			compressor.setClosedLoopControl(true);
@@ -84,12 +85,12 @@ public class CollectorSystem extends Subsystem {
 
 	private void startMotor() {
 		right_motor.set(getVoltage());
-		left_motor.set(-getVoltage());
+		left_motor.set(getVoltage());
 	}
 	
 	private void reverseMotor() {
 		right_motor.set(-getVoltage());
-		left_motor.set(getVoltage());
+		left_motor.set(-getVoltage());
 	}
 	
 	private void stopMotor() {
@@ -99,7 +100,7 @@ public class CollectorSystem extends Subsystem {
 
 	private double getVoltage() {
 		// reverse the polarity
-		voltage = voltage * -1;
+		//voltage = voltage * -1;
 
 		return voltage;
 	}
