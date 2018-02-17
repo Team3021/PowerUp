@@ -36,7 +36,7 @@ public class Configuration {
 	private  final boolean CONTROLLER_XBOX_ENABLED_DEFAULT = false;
 
 	private  final String PREF_AUX_PANEL_ENABLED = "Controller.aux.enabled";
-	private  final boolean AUX_PANEL_ENABLED_DEFAULT = false;
+	private  final boolean AUX_PANEL_ENABLED_DEFAULT = true;
 	
 	private final String PREF_AUX_PANEL_PORT = "Controller.aux.port";
 	private final int AUX_PANEL_PORT_DEFAULT = 1;
