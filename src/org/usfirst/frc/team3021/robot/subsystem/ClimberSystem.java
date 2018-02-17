@@ -12,8 +12,7 @@ public class ClimberSystem extends Subsystem {
 	private boolean isEnabled = ENABLED_DEFAULT;
 	
 	private static final String PREF_VOLTAGE = "Climber.motor.voltage";
-	private static final double VOLTAGE_DEFAULT = 0.55;
-
+	private static final double VOLTAGE_DEFAULT = 1.0;
 	private double voltage = VOLTAGE_DEFAULT;
 	
 	private Spark motor;
@@ -23,6 +22,7 @@ public class ClimberSystem extends Subsystem {
 		voltage = Preferences.getInstance().getDouble(PREF_VOLTAGE, VOLTAGE_DEFAULT);
 
 		motor = new Spark(0);
+		motor.setInverted(true);
 	}
 	
 	@Override
@@ -32,10 +32,10 @@ public class ClimberSystem extends Subsystem {
 			return;
 		}
 
-		if (auxController.isClimberSafteyOn())  {
-			startMotor();
-		}
-		else if (auxController.isClimberExtending()) {//!auxController.isClimberSafteyOn() && auxController.isClimberExtending()) { //mainController.isCollecting() || 
+//		if (auxController.isClimberSafteyOn())  {
+//			startMotor();
+//		}
+		if (auxController.isClimberExtending()) {//!auxController.isClimberSafteyOn() && auxController.isClimberExtending()) { //mainController.isCollecting() || 
 			startMotor();
 		}
 		else if (auxController.isClimberContracting()) { //!auxController.isClimberSafteyOn() &&  auxController.isClimberContracting()) { //mainController.isLaunching() ||
@@ -51,8 +51,7 @@ public class ClimberSystem extends Subsystem {
 	}
 	
 	public void reverseMotor() {
-		motor.set(-getVoltage());
-
+		motor.set(-1.0 * getVoltage());
 	}
 	
 	public void stopMotor() {
@@ -61,7 +60,8 @@ public class ClimberSystem extends Subsystem {
 	
 	private double getVoltage() {
 		// reverse the polarity
-		voltage = voltage * -1;
+		
+//		voltage = voltage * -1;
 		
 		return voltage;
 	}
