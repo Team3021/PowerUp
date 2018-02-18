@@ -115,12 +115,12 @@ public class DriveController {
 		return (leftFrontTalon.getMotorOutputVoltage() + leftRearTalon.getMotorOutputVoltage() + rightFrontTalon.getMotorOutputVoltage() + rightRearTalon.getMotorOutputVoltage()) / 4;
 	}
 
-	public double getLeftMotorVoltage() {
-		return leftFrontTalon.getBusVoltage();
+	public double getLeftMotorInput() {
+		return leftSpeedController.get();
 	}
 
-	public double getRightMotorVoltage() {
-		return rightFrontTalon.getBusVoltage();
+	public double getRightMotorInput() {
+		return rightSpeedController.get();
 	}
 
 	// ****************************************************************************
