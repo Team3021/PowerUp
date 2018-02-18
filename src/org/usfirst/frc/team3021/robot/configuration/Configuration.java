@@ -19,7 +19,7 @@ public abstract class Configuration {
 		System.out.println("Commands enabled for the group: " + commandType);
 
 		for (Command command : commands) {
-			Dashboard.putData(command);
+			Dashboard.putCommand(command);
 		}
 	}
 }

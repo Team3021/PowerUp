@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3021.robot.configuration;
 
 import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dashboard {
@@ -53,5 +54,9 @@ public class Dashboard {
 		}
 		
 		return SmartDashboard.putNumber(key, value);
+	}
+
+	public static void putCommand(Command command) {
+		SmartDashboard.putData(command);
 	}
 }
