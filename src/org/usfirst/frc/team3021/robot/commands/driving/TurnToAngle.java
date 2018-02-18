@@ -30,9 +30,7 @@ public abstract class TurnToAngle extends DriveCommand {
 		// Command does not perform action as the GyroController is executing drive actions in a PID loop
 		
 		// print some data
-		if(driveSystem.isPrintingData()) {
-			driveSystem.printData();
-		}
+		driveSystem.printData();
 	}
 	
 	@Override
