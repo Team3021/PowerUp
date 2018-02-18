@@ -68,10 +68,14 @@ public class DriveSystem extends Subsystem {
 	}
 	
 	public void printData() {
+		if (!isPrintingData()) {
+			return;
+		}
+		
 		String logMessage = driveController.getMoveValue() + ", " 
 				+ driveController.getTurnValue() + ", " 
-				+ driveController.getLeftMotorVoltage() + ", " 
-				+ driveController.getRightMotorVoltage() + ", " 
+				+ driveController.getLeftMotorInput() + ", " 
+				+ driveController.getRightMotorInput() + ", " 
 				+ gyroController.getGyroRotation();
 
 		System.out.println(logMessage);

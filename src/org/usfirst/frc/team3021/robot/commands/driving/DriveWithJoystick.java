@@ -6,6 +6,8 @@ import org.usfirst.frc.team3021.robot.inputs.ArcadeDriveInput;
 
 public class DriveWithJoystick extends DriveCommand {
 
+	private static final double REVERSE_MULTIPLIER = -1.0;
+	
 	private Controller mainController = null;
 	
 	private boolean hasPrintedHeader = false;
@@ -55,11 +57,12 @@ public class DriveWithJoystick extends DriveCommand {
 		// Determines whether the output of expSpeed should be positive or negative.
 		int verticalDirection = getDirection(mainController.getMoveValue());
 
-		// These equations are modified versions of the standard exponential form, ab^x. 
-		// The equations here are of the form d(ab^|x| - a) where d is the respective direction value (note above). 
+		// These equations are modified versions of the standard exponential form, ab^x + k. 
+		// The equations here are of the form d(ab^|x| - k) where d is the respective direction value (note above) and k = -a. 
 		// If you wish to alter these equations, adjust b, then solve for a at (1, 1).
 		// Greater values of b make the controls less sensitive; smaller values are more sensitive.
-		double expSpeed = -1 * verticalDirection * (0.2 * Math.pow(6.0, Math.abs(moveValue)) - 0.2);
+		// The REVERSE_MULTIPLIER  constant exists just to make the joystick input properly; upwards on the stick corresponds to -y.
+		double expSpeed = REVERSE_MULTIPLIER * verticalDirection * (0.2 * Math.pow(6.0, Math.abs(moveValue)) - 0.2);
 
 		return expSpeed;
 	}
@@ -73,8 +76,8 @@ public class DriveWithJoystick extends DriveCommand {
 
 		int turnDirection = getDirection(turnValue);
 
-		// These equations are modified versions of the standard exponential form, ab^x. 
-		// The equations here are of the form d(ab^|x| - a) where d is the respective direction value (note above). 
+		// These equations are modified versions of the standard exponential form, ab^x + k. 
+		// The equations here are of the form d(ab^|x| - a) where d is the respective direction value (note above), and k = -a. 
 		// If you wish to alter these equations, adjust b, then solve for a at (1, 1).
 		// Greater values of b make the controls less sensitive; smaller values are more sensitive.
 		// a = 0.25, b = 5
