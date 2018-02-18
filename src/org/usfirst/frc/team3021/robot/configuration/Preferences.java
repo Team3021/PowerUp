@@ -3,10 +3,6 @@ package org.usfirst.frc.team3021.robot.configuration;
 import java.util.HashMap;
 import java.util.Vector;
 
-import org.usfirst.frc.team3021.robot.controller.station.AttackThreeController;
-import org.usfirst.frc.team3021.robot.controller.station.AuxController;
-import org.usfirst.frc.team3021.robot.controller.station.Xbox360Controller;
-
 public class Preferences {
 	
 	private static Preferences preferences;

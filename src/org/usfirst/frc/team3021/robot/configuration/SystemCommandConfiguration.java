@@ -3,10 +3,10 @@ package org.usfirst.frc.team3021.robot.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.usfirst.frc.team3021.robot.commands.driving.ToggleDriveDataCollection;
 import org.usfirst.frc.team3021.robot.commands.system.PrintButtonMappingsCommand;
 import org.usfirst.frc.team3021.robot.commands.system.PrintPreferencesCommand;
 
-import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class SystemCommandConfiguration extends Configuration {
@@ -29,6 +29,7 @@ public class SystemCommandConfiguration extends Configuration {
 	private void addCommandsToDashboard() {
 		commands.add(new PrintPreferencesCommand());
 		commands.add(new PrintButtonMappingsCommand());
+		commands.add(new ToggleDriveDataCollection());
 
 		addCommandsToDashboard(COMMAND_GROUP, commands, enabled);
 	}
