@@ -29,6 +29,19 @@ public abstract class BaseController implements Controller {
 	}
 
 	@Override
+	public boolean isXbox() {
+		if (controller != null) {
+			return DriverStation.getInstance().getJoystickIsXbox(controller.getPort());
+		}
+		
+		return false;
+	}
+
+	// ****************************************************************************
+	// **********************            MOVEMENT            **********************
+	// ****************************************************************************
+
+	@Override
 	public double getMoveValue() {
 		return 0;
 	}
@@ -38,38 +51,9 @@ public abstract class BaseController implements Controller {
 		return 0;
 	}
 
-	@Override
-	public boolean isXbox() {
-		if (controller != null) {
-			return DriverStation.getInstance().getJoystickIsXbox(controller.getPort());
-		}
-		
-		return false;
-	}
-	
-	public boolean isCollectingData() {
-		return false;
-	}
-	
-	@Override
-	public boolean isLaunching() {
-		return getRawButton("isLaunching");
-	}
-	
-	@Override
-	public boolean isSwitchingCamera() {
-		return getRawButton("isSwitchingCamera");
-	}
-
-	@Override
-	public boolean isCollecting() {
-		return getRawButton("isCollecting");
-	}
-
-	@Override
-	public boolean isResettingNavx() {
-		return getRawButton("isResettingNavx");
-	}
+	// ****************************************************************************
+	// **********************             DRIVE              **********************
+	// ****************************************************************************
 
 	@Override
 	public boolean isZeroGyro() {
@@ -106,6 +90,10 @@ public abstract class BaseController implements Controller {
 		return getRawButton("isRotatingLeft45");
 	}
 
+	// ****************************************************************************
+	// **********************             CLIMBER            **********************
+	// ****************************************************************************
+
 	@Override
 	public boolean isClimberSafteyOn() {
 		return getRawButton("isClimberSafteyOn");
@@ -120,6 +108,20 @@ public abstract class BaseController implements Controller {
 	public boolean isClimberContracting() {
 		return getRawButton("isClimberContracting");
 	}
+
+	// ****************************************************************************
+	// **********************            COLLECTOR           **********************
+	// ****************************************************************************
+	
+	@Override
+	public boolean isLaunching() {
+		return getRawButton("isLaunching");
+	}
+
+	@Override
+	public boolean isCollecting() {
+		return getRawButton("isCollecting");
+	}
 	
 	@Override
 	public boolean isCollectorDeploying() {
@@ -130,7 +132,15 @@ public abstract class BaseController implements Controller {
 	public boolean isCollectorStowing() {
 		return getRawButton("isCollectorStowing");
 	}
+
+	// ****************************************************************************
+	// **********************             VISION             **********************
+	// ****************************************************************************
 	
+	@Override
+	public boolean isSwitchingCamera() {
+		return getRawButton("isSwitchingCamera");
+	}
 
 	@Override
 	public boolean isScopeEnabled() {
@@ -141,12 +151,28 @@ public abstract class BaseController implements Controller {
 	public boolean isTargetLocatorEnabled() {
 		return getRawButton("isTargetLocatorEnabled");
 	}
+
+	// ****************************************************************************
+	// **********************           SCHEDULER            **********************
+	// ****************************************************************************
 	
 	@Override
 	public boolean isStoppingCommands() {
 		return getRawButton("isStoppingCommands");
 	}
+
+	// ****************************************************************************
+	// **********************            DEBUGGING           **********************
+	// ****************************************************************************
 	
+	public boolean isCollectingData() {
+		return false;
+	}
+
+	// ****************************************************************************
+	// **********************             ACTIONS            **********************
+	// ****************************************************************************
+
 	public boolean getRawButton(String action) {
 		
 		ButtonAction foundButtonAction = null;

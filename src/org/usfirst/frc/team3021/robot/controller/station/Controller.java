@@ -1,20 +1,24 @@
 package org.usfirst.frc.team3021.robot.controller.station;
 
 public interface Controller {
+
+	boolean isXbox();
+
+	// ****************************************************************************
+	// **********************            MOVEMENT            **********************
+	// ****************************************************************************
 	
 	double getMoveValue();
 
 	double getTurnValue();
 
-	boolean isCollectingData();
-	
-	boolean isLaunching();
+	// ****************************************************************************
+	// **********************             DRIVE              **********************
+	// ****************************************************************************
 
-	boolean isSwitchingCamera();
-	
-	boolean isCollecting();
+	boolean isZeroGyro();
 
-	boolean isResettingNavx();
+	boolean isZeroEncoders();
 
 	boolean isRotatingToNinety();
 	
@@ -26,27 +30,50 @@ public interface Controller {
 
 	boolean isRotatingLeft45();
 
-	boolean isXbox();
+	// ****************************************************************************
+	// **********************             CLIMBER            **********************
+	// ****************************************************************************
 
 	boolean isClimberSafteyOn();
 
 	boolean isClimberExtending();
 	
 	boolean isClimberContracting();
+
+	// ****************************************************************************
+	// **********************            COLLECTOR           **********************
+	// ****************************************************************************
+	
+	boolean isLaunching();
+	
+	boolean isCollecting();
 	
 	boolean isCollectorDeploying();
 
 	boolean isCollectorStowing();
-	
-	void printButtonActions(String controller);
+
+	// ****************************************************************************
+	// **********************             VISION             **********************
+	// ****************************************************************************
+
+	boolean isSwitchingCamera();
  
 	boolean isScopeEnabled();
 
 	boolean isTargetLocatorEnabled();
 
+	// ****************************************************************************
+	// **********************           SCHEDULER            **********************
+	// ****************************************************************************
+
 	boolean isStoppingCommands();
 
-	boolean isZeroGyro();
+	// ****************************************************************************
+	// **********************            DEBUGGING           **********************
+	// ****************************************************************************
 
-	boolean isZeroEncoders();
+	boolean isCollectingData();
+	
+	void printButtonActions(String controller);
+
 }
