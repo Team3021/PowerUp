@@ -1,20 +1,23 @@
 package org.usfirst.frc.team3021.robot;
 
+import org.usfirst.frc.team3021.robot.configuration.AutonomousConfiguration;
+import org.usfirst.frc.team3021.robot.configuration.ControllerConfiguration;
+import org.usfirst.frc.team3021.robot.configuration.TestCommandConfiguration;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
-import org.usfirst.frc.team3021.robot.subsystem.CollectorSystem;
 import org.usfirst.frc.team3021.robot.subsystem.ClimberSystem;
+import org.usfirst.frc.team3021.robot.subsystem.CollectorSystem;
 import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
 import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.Compressor;
 
 public class QBert extends IterativeRobot {
 	
 	// Member Attributes
-	private static Configuration configuration;
+	private static ControllerConfiguration controllerConfiguration;
+	private static AutonomousConfiguration autonomousCommandConfiguration;
 	
 	private static DriveSystem driveSystem;
 	private static CollectorSystem collectorSystem;	
@@ -29,21 +32,14 @@ public class QBert extends IterativeRobot {
 
 		// Create the sub systems
 		visionSystem = new VisionSystem();
-		
 		driveSystem = new DriveSystem();
-		
 		collectorSystem = new CollectorSystem();
-		
 		climberSystem = new ClimberSystem();
 		
-		// Create the configuration and initialize
-		configuration = new Configuration();
-		
-		configuration.addAutoCommandsToDashboard();
-		
-		configuration.addTestCommandsToDashboard();
-		
-		configuration.addAutonmousChoices();
+		// Create the configuration
+		controllerConfiguration = new ControllerConfiguration();
+		new AutonomousConfiguration();
+		new TestCommandConfiguration();
 	}
 
 	// ****************************************************************************
@@ -54,9 +50,8 @@ public class QBert extends IterativeRobot {
 	public void robotInit() {
 		System.out.println("Robot initializing...");
 		
-		mainController = configuration.initializeMainController();
-
-		auxController = configuration.initializeAuxController();
+		mainController = controllerConfiguration.getMainController();
+		auxController = controllerConfiguration.getAuxController();
 
 		driveSystem.setControllers(mainController, auxController);
 		visionSystem.setControllers(mainController, auxController);
@@ -73,11 +68,11 @@ public class QBert extends IterativeRobot {
 		// Stop any commands that might be left running from another mode
 		Scheduler.getInstance().removeAll();
 		
-		String autoMode = configuration.getAutonomousMode();
+		String autoMode = autonomousCommandConfiguration.getAutonomousMode();
 		
 		System.out.println("Autonomous mode: " + autoMode);
 		
-		Command autoCommand = configuration.getAutonomousCommand();
+		Command autoCommand = autonomousCommandConfiguration.getAutonomousCommand();
 		
 		Scheduler.getInstance().add(autoCommand);
 	}
@@ -145,8 +140,8 @@ public class QBert extends IterativeRobot {
 	// **********************        ACCESSOR METHODS        **********************
 	// ****************************************************************************
 
-	public static Configuration getConfiguration() {
-		return configuration;
+	public static ControllerConfiguration getControllerConfiguration() {
+		return controllerConfiguration;
 	}
 
 	public static VisionSystem getVisionSystem() {

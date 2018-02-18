@@ -3,8 +3,8 @@ package org.usfirst.frc.team3021.robot.controller.station;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.usfirst.frc.team3021.robot.Configuration;
 import org.usfirst.frc.team3021.robot.QBert;
+import org.usfirst.frc.team3021.robot.configuration.ControllerConfiguration;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
@@ -17,15 +17,15 @@ public abstract class BaseController implements Controller {
 	
 	protected Joystick controller;
 	
-	protected Configuration configuration;
+	protected ControllerConfiguration configuration;
 	
 	public BaseController() {
-		this.configuration = QBert.getConfiguration();
+		this.configuration = QBert.getControllerConfiguration();
 	}
 	
 	public BaseController(int port) {
 		controller = new Joystick(port);
-		this.configuration = QBert.getConfiguration();
+		this.configuration = QBert.getControllerConfiguration();
 	}
 
 	@Override
