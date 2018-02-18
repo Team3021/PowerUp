@@ -82,25 +82,22 @@ public class CollectorSystem extends Subsystem {
 		}
 	}
 
-	private void startMotor() {
+	public void startMotor() {
 		right_motor.set(getVoltage());
 		left_motor.set(-getVoltage());
 	}
 	
-	private void reverseMotor() {
+	public void reverseMotor() {
 		right_motor.set(-getVoltage());
 		left_motor.set(getVoltage());
 	}
 	
-	private void stopMotor() {
+	public void stopMotor() {
 		right_motor.set(0);
 		left_motor.set(0);
 	}
 
-	private double getVoltage() {
-		// reverse the polarity
-		voltage = voltage * -1;
-
+	public double getVoltage() {
 		return voltage;
 	}
 
