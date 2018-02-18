@@ -61,11 +61,11 @@ public class ControllerConfiguration extends Configuration {
 		return selected;
 	}
 	
-	public int getMainControllerPort() {
+	private int getMainControllerPort() {
 		return Preferences.getInstance().getInt(PREF_MAIN_CONTROLLER_PORT, MAIN_CONTROLLER_PORT_DEFAULT);
 	}
 	
-	public int getAuxPanelPort() {
+	private int getAuxPanelPort() {
 		return Preferences.getInstance().getInt(PREF_AUX_PANEL_PORT, AUX_PANEL_PORT_DEFAULT);
 	}
 	
@@ -73,7 +73,7 @@ public class ControllerConfiguration extends Configuration {
 		return Preferences.getInstance().getBoolean(PREF_AUX_PANEL_ENABLED, AUX_PANEL_ENABLED_DEFAULT);
 	}
 
-	public Controller initializeMainController() {
+	private Controller initializeMainController() {
 		int mainControllerPort = getMainControllerPort();
 
 		Controller mainController = new AttackThreeController(mainControllerPort);
@@ -102,7 +102,7 @@ public class ControllerConfiguration extends Configuration {
 		return mainController;
 	}
 
-	public Controller initializeAuxController() {
+	private Controller initializeAuxController() {
 		System.out.println("*************** AUX ***************");
 		
 		int auxControllerPort = getAuxPanelPort();
