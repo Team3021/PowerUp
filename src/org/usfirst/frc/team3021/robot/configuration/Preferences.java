@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public class Preferences {
 	
-	private static Preferences preferences;
+	private static Preferences instance = null;
 	
 	private HashMap<String, Object> table = new HashMap<String, Object>();
 	
@@ -14,11 +14,11 @@ public class Preferences {
 	}
 
 	public static Preferences getInstance() {
-		if (preferences == null) {
-			preferences = new Preferences();
+		if (instance == null) {
+			instance = new Preferences();
 		}
 		
-		return preferences;
+		return instance;
 	}
 
 	public String getString(String key, String backup) {

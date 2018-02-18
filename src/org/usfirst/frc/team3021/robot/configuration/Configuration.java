@@ -3,7 +3,7 @@ package org.usfirst.frc.team3021.robot.configuration;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3021.robot.configuration.Dashboard;
 
 public abstract class Configuration {
 
@@ -19,7 +19,7 @@ public abstract class Configuration {
 		System.out.println("Commands enabled for the group: " + commandType);
 
 		for (Command command : commands) {
-			SmartDashboard.putData(command);
+			Dashboard.putData(command);
 		}
 	}
 }

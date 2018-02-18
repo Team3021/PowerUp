@@ -10,7 +10,7 @@ import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3021.robot.configuration.Dashboard;
 
 public class AutonomousConfiguration extends Configuration {
 	
@@ -48,7 +48,7 @@ public class AutonomousConfiguration extends Configuration {
 			autonomousChooser.addObject(command.getName(), command.getName());
 		}
 		
-		SmartDashboard.putData("Autonomous Mode", autonomousChooser);
+		Dashboard.putData("Autonomous Mode", autonomousChooser);
 	}
 
 	// ****************************************************************************
@@ -56,7 +56,7 @@ public class AutonomousConfiguration extends Configuration {
 	// ****************************************************************************
 	
 	private void addCommandsToDashboard() {
-		SmartDashboard.putData(Scheduler.getInstance());
+		Dashboard.putData(Scheduler.getInstance());
 
 		// RED ALLIANCE COMMANDS
 		commands.add(new RedStartLeftToLeftSwitchPlate());

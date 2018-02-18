@@ -8,7 +8,7 @@ import org.usfirst.frc.team3021.robot.controller.station.Xbox360Controller;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc.team3021.robot.configuration.Preferences;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3021.robot.configuration.Dashboard;
 
 public class ControllerConfiguration extends Configuration {
 	
@@ -56,7 +56,7 @@ public class ControllerConfiguration extends Configuration {
 			selected = XBOX360;
 		}
 		
-		SmartDashboard.putString("Configuration : joystick mode",  selected);
+		Dashboard.putString("Configuration : joystick mode",  selected);
 		
 		return selected;
 	}

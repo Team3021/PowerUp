@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3021.robot.configuration.Dashboard;
 
 public class DriveController {
 	
@@ -107,10 +107,10 @@ public class DriveController {
 
 	public double getMotorOutput() {
 		
-		SmartDashboard.putNumber("Drive : Motor Voltage : Left Front", leftFrontTalon.getMotorOutputVoltage());
-		SmartDashboard.putNumber("Drive : Motor Voltage : Left Rear", leftRearTalon.getMotorOutputVoltage());
-		SmartDashboard.putNumber("Drive : Motor Voltage : Right Front", rightFrontTalon.getMotorOutputVoltage());
-		SmartDashboard.putNumber("Drive : Motor Voltage : Right Rear", rightRearTalon.getMotorOutputVoltage());
+		Dashboard.putNumber("Drive : Motor Voltage : Left Front", leftFrontTalon.getMotorOutputVoltage());
+		Dashboard.putNumber("Drive : Motor Voltage : Left Rear", leftRearTalon.getMotorOutputVoltage());
+		Dashboard.putNumber("Drive : Motor Voltage : Right Front", rightFrontTalon.getMotorOutputVoltage());
+		Dashboard.putNumber("Drive : Motor Voltage : Right Rear", rightRearTalon.getMotorOutputVoltage());
 		
 		return (leftFrontTalon.getMotorOutputVoltage() + leftRearTalon.getMotorOutputVoltage() + rightFrontTalon.getMotorOutputVoltage() + rightRearTalon.getMotorOutputVoltage()) / 4;
 	}
@@ -128,33 +128,33 @@ public class DriveController {
 	// ****************************************************************************
 	
 	public void printEncoderValues() {
-		SmartDashboard.putNumber("Drive : Encoder Speed Left", leftEncoder.getRate());
-		SmartDashboard.putNumber("Drive : Encoder Speed Right", rightEncoder.getRate());
-		SmartDashboard.putNumber("Drive : Encoder Pulses Left: ", leftEncoder.get());
-		SmartDashboard.putNumber("Drive : Encoder Pulses Right: ", rightEncoder.get());
+		Dashboard.putNumber("Drive : Encoder Speed Left", leftEncoder.getRate());
+		Dashboard.putNumber("Drive : Encoder Speed Right", rightEncoder.getRate());
+		Dashboard.putNumber("Drive : Encoder Pulses Left: ", leftEncoder.get());
+		Dashboard.putNumber("Drive : Encoder Pulses Right: ", rightEncoder.get());
 	}
 
 	public void printEncoderDistance(double distance) {
-		SmartDashboard.putNumber("Drive : Encoder Distance", distance);
+		Dashboard.putNumber("Drive : Encoder Distance", distance);
 	}
 
 	public double getEncoderRate() {
 		double rateLeftSide = leftEncoder.getRate();
 		
-		SmartDashboard.putNumber("Drive : Encoder Rate : Left", rateLeftSide);
+		Dashboard.putNumber("Drive : Encoder Rate : Left", rateLeftSide);
 
 		double rateRightSide = rightEncoder.getRate();
 		
-		SmartDashboard.putNumber("Drive : Encoder Rate : Right", rateRightSide);
+		Dashboard.putNumber("Drive : Encoder Rate : Right", rateRightSide);
 		
 		double rateAverage = (rateLeftSide + rateRightSide) / 2;
 		
-		SmartDashboard.putNumber("Drive : Encoder Rate", rateAverage);
+		Dashboard.putNumber("Drive : Encoder Rate", rateAverage);
 		
 		if (rateAverage > maxRateAchieved) {
 			maxRateAchieved = rateAverage;
 			
-			SmartDashboard.putNumber("Drive : Encoder Rate Max", maxRateAchieved);
+			Dashboard.putNumber("Drive : Encoder Rate Max", maxRateAchieved);
 		}
 		
 		return rateAverage;
@@ -164,15 +164,15 @@ public class DriveController {
 
 		double distanceTraveledLeftSide = getDistanceTraveled(leftEncoder);
 		
-		SmartDashboard.putNumber("Drive : Encoder Distance : Left", distanceTraveledLeftSide);
+		Dashboard.putNumber("Drive : Encoder Distance : Left", distanceTraveledLeftSide);
 
 		double distanceTraveledRightSide = getDistanceTraveled(rightEncoder);
 		
-		SmartDashboard.putNumber("Drive : Encoder Distance : Right", distanceTraveledRightSide);
+		Dashboard.putNumber("Drive : Encoder Distance : Right", distanceTraveledRightSide);
 		
 		double distanceTraveledAverage = (distanceTraveledLeftSide + distanceTraveledRightSide) / 2;
 		
-		SmartDashboard.putNumber("Drive : Encoder Distance", distanceTraveledAverage);
+		Dashboard.putNumber("Drive : Encoder Distance", distanceTraveledAverage);
 		
 		return distanceTraveledAverage;
 	}

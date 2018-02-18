@@ -13,7 +13,7 @@ import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3021.robot.configuration.Dashboard;
 
 public class GyroController implements PIDOutput {
 	
@@ -39,7 +39,7 @@ public class GyroController implements PIDOutput {
     
     /* The following PID Controller coefficients will need to be tuned */
     /* to match the dynamics of your drive system.  Note that the      */
-    /* SmartDashboard in Test mode has support for helping you tune    */
+    /* Test mode has support for helping you tune    */
     /* controllers by displaying a form where you can enter new P, I,  */
     /* and D constants and test the mechanism.                         */
     
@@ -125,7 +125,7 @@ public class GyroController implements PIDOutput {
 		
 		double rotation = navx.getYaw();
 		
-		SmartDashboard.putNumber("GyroController : Navx : Rotation", rotation);
+		Dashboard.putNumber("GyroController : Navx : Rotation", rotation);
 
 		return rotation;
 	}
@@ -149,7 +149,7 @@ public class GyroController implements PIDOutput {
         		turnValue = 0;
         }
 		
-		SmartDashboard.putNumber("GyroController : currentRotationRate",  turnValue);
+		Dashboard.putNumber("GyroController : currentRotationRate",  turnValue);
 
 		return turnValue;
 	}
