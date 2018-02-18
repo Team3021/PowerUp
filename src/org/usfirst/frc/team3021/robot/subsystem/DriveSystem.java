@@ -68,6 +68,10 @@ public class DriveSystem extends Subsystem {
 	}
 	
 	public void printData() {
+		if (!isPrintingData()) {
+			return;
+		}
+		
 		String logMessage = driveController.getMoveValue() + ", " 
 				+ driveController.getTurnValue() + ", " 
 				+ driveController.getLeftMotorVoltage() + ", " 
