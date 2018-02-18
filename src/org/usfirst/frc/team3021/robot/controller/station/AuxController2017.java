@@ -1,12 +1,12 @@
 package org.usfirst.frc.team3021.robot.controller.station;
 
-public class AuxController extends BaseController {
+public class AuxController2017 extends BaseController {
 	
-	public AuxController() {
+	public AuxController2017() {
 		setButtons();
 	}
 	
-	public AuxController(int port) {
+	public AuxController2017(int port) {
 		super(port);
 		
 		setButtons();
