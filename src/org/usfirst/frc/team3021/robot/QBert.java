@@ -2,6 +2,7 @@ package org.usfirst.frc.team3021.robot;
 
 import org.usfirst.frc.team3021.robot.configuration.AutonomousConfiguration;
 import org.usfirst.frc.team3021.robot.configuration.ControllerConfiguration;
+import org.usfirst.frc.team3021.robot.configuration.DriveCommandConfiguration;
 import org.usfirst.frc.team3021.robot.configuration.TestCommandConfiguration;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
 import org.usfirst.frc.team3021.robot.subsystem.ClimberSystem;
@@ -39,6 +40,7 @@ public class QBert extends IterativeRobot {
 		// Create the configuration
 		controllerConfiguration = new ControllerConfiguration();
 		new AutonomousConfiguration();
+		new DriveCommandConfiguration();
 		new TestCommandConfiguration();
 	}
 
