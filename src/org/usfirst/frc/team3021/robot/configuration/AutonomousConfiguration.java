@@ -6,7 +6,7 @@ import java.util.List;
 import org.usfirst.frc.team3021.robot.commands.auto.BlueStartLeftToLeftSwitchPlate;
 import org.usfirst.frc.team3021.robot.commands.auto.RedStartLeftToLeftSwitchPlate;
 
-import edu.wpi.first.wpilibj.Preferences;
+import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;

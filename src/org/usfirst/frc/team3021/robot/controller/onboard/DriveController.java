@@ -8,7 +8,7 @@ import org.usfirst.frc.team3021.robot.inputs.TankDriveInput;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Preferences;
+import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

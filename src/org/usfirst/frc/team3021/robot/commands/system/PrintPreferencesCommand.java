@@ -10,6 +10,8 @@ public class PrintPreferencesCommand extends SystemCommand {
 	
 	protected void execute() {
 		Preferences.getInstance().printPreferences();
+		
+		Preferences.getInstance().printPreferencesOnRobot();
 	}
 	
 	protected boolean isFinished() {

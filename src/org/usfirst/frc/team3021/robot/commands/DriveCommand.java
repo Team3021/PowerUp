@@ -3,7 +3,7 @@ package org.usfirst.frc.team3021.robot.commands;
 import org.usfirst.frc.team3021.robot.QBert;
 import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
 
-import edu.wpi.first.wpilibj.Preferences;
+import org.usfirst.frc.team3021.robot.configuration.Preferences;
 
 public abstract class DriveCommand extends Command {
 	

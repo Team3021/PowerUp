@@ -7,7 +7,7 @@ import org.usfirst.frc.team3021.robot.controller.station.DefaultController;
 import org.usfirst.frc.team3021.robot.controller.station.Xbox360Controller;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Preferences;
+import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ControllerConfiguration extends Configuration {

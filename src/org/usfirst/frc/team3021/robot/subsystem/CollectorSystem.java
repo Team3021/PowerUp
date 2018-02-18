@@ -5,7 +5,7 @@ import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Preferences;
+import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import edu.wpi.first.wpilibj.Solenoid;
 
 public class CollectorSystem extends Subsystem {

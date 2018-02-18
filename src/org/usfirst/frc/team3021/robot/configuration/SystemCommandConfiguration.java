@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.usfirst.frc.team3021.robot.commands.system.PrintPreferencesCommand;
 
-import edu.wpi.first.wpilibj.Preferences;
+import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class SystemCommandConfiguration extends Configuration {
