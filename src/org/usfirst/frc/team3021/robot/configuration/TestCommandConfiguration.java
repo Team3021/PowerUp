@@ -3,10 +3,11 @@ package org.usfirst.frc.team3021.robot.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.usfirst.frc.team3021.robot.commands.test.MoveBackwardForDistanceTest;
 import org.usfirst.frc.team3021.robot.commands.test.MoveForwardEscalateInputTest;
+import org.usfirst.frc.team3021.robot.commands.test.MoveForwardForDistanceTest;
 import org.usfirst.frc.team3021.robot.commands.test.TurnRightEscalateInputTest;
 
-import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TestCommandConfiguration extends Configuration {
@@ -29,6 +30,10 @@ public class TestCommandConfiguration extends Configuration {
 	private void addCommandsToDashboard() {
 		commands.add(new MoveForwardEscalateInputTest());
 		commands.add(new TurnRightEscalateInputTest());
+		
+		commands.add(new MoveForwardForDistanceTest());
+		commands.add(new MoveBackwardForDistanceTest());
+
 
 		addCommandsToDashboard(COMMAND_GROUP, commands, enabled);
 	}
