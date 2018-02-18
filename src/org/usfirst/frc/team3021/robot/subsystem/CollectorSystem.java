@@ -66,6 +66,7 @@ public class CollectorSystem extends Subsystem {
 				collector_stow.set(false);
 				collecter_deployed = true;
 			}
+			
 			if (collecter_deployed && auxController.isCollectorStowing()) {
 				collector_deploy.set(false);
 				collector_stow.set(true);	
@@ -73,10 +74,10 @@ public class CollectorSystem extends Subsystem {
 			}
 
 			// Control the motor
-			if (auxController.isCollectorDeploying() && (mainController.isCollecting() || auxController.isCollecting())) {
+			if (collecter_deployed && (mainController.isCollecting() || auxController.isCollecting())) {
 				startMotor();
 			}
-			else if (auxController.isCollectorDeploying() && (mainController.isLaunching() || auxController.isLaunching())) {
+			else if (collecter_deployed && (mainController.isLaunching() || auxController.isLaunching())) {
 				reverseMotor();
 			}
 			else {

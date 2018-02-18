@@ -13,6 +13,7 @@ public class ClimberSystem extends Subsystem {
 	
 	private static final String PREF_VOLTAGE = "Climber.motor.voltage";
 	private static final double VOLTAGE_DEFAULT = 0.5;
+	
 	private double voltage = VOLTAGE_DEFAULT;
 	
 	private static final double REVERSE_MULTIPLIER = -1.0;
@@ -34,10 +35,10 @@ public class ClimberSystem extends Subsystem {
 			return;
 		}
 
-		if (auxController.isClimberExtending()) {//!auxController.isClimberSafteyOn() && auxController.isClimberExtending()) { //mainController.isCollecting() || 
+		if (auxController.isClimberExtending()) {
 			startMotor();
 		}
-		else if (auxController.isClimberContracting()) { //!auxController.isClimberSafteyOn() &&  auxController.isClimberContracting()) { //mainController.isLaunching() ||
+		else if (auxController.isClimberContracting()) {
 			reverseMotor();
 		}
 		else {
