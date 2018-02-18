@@ -8,7 +8,7 @@ import org.usfirst.frc.team3021.robot.commands.auto.*;
 import org.usfirst.frc.team3021.robot.commands.test.MoveForwardEscalateInputTest;
 import org.usfirst.frc.team3021.robot.commands.test.TurnRightEscalateInputTest;
 import org.usfirst.frc.team3021.robot.controller.station.AttackThreeController;
-import org.usfirst.frc.team3021.robot.controller.station.AuxController2017;
+import org.usfirst.frc.team3021.robot.controller.station.AuxController;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
 import org.usfirst.frc.team3021.robot.controller.station.DefaultController;
 import org.usfirst.frc.team3021.robot.controller.station.Xbox360Controller;
@@ -213,7 +213,7 @@ public class Configuration {
 		
 		int auxControllerPort = getAuxPanelPort();
 
-		Controller auxController = new AuxController2017(auxControllerPort);
+		Controller auxController = new AuxController(auxControllerPort);
 		
 		return auxController;
 	}
@@ -225,7 +225,7 @@ public class Configuration {
 	public static void printButtonActions() {
 		new AttackThreeController().printButtonActions("Attack Three");
 		new Xbox360Controller().printButtonActions("Xbox360");
-		new AuxController2017().printButtonActions("Aux Panel 2017");
+		new AuxController().printButtonActions("Aux Panel 2017");
 	}
 
 	public void printPreferences() {
