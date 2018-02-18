@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3021.robot.commands.system;
 
-import org.usfirst.frc.team3021.robot.configuration.Preferences;
+import org.usfirst.frc.team3021.robot.controller.station.AttackThreeController;
+import org.usfirst.frc.team3021.robot.controller.station.AuxController;
+import org.usfirst.frc.team3021.robot.controller.station.Xbox360Controller;
 
 public class PrintPreferencesCommand extends SystemCommand {
 	
@@ -9,9 +11,9 @@ public class PrintPreferencesCommand extends SystemCommand {
 	}
 	
 	protected void execute() {
-		Preferences.getInstance().printPreferences();
-		
-		Preferences.getInstance().printPreferencesOnRobot();
+		new AttackThreeController().printButtonActions("Attack Three");
+		new Xbox360Controller().printButtonActions("Xbox360");
+		new AuxController().printButtonActions("Aux Panel");
 	}
 	
 	protected boolean isFinished() {

@@ -48,12 +48,6 @@ public class Preferences {
 		
 		return edu.wpi.first.wpilibj.Preferences.getInstance().getInt(key, backup);
 	}
-	
-	public static void printButtonActions() {
-		new AttackThreeController().printButtonActions("Attack Three");
-		new Xbox360Controller().printButtonActions("Xbox360");
-		new AuxController().printButtonActions("Aux Panel");
-	}
 
 	public void printPreferences() {
 		System.out.println("******************* Prefernces *******************");
