@@ -15,6 +15,8 @@ public class ClimberSystem extends Subsystem {
 	private static final double VOLTAGE_DEFAULT = 0.5;
 	private double voltage = VOLTAGE_DEFAULT;
 	
+	private static final double REVERSE_MULTIPLIER = -1.0;
+	
 	private Spark motor;
 	
 	public ClimberSystem() {		
@@ -32,9 +34,6 @@ public class ClimberSystem extends Subsystem {
 			return;
 		}
 
-//		if (auxController.isClimberSafteyOn())  {
-//			startMotor();
-//		}
 		if (auxController.isClimberExtending()) {//!auxController.isClimberSafteyOn() && auxController.isClimberExtending()) { //mainController.isCollecting() || 
 			startMotor();
 		}
@@ -51,7 +50,7 @@ public class ClimberSystem extends Subsystem {
 	}
 	
 	public void reverseMotor() {
-		motor.set(-1.0 * getVoltage());
+		motor.set(REVERSE_MULTIPLIER * getVoltage());
 	}
 	
 	public void stopMotor() {
@@ -59,10 +58,6 @@ public class ClimberSystem extends Subsystem {
 	}
 	
 	private double getVoltage() {
-		// reverse the polarity
-		
-//		voltage = voltage * -1;
-		
 		return voltage;
 	}
 
