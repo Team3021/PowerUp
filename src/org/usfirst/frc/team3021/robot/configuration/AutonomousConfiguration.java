@@ -30,9 +30,9 @@ public class AutonomousConfiguration extends Configuration {
 	public AutonomousConfiguration() {
 		enabled = Preferences.getInstance().getBoolean(PREF_AUTO_COMMANDS_ENABLED, AUTO_COMMANDS_ENABLED_DEFAULT);
 		
-		addCommandsToDashboard();
-		
 		addAutonmousChoices();
+		
+		addCommandsToDashboard();
 	}
 	
 	// ****************************************************************************
