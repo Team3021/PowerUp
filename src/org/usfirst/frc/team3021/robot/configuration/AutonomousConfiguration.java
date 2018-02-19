@@ -3,82 +3,79 @@ package org.usfirst.frc.team3021.robot.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.usfirst.frc.team3021.robot.commands.auto.BlueStartLeftToLeftSwitchPlate;
-import org.usfirst.frc.team3021.robot.commands.auto.RedStartLeftToLeftSwitchPlate;
+import org.usfirst.frc.team3021.robot.commands.auto.StraightToSwitch;
 
-import org.usfirst.frc.team3021.robot.configuration.Preferences;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import org.usfirst.frc.team3021.robot.configuration.Dashboard;
 
 public class AutonomousConfiguration extends Configuration {
 	
-	private final String COMMAND_GROUP = "Autonomous";
-	
-	private static final String NO_AUTONOMOUS = "No Command";
-	
 	private  final String PREF_AUTO_COMMANDS_ENABLED = "Config.auto.commands.enabled";
-	private  final boolean AUTO_COMMANDS_ENABLED_DEFAULT = false;
+	private  final boolean AUTO_COMMANDS_ENABLED_DEFAULT = true;
 
-	private SendableChooser<String> autonomousChooser = new SendableChooser<>();
+	public static final int START_1 = 1;
+	public static final int START_2 = 2;
+	public static final int START_3 = 3;
 	
-	private List<Command> commands = new ArrayList<Command>();
+	public static final String SWITCH_I = "I";
+	public static final String SWITCH_L= "L";
+	public static final String SWITCH_R = "R";
 	
-	private boolean enabled = true;
+	public static final String AUTO_LINE_I = "I";
+	public static final String AUTO_LINE_G = "G";
+	
+	public static final String SCALE_I = "I";
+	public static final String SCALE_L= "L";
+	public static final String SCALE_R = "R";
+
+	public static final String POWERUP_I = "I";
+	public static final String POWERUP_G = "G";
+	
+	private List<AutonomousCommandMapping> commandMappings = new ArrayList<AutonomousCommandMapping>();
+	
+	private boolean enabled = AUTO_COMMANDS_ENABLED_DEFAULT;
+	
+	private int startLocation = START_1;
+	
+	private String switchObjective = SWITCH_I;
+	private String autoLineObjective = AUTO_LINE_I;
+	private String scaleObjective = SCALE_I;
+	private String powerupObjective = POWERUP_I;
 	
 	public AutonomousConfiguration() {
 		enabled = Preferences.getInstance().getBoolean(PREF_AUTO_COMMANDS_ENABLED, AUTO_COMMANDS_ENABLED_DEFAULT);
 		
-		addAutonmousChoices();
-		
-		addCommandsToDashboard();
-	}
-	
-	// ****************************************************************************
-	// **********************             CHOICES            **********************
-	// ****************************************************************************
+		startLocation = DriverStation.getInstance().getLocation();
 
-	private void addAutonmousChoices() {
-		autonomousChooser.addDefault("[Red] [Left] to [Left Gear]", "[Red] [Left] to [Left Gear]");
-		
-		autonomousChooser.addObject(NO_AUTONOMOUS, NO_AUTONOMOUS);
-		
-		for (Command command : commands) {
-			autonomousChooser.addObject(command.getName(), command.getName());
-		}
-		
-		Dashboard.putData("Autonomous Mode", autonomousChooser);
-	}
-
-	// ****************************************************************************
-	// **********************            COMMANDS            **********************
-	// ****************************************************************************
-	
-	private void addCommandsToDashboard() {
 		Dashboard.putData(Scheduler.getInstance());
+		
+		addCommandMappings();
+	}
 
-		// RED ALLIANCE COMMANDS
-		commands.add(new RedStartLeftToLeftSwitchPlate());
-
-		// BLUE ALLIANCE COMMANDS
-		commands.add(new BlueStartLeftToLeftSwitchPlate());
-
-		// Add commands to dashboard
-		addCommandsToDashboard(COMMAND_GROUP, commands, enabled);
+	private void addCommandMappings() {
+		commandMappings.add(new AutonomousCommandMapping(START_1, SWITCH_L, AUTO_LINE_I, SCALE_I, POWERUP_I, new StraightToSwitch()));
+		commandMappings.add(new AutonomousCommandMapping(START_3, SWITCH_R, AUTO_LINE_I, SCALE_I, POWERUP_I, new StraightToSwitch()));
 	}
 	
-	public String getAutonomousMode() {
-		return autonomousChooser.getSelected();
+	private AutonomousCommandMapping getAutonomousMode() {
+		
+		AutonomousCommandMapping commandMapping = new AutonomousCommandMapping(startLocation, switchObjective, autoLineObjective, scaleObjective, powerupObjective, null);
+		
+		return commandMapping;
 	}
 
 	public Command getAutonomousCommand() {
 		
-		String name = getAutonomousMode();
+		if (!enabled) {
+			return null;
+		}
 		
-		for (Command command : commands) {
-			if (command.getName().equals(name)) {
-				return command;
+		AutonomousCommandMapping mode = getAutonomousMode();
+		
+		for (AutonomousCommandMapping commandMapping : commandMappings) {
+			if (commandMapping.equals(mode)) {
+				return commandMapping.getCommand();
 			}
 		}
 		

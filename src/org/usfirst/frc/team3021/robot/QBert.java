@@ -72,10 +72,6 @@ public class QBert extends IterativeRobot {
 		// Stop any commands that might be left running from another mode
 		Scheduler.getInstance().removeAll();
 		
-		String autoMode = autonomousConfiguration.getAutonomousMode();
-		
-		System.out.println("Autonomous mode: " + autoMode);
-		
 		Command autoCommand = autonomousConfiguration.getAutonomousCommand();
 		
 		Scheduler.getInstance().add(autoCommand);
