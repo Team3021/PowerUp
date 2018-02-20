@@ -42,7 +42,7 @@ public class Configuration {
 	private final int AUX_PANEL_PORT_DEFAULT = 1;
 
 	private  final String PREF_AUTO_COMMANDS_ENABLED = "Config.auto.commands.enabled";
-	private  final boolean AUTO_COMMANDS_ENABLED_DEFAULT = false;
+	private  final boolean AUTO_COMMANDS_ENABLED_DEFAULT = true;
 
 	private  final String PREF_TEST_COMMANDS_ENABLED = "Config.test.commands.enabled";
 	private  final boolean TEST_COMMANDS_ENABLED_DEFAULT = false;
@@ -60,9 +60,10 @@ public class Configuration {
 	// ****************************************************************************
 
 	public void addAutonmousChoices() {
-		autonomousChooser.addDefault("[Red] [Left] to [Left Gear]", "[Red] [Left] to [Left Gear]");
+		autonomousChooser.addDefault("[Straight]", "[Straight]");
 		
 		autonomousChooser.addObject(NO_AUTONOMOUS, NO_AUTONOMOUS);
+		
 		
 		for (Command command : autoCommands) {
 			autonomousChooser.addObject(command.getName(), command.getName());
@@ -94,10 +95,18 @@ public class Configuration {
 	public void addAutoCommandsToDashboard() {
 		SmartDashboard.putData(Scheduler.getInstance());
 
-		// RED ALLIANCE COMMANDS
-		autoCommands.add(new RedStartLeftToLeftSwitchPlate());
+		// AUTONOMOUS COMMANDS
+		autoCommands.add(new LeftToSCALE());
+		autoCommands.add(new LeftToSWITCH());
+		
+		autoCommands.add(new MiddleToSWITCH());
+		
+		autoCommands.add(new Straight());
+		
+		autoCommands.add(new RightToSCALE());
+		autoCommands.add(new RightToSWITCH());
+		
 
-		// BLUE ALLIANCE COMMANDS
 		autoCommands.add(new BlueStartLeftToLeftSwitchPlate());
 
 		// Add commands to dashboard
@@ -225,7 +234,7 @@ public class Configuration {
 	public static void printButtonActions() {
 		new AttackThreeController().printButtonActions("Attack Three");
 		new Xbox360Controller().printButtonActions("Xbox360");
-		new AuxController().printButtonActions("Aux Panel 2017");
+		new AuxController().printButtonActions("Aux Panel");
 	}
 
 	public void printPreferences() {
