@@ -42,7 +42,7 @@ public class Configuration {
 	private final int AUX_PANEL_PORT_DEFAULT = 1;
 
 	private  final String PREF_AUTO_COMMANDS_ENABLED = "Config.auto.commands.enabled";
-	private  final boolean AUTO_COMMANDS_ENABLED_DEFAULT = true;
+	private  final boolean AUTO_COMMANDS_ENABLED_DEFAULT = false;
 
 	private  final String PREF_TEST_COMMANDS_ENABLED = "Config.test.commands.enabled";
 	private  final boolean TEST_COMMANDS_ENABLED_DEFAULT = false;
@@ -63,7 +63,6 @@ public class Configuration {
 		autonomousChooser.addDefault("[Straight]", "[Straight]");
 		
 		autonomousChooser.addObject(NO_AUTONOMOUS, NO_AUTONOMOUS);
-		
 		
 		for (Command command : autoCommands) {
 			autonomousChooser.addObject(command.getName(), command.getName());
