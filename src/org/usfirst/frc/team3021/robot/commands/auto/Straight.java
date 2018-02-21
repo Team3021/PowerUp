@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class Straight extends CommandGroup {
 	public Straight() {
-		super("[] [Straight] to []");
+		super("[Straight]");
 		
 		double speed = DriveCommand.getAutonomousMoveSpeed();
 		
-		addSequential(new MoveForwardForDistance(speed, 6.9));
+		addSequential(new MoveForwardForDistance(speed, 10));
 		
 	}
 }
