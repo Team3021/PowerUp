@@ -122,6 +122,10 @@ public class CollectorSystem extends Subsystem {
 	private double getVoltage() {
 		return voltage;
 	}
+	
+	public boolean hasTote(){
+		return !(tote_switch.get());
+	}
 
 	@Override
 	protected void initDefaultCommand() {
