@@ -27,7 +27,7 @@ public class DeliverTote extends CollectorCommand {
 
 	@Override
 	protected boolean isFinished() {
-		return timeSinceInitialized() >= time;
+		return (timeSinceInitialized() >= time);
 	}
 
 }
