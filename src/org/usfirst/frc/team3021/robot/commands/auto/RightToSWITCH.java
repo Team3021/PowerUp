@@ -3,6 +3,8 @@ package org.usfirst.frc.team3021.robot.commands.auto;
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
 import org.usfirst.frc.team3021.robot.commands.driving.MoveForwardForDistance;
 import org.usfirst.frc.team3021.robot.commands.driving.TurnLeftToAngle;
+import org.usfirst.frc.team3021.robot.commands.test.OuttakeScale;
+import org.usfirst.frc.team3021.robot.commands.test.OuttakeSwitch;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -25,7 +27,7 @@ public class RightToSWITCH extends CommandGroup {
 				addSequential(new MoveForwardForDistance(speed, 13.125));
 				addSequential(new TurnLeftToAngle(90));
 				addSequential(new MoveForwardForDistance(speed, 0.83));
-				
+				addSequential(new OuttakeSwitch());
 				
 			} else if (gameData.charAt(1) == 'R'){
 				
@@ -34,6 +36,7 @@ public class RightToSWITCH extends CommandGroup {
 				addSequential(new MoveForwardForDistance(speed, 26.75));
 				addSequential(new TurnLeftToAngle(90));
 				addSequential(new MoveForwardForDistance(speed, 6.9));
+				addSequential(new OuttakeScale());
 				
 			}else {
 				//Nothing on Right side, just go straight
