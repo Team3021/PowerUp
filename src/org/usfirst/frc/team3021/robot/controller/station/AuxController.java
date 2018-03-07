@@ -1,17 +1,14 @@
 package org.usfirst.frc.team3021.robot.controller.station;
 
+import org.usfirst.frc.team3021.robot.configuration.ControllerConfiguration;
+
 public class AuxController extends BaseController {
 	
-	public AuxController() {
-		setButtons();
+	public AuxController(ControllerConfiguration configuration, int port) {
+		super(configuration, port);
 	}
 	
-	public AuxController(int port) {
-		super(port);
-		
-		setButtons();
-	}
-	private void setButtons() {
+	protected void setButtons() {
 		buttonActions.add(new ButtonAction(1, "RIGHT_TOGGLE_BUTTON", "UNASSIGNED"));
 		buttonActions.add(new ButtonAction(2, "MIDDLE_TOGGLE_BUTTON", "UNASSIGNED"));
 		buttonActions.add(new ButtonAction(3, "LEFT_TOGGLE_BUTTON", "UNASSIGNED"));

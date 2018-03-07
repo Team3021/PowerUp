@@ -1,18 +1,14 @@
 package org.usfirst.frc.team3021.robot.controller.station;
 
+import org.usfirst.frc.team3021.robot.configuration.ControllerConfiguration;
+
 public class AttackThreeController extends BaseController {
 	
-	public AttackThreeController() {
-		setButtons();
-	}
-	
-	public AttackThreeController(int port) {
-		super(port);
-		
-		setButtons();
+	public AttackThreeController(ControllerConfiguration configuration, int port) {
+		super(configuration, port);
 	}
 
-	private void setButtons() {
+	protected void setButtons() {
 		buttonActions.add(new ButtonAction(1, "STICK_TRIGGER", "UNASSIGNED"));
 		buttonActions.add(new ButtonAction(2, "STICK_MIDDLE_BUTTON", "UNASSIGNED"));
 		buttonActions.add(new ButtonAction(3, "STICK_CENTER", "UNASSIGNED"));

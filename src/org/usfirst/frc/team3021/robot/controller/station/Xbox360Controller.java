@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3021.robot.controller.station;
 
+import org.usfirst.frc.team3021.robot.configuration.ControllerConfiguration;
+
 public class Xbox360Controller extends BaseController {
 	
 	// Controller axes
@@ -12,17 +14,11 @@ public class Xbox360Controller extends BaseController {
 //	private static final int RIGHT_STICK_X = 4;
 //	private static final int RIGHT_STICK_Y = 5;
 
-	public Xbox360Controller() {
-		setButtons();
-	}
-	
-	public Xbox360Controller(int port) {
-		super(port);
-		
-		setButtons();
+	public Xbox360Controller(ControllerConfiguration configuration, int port) {
+		super(configuration, port);
 	}
 
-	private void setButtons() {
+	protected void setButtons() {
 		buttonActions.add(new ButtonAction(1, "A_BUTTON", "isRotatingToOneHundredEighty"));
 		buttonActions.add(new ButtonAction(2, "B_BUTTON", "isRotatingToNinety"));
 		buttonActions.add(new ButtonAction(3, "X_BUTTON", "isRotatingToNegativeNinety"));

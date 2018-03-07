@@ -7,8 +7,6 @@ import org.usfirst.frc.team3021.robot.controller.station.DefaultController;
 import org.usfirst.frc.team3021.robot.controller.station.Xbox360Controller;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import org.usfirst.frc.team3021.robot.configuration.Preferences;
-import org.usfirst.frc.team3021.robot.configuration.Dashboard;
 
 public class ControllerConfiguration extends Configuration {
 	
@@ -76,7 +74,7 @@ public class ControllerConfiguration extends Configuration {
 	private Controller initializeMainController() {
 		int mainControllerPort = getMainControllerPort();
 
-		Controller mainController = new AttackThreeController(mainControllerPort);
+		Controller mainController = new AttackThreeController(this, mainControllerPort);
 		
 		String selectedController = getMainControllerMode();
 
@@ -89,14 +87,14 @@ public class ControllerConfiguration extends Configuration {
 		}
 		else if (selectedController.equals(ControllerConfiguration.XBOX360)) {
 			System.out.println("*************** XBOX ***************");
-			mainController = new Xbox360Controller(mainControllerPort);
+			mainController = new Xbox360Controller(this, mainControllerPort);
 			
 			if (!mainController.isXbox()) {
 				DriverStation.reportWarning("Dahboard choice is XBOX controller, but this is NOT an XBOX CONTROLLER on port " + getMainControllerPort(), false);
 			}
 		} else if (selectedController.equals(ControllerConfiguration.NO_CONTROLLER)) {
 			DriverStation.reportError("*************** NO CONTROLLER ***************", false);
-			mainController = new DefaultController(mainControllerPort);
+			mainController = new DefaultController(this, mainControllerPort);
 		}
 		
 		return mainController;
@@ -107,7 +105,7 @@ public class ControllerConfiguration extends Configuration {
 		
 		int auxControllerPort = getAuxPanelPort();
 
-		Controller auxController = new AuxController(auxControllerPort);
+		Controller auxController = new AuxController(this, auxControllerPort);
 		
 		return auxController;
 	}

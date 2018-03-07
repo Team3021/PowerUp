@@ -144,10 +144,6 @@ public class QBert extends IterativeRobot {
 	// **********************        ACCESSOR METHODS        **********************
 	// ****************************************************************************
 
-	public static ControllerConfiguration getControllerConfiguration() {
-		return controllerConfiguration;
-	}
-
 	public static VisionSystem getVisionSystem() {
 		return visionSystem;
 	}

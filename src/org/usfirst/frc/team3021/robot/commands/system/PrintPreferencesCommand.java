@@ -11,9 +11,9 @@ public class PrintPreferencesCommand extends SystemCommand {
 	}
 	
 	protected void execute() {
-		new AttackThreeController().printButtonActions("Attack Three");
-		new Xbox360Controller().printButtonActions("Xbox360");
-		new AuxController().printButtonActions("Aux Panel");
+		new AttackThreeController(null, -1).printButtonActions("Attack Three");
+		new Xbox360Controller(null, -1).printButtonActions("Xbox360");
+		new AuxController(null, -1).printButtonActions("Aux Panel");
 	}
 	
 	protected boolean isFinished() {

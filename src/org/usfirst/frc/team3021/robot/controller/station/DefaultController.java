@@ -1,9 +1,17 @@
 package org.usfirst.frc.team3021.robot.controller.station;
 
+import org.usfirst.frc.team3021.robot.configuration.ControllerConfiguration;
+
 public class DefaultController extends BaseController {
 	
-	public DefaultController(int port) {
-		// override to do nothing and not construct a Joystick
+	public DefaultController(ControllerConfiguration configuration, int port) {
+		super(configuration, port);
+	}
+
+	@Override
+	protected void setButtons() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
