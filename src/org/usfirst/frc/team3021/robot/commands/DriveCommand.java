@@ -34,9 +34,6 @@ public abstract class DriveCommand extends Command {
 
 	@Override
 	protected void initialize() {
-		driveSystem.zeroGyro();
-		driveSystem.zeroEncoders();
-
 		hasStarted = false;
 
 		hasMoved = false;
