@@ -46,7 +46,7 @@ public class Preferences {
 	}
 
 	public void printPreferences() {
-		System.out.println("******************* Prefernces *******************");
+		System.out.println("******************* Prefernces: DEFAULT *******************");
 		
 		for (String key : table.keySet()) {
 			Object value = table.get(key);
@@ -61,7 +61,7 @@ public class Preferences {
 		@SuppressWarnings("rawtypes")
 		Vector keys = prefs.getKeys();
 		
-		System.out.println("**************** Prefernces on Robot ****************");
+		System.out.println("**************** Prefernces: ON ROBOT ****************");
 		
 		for (Object obj : keys) {
 			String key = null;
