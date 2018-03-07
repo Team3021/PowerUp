@@ -173,10 +173,8 @@ public class GyroController implements PIDOutput {
 
 			driveSystem.stop();
 			
-			System.out.println(getGyroRotation());
-			
 			// End the checking after a given number of checks
-			if (checkCount >= 50) {
+			if (checkCount >= 100) {
 				DriverStation.reportError("breaking from zero gyro", false);
 				break;
 			}
