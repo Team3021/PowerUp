@@ -69,6 +69,10 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public void printHeaderData() {
+		if (!isPrintingData()) {
+			return;
+		}
+		
 		System.out.println("MoveValue, TurnValue, Left Motor Voltage, Right Motor Voltage, Gyro Angle");
 	}
 	
