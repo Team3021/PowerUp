@@ -80,15 +80,11 @@ public class CollectorSystem extends Subsystem {
 		}
 		else {
 			if (auxController.isCollectorDeploying()) {
-				collector_deploy.set(true);
-				collector_stow.set(false);
-				collecter_deployed = true;
+				deploy();
 			}
 			
 			if (auxController.isCollectorStowing()) {
-				collector_deploy.set(false);
-				collector_stow.set(true);	
-				collecter_deployed = false;
+				stow();
 			}
 
 			// Control the motor
