@@ -50,7 +50,7 @@ public class CollectorSystem extends Subsystem {
 			left_motor.setInverted(true);
 			
 			tote_switch = new DigitalInput(4);
-			tote_light = new Relay(0);        ;
+			tote_light = new Relay(0);
 
 			compressor = new Compressor(0);
 			compressor.setClosedLoopControl(true);
@@ -76,7 +76,7 @@ public class CollectorSystem extends Subsystem {
 
 		if (auxController.isClimberSafteyOn())  {
 			collector_deploy.set(false);
-			collector_stow.set(true);	
+			collector_stow.set(true);
 		}
 		else {
 			if (auxController.isCollectorDeploying()) {
@@ -125,6 +125,18 @@ public class CollectorSystem extends Subsystem {
 	
 	public boolean hasTote(){
 		return !(tote_switch.get());
+	}
+	
+	public void deploy(){
+		collector_deploy.set(true);
+		collector_stow.set(false);	
+		collecter_deployed = true;
+	}
+	
+	public void stow(){
+		collector_deploy.set(false);
+		collector_stow.set(true);	
+		collecter_deployed = false;
 	}
 
 	@Override

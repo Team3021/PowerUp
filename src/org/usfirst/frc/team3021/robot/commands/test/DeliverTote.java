@@ -2,8 +2,6 @@ package org.usfirst.frc.team3021.robot.commands.test;
 
 import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
 
-import edu.wpi.first.wpilibj.Timer;
-
 public class DeliverTote extends CollectorCommand {
 
 	int time; // seconds

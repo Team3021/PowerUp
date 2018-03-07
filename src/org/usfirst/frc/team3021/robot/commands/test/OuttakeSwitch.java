@@ -5,7 +5,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class OuttakeSwitch extends CommandGroup{
 	public OuttakeSwitch(){
 		super();
-		addSequential(new RaiseClimberDuration(2)); //5 seconds?  We really need limit switches.
+		addSequential(new RaiseClimberDuration(3)); //5 seconds?  We really need limit switches.
+		addSequential(new DeployTote());
 		addSequential(new DeliverTote(2));
 	}
 }

@@ -3,7 +3,7 @@ package org.usfirst.frc.team3021.robot.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.usfirst.frc.team3021.robot.commands.auto.StraightToSwitch;
+import org.usfirst.frc.team3021.robot.commands.auto.Straight;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
@@ -54,8 +54,8 @@ public class AutonomousConfiguration extends Configuration {
 	}
 
 	private void addCommandMappings() {
-		commandMappings.add(new AutonomousCommandMapping(START_1, SWITCH_L, AUTO_LINE_I, SCALE_I, POWERUP_I, new StraightToSwitch()));
-		commandMappings.add(new AutonomousCommandMapping(START_3, SWITCH_R, AUTO_LINE_I, SCALE_I, POWERUP_I, new StraightToSwitch()));
+		commandMappings.add(new AutonomousCommandMapping(START_1, SWITCH_L, AUTO_LINE_I, SCALE_I, POWERUP_I, new Straight()));
+		commandMappings.add(new AutonomousCommandMapping(START_3, SWITCH_R, AUTO_LINE_I, SCALE_I, POWERUP_I, new Straight()));
 	}
 	
 	private AutonomousCommandMapping getAutonomousMode() {

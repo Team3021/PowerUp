@@ -1,10 +1,6 @@
 package org.usfirst.frc.team3021.robot.commands.test;
 
 import org.usfirst.frc.team3021.robot.commands.ClimberCommand;
-import org.usfirst.frc.team3021.robot.subsystem.ClimberSystem;
-
-
-import edu.wpi.first.wpilibj.Timer;
 
 public class RaiseClimberDuration extends ClimberCommand{
 

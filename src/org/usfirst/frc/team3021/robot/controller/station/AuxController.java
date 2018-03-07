@@ -30,7 +30,7 @@ public class AuxController extends BaseController {
 	
 	@Override
 	public boolean getRawButton(String action) {
-		if (!configuration.isAuxPanelEnabled()) {
+		if (configuration == null || !configuration.isAuxPanelEnabled()) {
 			return false;
 		}
 		

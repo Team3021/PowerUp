@@ -19,6 +19,7 @@ public class QBert extends IterativeRobot {
 	// Member Attributes
 	private static ControllerConfiguration controllerConfiguration;
 	private static AutonomousConfiguration autonomousConfiguration;
+	private static Configuration configuration;
 	
 	private static DriveSystem driveSystem;
 	private static CollectorSystem collectorSystem;	
@@ -40,10 +41,13 @@ public class QBert extends IterativeRobot {
 		// Create the main configuration
 		controllerConfiguration = new ControllerConfiguration();
 		autonomousConfiguration = new AutonomousConfiguration();
+		configuration = new Configuration();
 		
 		// Create the command configuration
 		new DriveCommandConfiguration();
 		new TestCommandConfiguration();
+		configuration.addAutoCommandsToDashboard();
+		configuration.addAutonmousChoices();
 	}
 
 	// ****************************************************************************
@@ -72,7 +76,7 @@ public class QBert extends IterativeRobot {
 		// Stop any commands that might be left running from another mode
 		Scheduler.getInstance().removeAll();
 		
-		Command autoCommand = autonomousConfiguration.getAutonomousCommand();
+		Command autoCommand = configuration.getAutonomousCommand();
 		
 		Scheduler.getInstance().add(autoCommand);
 	}

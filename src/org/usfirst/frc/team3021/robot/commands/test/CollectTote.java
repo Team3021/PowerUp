@@ -1,11 +1,6 @@
-//IS THIS CORRECT LOL
-
 package org.usfirst.frc.team3021.robot.commands.test;
 
 import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
-import org.usfirst.frc.team3021.robot.subsystem.CollectorSystem;
-
-import edu.wpi.first.wpilibj.Timer;
 
 public class CollectTote extends CollectorCommand {
 	public CollectTote() {
