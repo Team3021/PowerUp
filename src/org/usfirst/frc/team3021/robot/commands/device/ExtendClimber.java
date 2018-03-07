@@ -2,11 +2,15 @@ package org.usfirst.frc.team3021.robot.commands.device;
 
 import org.usfirst.frc.team3021.robot.commands.ClimberCommand;
 
-public class RaiseClimberDuration extends ClimberCommand{
+public class ExtendClimber extends ClimberCommand {
 
 	int duration; // seconds
 
-	public RaiseClimberDuration(int duration) {
+	public ExtendClimber() {
+		this(3);
+	}
+	
+	public ExtendClimber(int duration) {
 		super();
 		this.duration = duration;
 	}
@@ -24,8 +28,6 @@ public class RaiseClimberDuration extends ClimberCommand{
 
 	@Override
 	protected boolean isFinished() {
-		
-		return (timeSinceInitialized() >= duration);
+		return timeSinceInitialized() >= duration;
 	}
-
 }

@@ -6,6 +6,10 @@ public class DeliverTote extends CollectorCommand {
 
 	int time; // seconds
 	
+	public DeliverTote() {
+		this(2);
+	}
+	
 	public DeliverTote(int time) {
 		super();
 
