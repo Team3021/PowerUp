@@ -12,6 +12,5 @@ public class Straight extends CommandGroup {
 		double speed = DriveCommand.getAutonomousMoveSpeed();
 		
 		addSequential(new MoveForwardForDistance(speed, 10));
-		
 	}
 }
