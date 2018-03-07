@@ -20,6 +20,8 @@ public abstract class TurnToAngle extends DriveCommand {
 		
 		driveSystem.setGyroDesiredAngle(desiredAngle);
 		
+		driveSystem.zeroGyro();
+		
 		driveSystem.enableGyro();
 		
 		driveSystem.printHeaderData();
