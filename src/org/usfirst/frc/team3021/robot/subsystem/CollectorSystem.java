@@ -63,9 +63,6 @@ public class CollectorSystem extends Subsystem {
 		if (!isEnabled) {
 			return;
 		}
-		else{
-			
-		}
 		
 		if (tote_switch.get()) {
 			tote_light.set(Relay.Value.kOff);
@@ -89,47 +86,63 @@ public class CollectorSystem extends Subsystem {
 
 			// Control the motor
 			if (mainController.isCollecting() || auxController.isCollecting()) {
-				startMotor();
+				collect();
 			}
 			else if (mainController.isLaunching() || auxController.isLaunching()) {
-				reverseMotor();
+				deliver();
 			}
 			else {
-				stopMotor();
+				stop();
 			}
 		}
 	}
 
-	public void startMotor() {
-		right_motor.set(REVERSE_MULTIPLIER * getVoltage());
-		left_motor.set(getVoltage());
+	public void collect() {
+		if (!isEnabled) {
+			return;
+		}
+		
+		right_motor.set(REVERSE_MULTIPLIER * voltage);
+		left_motor.set(voltage);
 	}
 	
-	public void reverseMotor() {
-		right_motor.set(getVoltage());
-		left_motor.set(REVERSE_MULTIPLIER * getVoltage());
+	public void deliver() {
+		if (!isEnabled) {
+			return;
+		}
+		
+		right_motor.set(voltage);
+		left_motor.set(REVERSE_MULTIPLIER * voltage);
 	}
 	
-	public void stopMotor() {
+	public void stop() {
+		if (!isEnabled) {
+			return;
+		}
+		
 		right_motor.set(0);
 		left_motor.set(0);
 	}
-
-	private double getVoltage() {
-		return voltage;
-	}
 	
-	public boolean hasTote(){
+	public boolean hasTote() {
 		return !(tote_switch.get());
 	}
 	
-	public void deploy(){
+	public void deploy() {
+		if (!isEnabled) {
+			return;
+		}
+		
 		collector_deploy.set(true);
 		collector_stow.set(false);	
 		collecter_deployed = true;
 	}
 	
-	public void stow(){
+	public void stow() {
+		if (!isEnabled) {
+			return;
+		}
+		
 		collector_deploy.set(false);
 		collector_stow.set(true);	
 		collecter_deployed = false;

@@ -9,13 +9,13 @@ public class CollectTote extends CollectorCommand {
 	
 	@Override
 	protected void execute() {
-		collectorSystem.startMotor();
+		collectorSystem.collect();
 	}
 
 	@Override
 	protected void end() {
 		System.out.println("Done with the intake.");
-		collectorSystem.stopMotor();
+		collectorSystem.stop();
 	}
 
 	@Override

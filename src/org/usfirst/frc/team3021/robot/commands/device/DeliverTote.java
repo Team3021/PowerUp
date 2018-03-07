@@ -18,13 +18,13 @@ public class DeliverTote extends CollectorCommand {
 	
 	@Override
 	protected void execute() {
-		collectorSystem.reverseMotor();
+		collectorSystem.deliver();
 	}
 
 	@Override
 	protected void end() {
 		System.out.println("Done with the outtake.");
-		collectorSystem.stopMotor();
+		collectorSystem.stop();
 	}
 
 	@Override
