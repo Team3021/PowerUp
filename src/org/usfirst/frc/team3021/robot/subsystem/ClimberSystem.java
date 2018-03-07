@@ -36,25 +36,25 @@ public class ClimberSystem extends Subsystem {
 		}
 
 		if (auxController.isClimberExtending()) {
-			startMotor();
+			extend();
 		}
 		else if (auxController.isClimberContracting()) {
-			reverseMotor();
+			contract();
 		}
 		else {
-			stopMotor();
+			stop();
 		}
 	}
 
-	public void startMotor() {
+	public void extend() {
 		motor.set(getVoltage());
 	}
 	
-	public void reverseMotor() {
+	public void contract() {
 		motor.set(REVERSE_MULTIPLIER * getVoltage());
 	}
 	
-	public void stopMotor() {
+	public void stop() {
 		motor.set(0);
 	}
 	

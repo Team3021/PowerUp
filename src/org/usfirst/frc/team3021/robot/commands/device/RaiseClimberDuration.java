@@ -13,13 +13,13 @@ public class RaiseClimberDuration extends ClimberCommand{
 
 	@Override
 	protected void execute() {
-		climberSystem.startMotor();
+		climberSystem.extend();
 	}
 
 	@Override
 	protected void end() {
 		System.out.println("Done with the elevator.");
-		climberSystem.stopMotor();
+		climberSystem.stop();
 	}
 
 	@Override
