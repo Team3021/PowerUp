@@ -31,12 +31,18 @@ public class DeviceCommandConfiguration extends BaseConfiguration {
 	}
 	
 	private void addCommandsToDashboard() {
+		// Elevator
 		commands.add(new ExtendClimber());
-		commands.add(new DeployTote());
-		commands.add(new CollectTote());
-		commands.add(new DeliverTote());
-		commands.add(new StowTote());
 		
+		// Forks up or down
+		commands.add(new StowTote());
+		commands.add(new DeployTote());
+		
+		// Get or Give
+		commands.add(new DeliverTote());
+		commands.add(new CollectTote());
+		
+		// Combined Actions
 		commands.add(new OuttakeSwitch());
 		commands.add(new OuttakeScale());
 
