@@ -10,8 +10,7 @@ public class DefaultController extends BaseController {
 
 	@Override
 	protected void setButtons() {
-		// TODO Auto-generated method stub
-		
+		// No button mappings for the default controller
 	}
 
 	@Override
