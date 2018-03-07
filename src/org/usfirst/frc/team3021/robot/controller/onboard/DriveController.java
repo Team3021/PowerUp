@@ -16,7 +16,7 @@ import org.usfirst.frc.team3021.robot.configuration.Dashboard;
 public class DriveController {
 	
 	private static final String PREF_DRIVE_WHEEL_SIZE = "DriveController.wheel.diameter";
-	private static final double DRIVE_WHEEL_SIZE_DEFAULT = 6.0;
+	private static final double DRIVE_WHEEL_SIZE_DEFAULT = 8.0;
 
 	// DRIVE SYSTEM
 	private DifferentialDrive robotDrive;
