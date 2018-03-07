@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3021.robot.commands.test;
+package org.usfirst.frc.team3021.robot.commands.device;
 
 import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
 
