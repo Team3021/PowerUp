@@ -2,20 +2,13 @@ Robot Preferences
 
 Gyro.usb.enabled						false
 Gyro.mxp.enabled						true
-Gyro.angle.adjustment					0.3
-Gyro.turn.rate							0.3
+Gyro.turn.rate.min						0.25
+Gyro.turn.rate.max						0.4
 
-Agitator.period.first.time.millis		200
-Agitator.periodic.time.millis			200
-Agitator.motor.time.millis				800
-
-Indexer.period.first.time.mills			1000
-Indexer.period.time.millis				100
-Indexer.period.motor.time.millis		30
-Indexer.motor.voltage					0.3
-
+Climber.enabled							true
 Climber.motor.voltage					0.95
 
+Collector.enabled						true
 Collector.motor.voltage					1.0
 
 Launcher.motor.voltage					0.70
@@ -29,12 +22,16 @@ VisionProcessor.target.locator.enabled	false
 Controller.main.port					0
 Controller.aux.port						1
 Controller.aux.enabled					true
+Controller.xbox.enabled					false
+
+DriveController.wheel.diameter			8.0
 
 Drive.autonomouns.move.speed			0.3
 Drive.autonomouns.move.time				3
 Drive.autonomouns.move.distance			3
 
-DriveController.wheel.diameter			6
-
-Config.dashboard.commands.enabled		false
-Config.dashboard.subsystems.enabled		false
+Config.test.commands.enabled			false
+Config.device.commands.enabled			false
+Config.system.commands.enabled			false
+Config.drive.commands.enabled			false
+Dashboard.display.enabled				false
