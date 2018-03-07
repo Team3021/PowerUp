@@ -13,7 +13,7 @@ import org.usfirst.frc.team3021.robot.commands.driving.ZeroGyro;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveCommandConfiguration extends Configuration {
+public class DriveCommandConfiguration extends BaseConfiguration {
 	
 	private final String COMMAND_GROUP = "Drive";
 

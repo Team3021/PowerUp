@@ -10,7 +10,7 @@ import org.usfirst.frc.team3021.robot.commands.test.TurnRightEscalateInputTest;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class TestCommandConfiguration extends Configuration {
+public class TestCommandConfiguration extends BaseConfiguration {
 	
 	private final String COMMAND_GROUP = "Tests";
 

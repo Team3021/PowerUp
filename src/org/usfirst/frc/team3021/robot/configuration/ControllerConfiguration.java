@@ -8,7 +8,7 @@ import org.usfirst.frc.team3021.robot.controller.station.Xbox360Controller;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
-public class ControllerConfiguration extends Configuration {
+public class ControllerConfiguration extends BaseConfiguration {
 	
 	private static final String NO_CONTROLLER = "No Controller";
 	private static final String ATTACK_THREE = "Attack Three";

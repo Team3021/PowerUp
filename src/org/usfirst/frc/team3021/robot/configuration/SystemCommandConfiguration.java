@@ -9,7 +9,7 @@ import org.usfirst.frc.team3021.robot.commands.system.PrintPreferencesCommand;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SystemCommandConfiguration extends Configuration {
+public class SystemCommandConfiguration extends BaseConfiguration {
 	
 	private final String COMMAND_GROUP = "System";
 
