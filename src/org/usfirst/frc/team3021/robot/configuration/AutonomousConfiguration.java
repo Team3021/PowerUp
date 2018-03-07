@@ -31,6 +31,10 @@ public class AutonomousConfiguration extends BaseConfiguration {
 		if (enabled) {
 			Dashboard.putData(Scheduler.getInstance());
 		}
+		
+		addCommandsToDashboard();
+		addAutonmousChoices();
+		
 	}
 
 	private SendableChooser<String> autonomousChooser = new SendableChooser<>();
@@ -57,7 +61,7 @@ public class AutonomousConfiguration extends BaseConfiguration {
 	// **********************            COMMANDS            **********************
 	// ****************************************************************************
 	
-	public void addAutoCommandsToDashboard() {
+	public void addCommandsToDashboard() {
 		SmartDashboard.putData(Scheduler.getInstance());
 
 		// AUTONOMOUS COMMANDS
