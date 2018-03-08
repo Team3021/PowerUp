@@ -212,6 +212,13 @@ public class DriveSystem extends Subsystem {
 		if (autonomousCommand != null) {
 			Scheduler.getInstance().removeAll();
 			Scheduler.getInstance().add(autonomousCommand);
+			return;
+		}
+		
+		// Check to determine what command is executing
+		if (getCurrentCommandName().isEmpty()) {
+			// No commands running so send signal to drive controller to stop the motors
+			stop();
 		}
 	}
 
