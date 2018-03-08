@@ -30,6 +30,9 @@ public abstract class DriveCommand extends Command {
 		this.driveSystem = QBert.getDriveSystem();
 		
 		requires(this.driveSystem);
+		
+		driveSystem.zeroEncoders();
+		driveSystem.zeroGyro();
 	}
 
 	@Override

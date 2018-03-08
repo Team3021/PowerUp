@@ -21,8 +21,6 @@ public class MoveForwardForDistance extends DriveCommand {
 	protected void initialize() {
 		System.out.println("Start moving " + direction + " for distance : " + desiredDistance);
 		
-		driveSystem.zeroEncoders();
-		
 		super.initialize();
 	}
 	
