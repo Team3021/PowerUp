@@ -71,7 +71,7 @@ public class DriveController {
 		rightSpeedController = new SpeedControllerGroup(rightFrontTalon, rightRearTalon);
 		
 		robotDrive = new DifferentialDrive(leftSpeedController, rightSpeedController);
-		robotDrive.setExpiration(0.1);
+		robotDrive.setExpiration(0.25);
 
 		// Calculate encoder distance
 		double wheelDiameter = Preferences.getInstance().getDouble(PREF_DRIVE_WHEEL_SIZE, DRIVE_WHEEL_SIZE_DEFAULT);
