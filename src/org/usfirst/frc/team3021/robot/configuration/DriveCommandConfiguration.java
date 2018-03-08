@@ -3,6 +3,8 @@ package org.usfirst.frc.team3021.robot.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.usfirst.frc.team3021.robot.commands.driving.StopMoving;
+import org.usfirst.frc.team3021.robot.commands.driving.StopTurning;
 import org.usfirst.frc.team3021.robot.commands.driving.TurnLeftToAngle45;
 import org.usfirst.frc.team3021.robot.commands.driving.TurnLeftToAngle90;
 import org.usfirst.frc.team3021.robot.commands.driving.TurnRightToAngle45;
@@ -41,6 +43,9 @@ public class DriveCommandConfiguration extends BaseConfiguration {
 
 		commands.add(new ZeroEncoders());
 		commands.add(new ZeroGyro());
+		
+		commands.add(new StopMoving());
+		commands.add(new StopTurning());
 		
 		addCommandsToDashboard(COMMAND_GROUP, commands, enabled);
 	}
