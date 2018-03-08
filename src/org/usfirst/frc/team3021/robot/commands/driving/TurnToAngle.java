@@ -46,6 +46,6 @@ public abstract class TurnToAngle extends DriveCommand {
 	
 	@Override
 	protected boolean isFinished() {
-		return driveSystem.isGyroOnTarget() || timeSinceInitialized() >= 5.0;
+		return driveSystem.isGyroOnTarget() || timeSinceInitialized() >= 2.5;
 	}
 }
