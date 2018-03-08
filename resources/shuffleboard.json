@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.21,
+  "dividerPosition": 0.2094736842105263,
   "tabPane": [
     {
       "title": "System",
@@ -19,15 +19,42 @@
             "content": {
               "_type": "Robot Preferences",
               "_source0": "network_table:///Preferences",
-              "_title": "/Preferences",
+              "_title": "Preferences",
               "searchBoxVisible": false
+            }
+          },
+          "5,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "System Commands",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/PrintButtonMappingsCommand",
+                  "_title": "SmartDashboard/PrintButtonMappingsCommand"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/PrintPreferencesCommand",
+                  "_title": "SmartDashboard/PrintPreferencesCommand"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/ToggleDriveDataCollection",
+                  "_title": "SmartDashboard/ToggleDriveDataCollection"
+                }
+              ]
             }
           }
         }
       }
     },
     {
-      "title": "Tab 2",
+      "title": "Drive",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -44,7 +71,7 @@
             "content": {
               "_type": "Differential Drivebase",
               "_source0": "network_table:///LiveWindow/Ungrouped/DifferentialDrive[1]",
-              "_title": "/LiveWindow/Ungrouped/DifferentialDrive[1]",
+              "_title": "DifferentialDrive",
               "numberOfWheels": 4,
               "wheelDiameter": 80.0,
               "showVectors": true
@@ -70,6 +97,210 @@
               "_type": "Encoder",
               "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[1]",
               "_title": "/LiveWindow/Ungrouped/Encoder[1]"
+            }
+          },
+          "6,0": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Autonomous Mode",
+              "_title": "SmartDashboard/Autonomous Mode"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Commands",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Collector",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/CollectTote",
+                  "_title": "Device"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/DeliverTote",
+                  "_title": "Device"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/DeployTote",
+                  "_title": "Device"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/StowTote",
+                  "_title": "Device"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/ExtendClimber",
+                  "_title": "Device"
+                }
+              ]
+            }
+          },
+          "6,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Move",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/MoveForwardForDistanceTest",
+                  "_title": "Move"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/MoveBackwardForDistanceTest",
+                  "_title": "Move"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/ZeroEncoders",
+                  "_title": "Move"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/StopMoving",
+                  "_title": "Move"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/StopTurning",
+                  "_title": "Turn"
+                }
+              ]
+            }
+          },
+          "8,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Turn",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/TurnLeftToAngle45",
+                  "_title": "Turn"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/TurnLeftToAngle90",
+                  "_title": "Turn"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/TurnRightToAngle45",
+                  "_title": "Turn"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/TurnRightToAngle90",
+                  "_title": "Turn"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/TurnToAngle180",
+                  "_title": "Turn"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/ZeroGyro",
+                  "_title": "Turn"
+                }
+              ]
+            }
+          },
+          "2,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Sequential Commands",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/OuttakeScale",
+                  "_title": "Sequential"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/OuttakeSwitch",
+                  "_title": "Sequential"
+                }
+              ]
+            }
+          },
+          "4,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Auto Commands",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/[Straight]",
+                  "_title": "Auto"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/[Left] to [SWITCH]",
+                  "_title": "Auto"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/[Left] to [SCALE]",
+                  "_title": "Auto"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/[Middle] to [SWITCH]",
+                  "_title": "Auto"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/[Right] to [SWITCH]",
+                  "_title": "Auto"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/[Right] to [SCALE]",
+                  "_title": "Auto"
+                }
+              ]
             }
           }
         }
