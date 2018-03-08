@@ -14,7 +14,7 @@ public abstract class TurnToAngle extends DriveCommand {
 	
 	@Override
 	protected void initialize() {
-		System.out.println("Start TurnToAngle at: " + timeSinceInitialized());
+		System.out.println("Start TurnToAngle");
 		
 		super.initialize();
 		
