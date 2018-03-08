@@ -3,6 +3,7 @@ package org.usfirst.frc.team3021.robot.commands.auto;
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
 import org.usfirst.frc.team3021.robot.commands.device.OuttakeScale;
 import org.usfirst.frc.team3021.robot.commands.device.OuttakeSwitch;
+import org.usfirst.frc.team3021.robot.commands.driving.HoldPosition;
 import org.usfirst.frc.team3021.robot.commands.driving.MoveForwardForDistance;
 import org.usfirst.frc.team3021.robot.commands.driving.TurnRightToAngle;
 
@@ -24,7 +25,9 @@ public class LeftToSWITCH extends CommandGroup {
 				addSequential(new MoveForwardForDistance(speed, 13.125));
 				addSequential(new TurnRightToAngle(90));
 				addSequential(new MoveForwardForDistance(speed, 0.83));
-				addSequential(new OuttakeSwitch());
+				
+				addParallel(new HoldPosition());
+				addParallel(new OuttakeSwitch());
 
 			} else if (gameData.charAt(1) == 'L') {
 
