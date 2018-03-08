@@ -47,19 +47,30 @@ public class ClimberSystem extends Subsystem {
 	}
 
 	public void extend() {
-		motor.set(getVoltage());
+		// don't do any actions as the sub system is not enabled
+		if (!isEnabled) {
+			return;
+		}
+		
+		motor.set(voltage);
 	}
 	
 	public void contract() {
-		motor.set(REVERSE_MULTIPLIER * getVoltage());
+		// don't do any actions as the sub system is not enabled
+		if (!isEnabled) {
+			return;
+		}
+		
+		motor.set(REVERSE_MULTIPLIER * voltage);
 	}
 	
 	public void stop() {
+		// don't do any actions as the sub system is not enabled
+		if (!isEnabled) {
+			return;
+		}
+		
 		motor.set(0);
-	}
-	
-	private double getVoltage() {
-		return voltage;
 	}
 
 	@Override
