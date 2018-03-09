@@ -49,7 +49,7 @@ public class LeftToSCALE extends CommandGroup {
 				addSequential(new DeployTote(1));
 				addSequential(new DeliverTote(2));
 				addSequential(new StowTote(1));
-				addSequential(new MoveBackwardForDistance(speed, 0.83));
+				addSequential(new MoveBackwardForDistance(speed, 0.83));//POSSIBLY BUMP THISDOWN FOR SAFETY
 				addSequential(new RetractClimber(1));
 				
 			}else {

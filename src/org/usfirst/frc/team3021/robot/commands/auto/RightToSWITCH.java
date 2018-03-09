@@ -38,24 +38,24 @@ public class RightToSWITCH extends CommandGroup {
 			{
 				//Right to Right Switch // PRIORITY
 				addSequential(new MoveForwardForDistance(speed, 10));
-				addSequential(new TurnLeftToAngle(90));
+				addSequential(new TurnLeftToAngle(100));
+				addSequential(new MoveForwardForDistance(speed, 1.1));
 				addSequential(new ExtendClimber());
-				addSequential(new MoveForwardForDistance(speed, 0.83));
 				addSequential(new DeployTote(1));
 				addSequential(new DeliverTote(2));
 				addSequential(new StowTote(1));
-				addSequential(new MoveBackwardForDistance(speed, 0.83));
+				addSequential(new MoveBackwardForDistance(speed - .2, 0.83));
 				addSequential(new RetractClimber(1));
-				
-			} else if (gameData.charAt(1) == 'R'){
-				
-				
-				//Right to Right Scale //Second Priority
-				addSequential(new MoveForwardForDistance(speed, 26.75));
-				addSequential(new TurnLeftToAngle(90));
-				addSequential(new OuttakeScale());
-				
-			}else {
+			}
+//			else if (gameData.charAt(1) == 'R'){
+//				
+//				
+//				//Right to Right Scale //Second Priority
+//				addSequential(new MoveForwardForDistance(speed, 26.75));
+//				addSequential(new TurnLeftToAngle(90));
+//				addSequential(new OuttakeScale());
+				//}
+			else {
 				//Nothing on Right side, just go straight
 				addSequential(new MoveForwardForDistance(speed, 10));
 				

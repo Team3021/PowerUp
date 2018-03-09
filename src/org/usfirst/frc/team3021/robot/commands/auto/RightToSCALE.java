@@ -44,7 +44,7 @@ public class RightToSCALE extends CommandGroup {
 				addSequential(new MoveForwardForDistance(speed, 10));
 				addSequential(new TurnLeftToAngle(90));
 				addSequential(new ExtendClimber());
-				addSequential(new MoveForwardForDistance(speed, 0.83));
+				addSequential(new MoveForwardForDistance(speed, 1.05));
 				addSequential(new DeployTote(1));
 				addSequential(new DeliverTote(2));
 				addSequential(new StowTote(1));
