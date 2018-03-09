@@ -39,9 +39,6 @@ public abstract class DriveCommand extends Command {
 		hasStarted = false;
 
 		hasMoved = false;
-		
-		driveSystem.zeroEncoders();
-		driveSystem.zeroGyro();
 	}
 	
 	public static double getAutonomousMoveSpeed() {

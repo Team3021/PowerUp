@@ -20,8 +20,10 @@ public class MoveForwardForDistance extends DriveCommand {
 	@Override
 	protected void initialize() {
 		System.out.println("Start moving " + direction + " for distance : " + desiredDistance);
-		
+
 		super.initialize();
+		
+		driveSystem.zeroEncoders();
 	}
 	
 	@Override
@@ -53,23 +55,6 @@ public class MoveForwardForDistance extends DriveCommand {
 	private DriveInput getDriveInput(double moveValue) {
 		
 		double turnValue = 0;
-		
-		double currentHeading = driveSystem.getGyroRotation();
-		
-		// current heading is correct
-		if (currentHeading == 0.0) {
-			turnValue = 0;
-		} 
-		// current heading is drifting left,
-		// then adjust to the right
-		else if (currentHeading < 0.0) {
-			turnValue = currentHeading * 0.05; // TODO need to determine the best value to adjust the heading
-		}
-		// current heading is drifting right
-		// then adjust to the left
-		else if (currentHeading > 0.0) {
-			turnValue = -1.0 * currentHeading * 0.05; // TODO need to determine the best value to adjust the heading
-		}
 		
 		ArcadeDriveInput input = new ArcadeDriveInput(moveValue, turnValue);
 		
