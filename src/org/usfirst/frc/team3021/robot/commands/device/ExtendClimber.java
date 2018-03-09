@@ -4,13 +4,13 @@ import org.usfirst.frc.team3021.robot.commands.ClimberCommand;
 
 public class ExtendClimber extends ClimberCommand {
 
-	int duration; // seconds
+	double duration; // seconds
 
 	public ExtendClimber() {
-		this(3);
+		this(1.5);
 	}
 	
-	public ExtendClimber(int duration) {
+	public ExtendClimber(double duration) {
 		super();
 		this.duration = duration;
 	}

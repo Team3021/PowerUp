@@ -1,23 +1,29 @@
 package org.usfirst.frc.team3021.robot.commands.auto;
 
+import org.usfirst.frc.team3021.robot.QBert;
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
 import org.usfirst.frc.team3021.robot.commands.device.OuttakeScale;
 import org.usfirst.frc.team3021.robot.commands.device.OuttakeSwitch;
 import org.usfirst.frc.team3021.robot.commands.driving.MoveForwardForDistance;
 import org.usfirst.frc.team3021.robot.commands.driving.TurnLeftToAngle;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class RightToSWITCH extends CommandGroup {
 	public RightToSWITCH() {
 		super("[Right] to [SWITCH]");
+	}
+	
+	@Override
+	protected void initialize() {
 		
+		System.out.println("Entering Initialize RightToSwitch");
+
+	
 		double speed = DriveCommand.getAutonomousMoveSpeed();
 		
-		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
+		String gameData = QBert.getGameData();
+
 		
 		if(gameData.length() > 0)
 		{
@@ -43,6 +49,10 @@ public class RightToSWITCH extends CommandGroup {
 				addSequential(new MoveForwardForDistance(speed, 10));
 				
 			}
+			
+		} else {
+			System.out.println("Failed to get game data" + getName());
+			addSequential(new MoveForwardForDistance(speed, 10));
 			
 		}
 	}

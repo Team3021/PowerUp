@@ -12,7 +12,7 @@ public class ClimberSystem extends Subsystem {
 	private boolean isEnabled = ENABLED_DEFAULT;
 	
 	private static final String PREF_VOLTAGE = "Climber.motor.voltage";
-	private static final double VOLTAGE_DEFAULT = 0.5;
+	private static final double VOLTAGE_DEFAULT = 1.0;
 	
 	private double voltage = VOLTAGE_DEFAULT;
 	
@@ -22,7 +22,7 @@ public class ClimberSystem extends Subsystem {
 	
 	public ClimberSystem() {		
 		isEnabled =  Preferences.getInstance().getBoolean(PREF_ENABLED, ENABLED_DEFAULT);
-		voltage = Preferences.getInstance().getDouble(PREF_VOLTAGE, VOLTAGE_DEFAULT);
+		voltage = 1.0;
 
 		motor = new Spark(0);
 		motor.setInverted(true);

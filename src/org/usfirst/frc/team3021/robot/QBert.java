@@ -12,7 +12,9 @@ import org.usfirst.frc.team3021.robot.subsystem.CollectorSystem;
 import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
 import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -29,6 +31,8 @@ public class QBert extends IterativeRobot {
 	
 	private Controller mainController;
 	private Controller auxController;
+	
+	private static String gameData = "";
 
 	public QBert() {
 		super();
@@ -74,11 +78,29 @@ public class QBert extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		// Stop any commands that might be left running from another mode
+		System.out.println("Entering Autonomous Init");
 		Scheduler.getInstance().removeAll();
 		
 		Command autoCommand = autonomousConfiguration.getAutonomousCommand();
 		
+		while (gameData.isEmpty()) {
+			
+			System.out.println("Trying to get game data");
+
+			gameData = DriverStation.getInstance().getGameSpecificMessage();
+			System.out.println("Game Data: " + gameData);
+
+			Timer.delay(0.005);
+		}
+
 		Scheduler.getInstance().add(autoCommand);
+		
+		if (autoCommand != null) {
+			System.out.println("AutoCommand Scheduled " + autoCommand.getName());
+		} else {
+			System.out.println("No Auto command scheduled");
+		}
+
 	}
 
 	@Override
@@ -158,6 +180,10 @@ public class QBert extends IterativeRobot {
 	
 	public static ClimberSystem getClimberSystem() {
 		return climberSystem;
+	}
+	
+	public static String getGameData() {
+		return gameData;
 	}
 }
 

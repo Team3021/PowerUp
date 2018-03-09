@@ -7,7 +7,7 @@ public class OuttakeScale extends CommandGroup {
 	public OuttakeScale() {
 		super();
 		
-		addSequential(new ExtendClimber(5)); //5 seconds?  We really need limit switches.
+		addSequential(new ExtendClimber(3.5)); //5 seconds?  We really need limit switches.
 		addSequential(new DeployTote());
 		addSequential(new DeliverTote());
 	}
