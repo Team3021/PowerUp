@@ -3,8 +3,10 @@ package org.usfirst.frc.team3021.robot.commands.device;
 import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
 
 public class StowTote extends CollectorCommand {
-		public StowTote() {
+	int duration;
+		public StowTote(int duration) {
 			super();
+			this.duration = duration;
 		}
 		
 		@Override
@@ -19,7 +21,7 @@ public class StowTote extends CollectorCommand {
 
 		@Override
 		protected boolean isFinished() {
-			return (true);
+			return timeSinceInitialized() >= duration;
 		}
 
 	}

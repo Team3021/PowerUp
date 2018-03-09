@@ -35,8 +35,8 @@ public class DeviceCommandConfiguration extends BaseConfiguration {
 		commands.add(new ExtendClimber());
 		
 		// Forks up or down
-		commands.add(new StowTote());
-		commands.add(new DeployTote());
+		commands.add(new StowTote(1));
+		commands.add(new DeployTote(2));
 		
 		// Get or Give
 		commands.add(new DeliverTote());

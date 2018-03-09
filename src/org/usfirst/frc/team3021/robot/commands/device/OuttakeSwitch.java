@@ -8,7 +8,9 @@ public class OuttakeSwitch extends CommandGroup {
 		super();
 		
 		addSequential(new ExtendClimber());
-		addSequential(new DeployTote());
-		addSequential(new DeliverTote());
+		addSequential(new DeployTote(1));
+		addSequential(new DeliverTote(2));
+		addSequential(new StowTote(1));
+		addSequential(new RetractClimber(1));
 	}
 }

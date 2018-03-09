@@ -2,12 +2,19 @@ package org.usfirst.frc.team3021.robot.commands.auto;
 
 import org.usfirst.frc.team3021.robot.QBert;
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
+import org.usfirst.frc.team3021.robot.commands.device.DeliverTote;
+import org.usfirst.frc.team3021.robot.commands.device.DeployTote;
+import org.usfirst.frc.team3021.robot.commands.device.ExtendClimber;
 import org.usfirst.frc.team3021.robot.commands.device.OuttakeScale;
 import org.usfirst.frc.team3021.robot.commands.device.OuttakeSwitch;
+import org.usfirst.frc.team3021.robot.commands.device.RetractClimber;
+import org.usfirst.frc.team3021.robot.commands.device.StowTote;
 import org.usfirst.frc.team3021.robot.commands.driving.HoldPosition;
+import org.usfirst.frc.team3021.robot.commands.driving.MoveBackwardForDistance;
 import org.usfirst.frc.team3021.robot.commands.driving.MoveForwardForDistance;
 import org.usfirst.frc.team3021.robot.commands.driving.TurnRightToAngle;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class LeftToSWITCH extends CommandGroup {
@@ -23,23 +30,28 @@ public class LeftToSWITCH extends CommandGroup {
 		double speed = DriveCommand.getAutonomousMoveSpeed();
 		
 		String gameData = QBert.getGameData();
+		
+		Timer timer = new Timer();
 
 		if (gameData.length() > 0) {
+			
 			if (gameData.charAt(0) == 'L') {
 				// Left to Left Switch // PRIORITY
-				addSequential(new MoveForwardForDistance(speed, 13.125));
+				addSequential(new MoveForwardForDistance(speed, 10));
 				addSequential(new TurnRightToAngle(90));
+				addSequential(new ExtendClimber());
 				addSequential(new MoveForwardForDistance(speed, 0.83));
+				addSequential(new DeployTote(1));
+				addSequential(new DeliverTote(2));
+				addSequential(new StowTote(1));
+				addSequential(new MoveBackwardForDistance(speed, 0.83));
+				addSequential(new RetractClimber(1));
 				
-				addParallel(new HoldPosition());
-				addParallel(new OuttakeSwitch());
-
 			} else if (gameData.charAt(1) == 'L') {
 
 				// Right to Right Scale //Second Priority
 				addSequential(new MoveForwardForDistance(speed, 26.75));
 				addSequential(new TurnRightToAngle(90));
-				addSequential(new MoveForwardForDistance(speed, 6.9));
 				addSequential(new OuttakeScale());
 
 			} else {

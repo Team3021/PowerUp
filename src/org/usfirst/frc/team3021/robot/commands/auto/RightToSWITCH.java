@@ -2,10 +2,17 @@ package org.usfirst.frc.team3021.robot.commands.auto;
 
 import org.usfirst.frc.team3021.robot.QBert;
 import org.usfirst.frc.team3021.robot.commands.DriveCommand;
+import org.usfirst.frc.team3021.robot.commands.device.DeliverTote;
+import org.usfirst.frc.team3021.robot.commands.device.DeployTote;
+import org.usfirst.frc.team3021.robot.commands.device.ExtendClimber;
 import org.usfirst.frc.team3021.robot.commands.device.OuttakeScale;
 import org.usfirst.frc.team3021.robot.commands.device.OuttakeSwitch;
+import org.usfirst.frc.team3021.robot.commands.device.RetractClimber;
+import org.usfirst.frc.team3021.robot.commands.device.StowTote;
+import org.usfirst.frc.team3021.robot.commands.driving.MoveBackwardForDistance;
 import org.usfirst.frc.team3021.robot.commands.driving.MoveForwardForDistance;
 import org.usfirst.frc.team3021.robot.commands.driving.TurnLeftToAngle;
+import org.usfirst.frc.team3021.robot.commands.driving.TurnRightToAngle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -30,10 +37,15 @@ public class RightToSWITCH extends CommandGroup {
 			if(gameData.charAt(0)== 'R')
 			{
 				//Right to Right Switch // PRIORITY
-				addSequential(new MoveForwardForDistance(speed, 13.125));
+				addSequential(new MoveForwardForDistance(speed, 10));
 				addSequential(new TurnLeftToAngle(90));
+				addSequential(new ExtendClimber());
 				addSequential(new MoveForwardForDistance(speed, 0.83));
-				addSequential(new OuttakeSwitch());
+				addSequential(new DeployTote(1));
+				addSequential(new DeliverTote(2));
+				addSequential(new StowTote(1));
+				addSequential(new MoveBackwardForDistance(speed, 0.83));
+				addSequential(new RetractClimber(1));
 				
 			} else if (gameData.charAt(1) == 'R'){
 				
@@ -41,7 +53,6 @@ public class RightToSWITCH extends CommandGroup {
 				//Right to Right Scale //Second Priority
 				addSequential(new MoveForwardForDistance(speed, 26.75));
 				addSequential(new TurnLeftToAngle(90));
-				addSequential(new MoveForwardForDistance(speed, 6.9));
 				addSequential(new OuttakeScale());
 				
 			}else {
