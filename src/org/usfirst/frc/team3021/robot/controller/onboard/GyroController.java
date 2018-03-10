@@ -155,13 +155,15 @@ public class GyroController implements PIDOutput {
 	}
 
 	private void recalibrateGyro() {
-		System.out.println("Recalibrating gyro");
+		System.out.println("Recalibrating gyro [START]");
 		
 		navx.reset();
+
+		System.out.println("Recalibrating gyro [END]");
 	}
 	
 	public void zeroGyro() {
-		System.out.println("Zero the gyro");
+		System.out.println("Zero the gyro [START]");
 		
 		navx.zeroYaw();
 		
@@ -181,6 +183,8 @@ public class GyroController implements PIDOutput {
 			
 			Timer.delay(0.005);
 		}
+		
+		System.out.println("Zero the gyro [END]");
 	}
 	
 	public void enable() {
