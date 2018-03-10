@@ -25,6 +25,8 @@ public class MoveForwardForDistance extends DriveCommand {
 		
 		driveSystem.zeroEncoders();
 		
+		driveSystem.zeroGyro();
+		
 		System.out.println("MoveForwardForDistance init complete");
 	}
 	
