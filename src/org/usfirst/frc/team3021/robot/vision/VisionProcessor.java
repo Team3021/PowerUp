@@ -1,13 +1,14 @@
 package org.usfirst.frc.team3021.robot.vision;
 
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import org.usfirst.frc.team3021.robot.device.RunnableDevice;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.wpilibj.CameraServer;
-import org.usfirst.frc.team3021.robot.configuration.Preferences;
 
 public class VisionProcessor extends RunnableDevice {
 	
@@ -100,6 +101,8 @@ public class VisionProcessor extends RunnableDevice {
 			targetScope.draw(mat);
 		}
 
+		Core.rotate(mat, mat, Core.ROTATE_90_CLOCKWISE);
+		
 		// Give the frame to the output
 		output.putFrame(mat);
 
