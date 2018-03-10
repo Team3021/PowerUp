@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3021.robot.vision;
 
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.usfirst.frc.team3021.robot.device.RunnableDevice;
 
@@ -101,6 +102,7 @@ public class VisionProcessor extends RunnableDevice {
 		}
 
 		// Give the frame to the output
+		Core.rotate(mat, mat, Core.ROTATE_90_COUNTERCLOCKWISE);
 		output.putFrame(mat);
 
 		delay(100);

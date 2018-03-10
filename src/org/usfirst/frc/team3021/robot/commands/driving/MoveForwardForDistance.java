@@ -85,7 +85,9 @@ public class MoveForwardForDistance extends DriveCommand {
 			turnValue = -1.0 * currentHeading * 0.05; // TODO need to determine the best value to adjust the heading
 		}
 		
-		System.out.println("Turn value calculated " + turnValue);
+		System.out.println("Turn value:   " + turnValue);
+		System.out.println("Move value: " + moveValue);
+
 		
 		ArcadeDriveInput input = new ArcadeDriveInput(moveValue, turnValue);
 		
