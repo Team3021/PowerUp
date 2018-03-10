@@ -66,6 +66,12 @@ public class DriveController {
 	//	rightFrontTalon = new WPI_TalonSRX(RIGHT_FRONT_PORT);
 		rightRearTalon = new WPI_TalonSRX(RIGHT_REAR_PORT);
 		
+		leftRearTalon.configVoltageCompSaturation(11.5, 20);
+		rightRearTalon.configVoltageCompSaturation(12, 20);
+		
+		leftRearTalon.enableVoltageCompensation(true);
+		rightRearTalon.enableVoltageCompensation(true);
+		
 		// DRIVE DECLARATION
 //		leftSpeedController = new SpeedControllerGroup(leftFrontTalon, leftRearTalon);
 //		rightSpeedController = new SpeedControllerGroup(rightFrontTalon, rightRearTalon);
