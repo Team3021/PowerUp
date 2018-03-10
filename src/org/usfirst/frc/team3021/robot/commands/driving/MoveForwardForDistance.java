@@ -58,6 +58,14 @@ public class MoveForwardForDistance extends DriveCommand {
 		
 		double currentHeading = driveSystem.getGyroRotation();
 		
+		// Tolerance check of the gyro reading to ensure no crazy value
+		if (Math.abs(currentHeading) > 7.5) {
+			System.out.println("Gyro reading of " + currentHeading + " is outside allowed tolerance");
+			
+			// Reset the heading
+			currentHeading = 0;
+		}
+		
 		// current heading is correct
 		if (currentHeading == 0.0) {
 			turnValue = 0;
