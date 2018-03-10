@@ -1,0 +1,23 @@
+**** Changes before Match 11 ****
+Autonomouns Actions
+
+***** Changes before Match 22 *****
+NO code changes
+Preference value changes to make autonomous move faster
+Preference value changes to remove command buttons from Java Smart Dashboard so only the Autonomous choice is visible
+
+***** Changes before Match  27 *****
+Turn off the zero gyro call
+Remove code for making drive straight calculations from current gyro heading
+
+***** Changes Before Match 40 *****
+Remove left front and right front talons from DriveController
+Autonomous actions
+
+***** Changes Before Match 61 *****
+Restore the logic for driving straight during autonomous
+Add a check that the current gyro heading is within an allowed tolerance before calculations for moving
+Add debug statements for Gyro methods
+Add debug statements for Move methods
+Add debug statements for MoveForwardForDistance command
+Restore the call to zeroGyro at the start of the move forward command which feeds into calculations for driving in a straight line
