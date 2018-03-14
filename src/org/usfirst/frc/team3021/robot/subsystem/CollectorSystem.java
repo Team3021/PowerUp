@@ -102,7 +102,7 @@ public class CollectorSystem extends Subsystem {
 			return;
 		}
 		
-		right_motor.set(voltage);
+		right_motor.set(voltage*0.9);
 		left_motor.set(REVERSE_MULTIPLIER * voltage);
 	}
 	
@@ -111,8 +111,8 @@ public class CollectorSystem extends Subsystem {
 			return;
 		}
 		
-		right_motor.set(REVERSE_MULTIPLIER * voltage);//right_motor.set(voltage);
-		left_motor.set(voltage);//left_motor.set(REVERSE_MULTIPLIER * voltage);
+		right_motor.set(REVERSE_MULTIPLIER * voltage*0.5);//right_motor.set(voltage);
+		left_motor.set(voltage*0.5);//left_motor.set(REVERSE_MULTIPLIER * voltage);
 	}
 	
 	public void stop() {

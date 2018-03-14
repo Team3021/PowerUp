@@ -112,7 +112,7 @@ public class DriveController {
 //		Dashboard.putNumber("Drive : Motor Voltage : Right Front", rightFrontTalon.getMotorOutputVoltage());
 		Dashboard.putNumber("Drive : Motor Voltage : Right Rear", rightRearTalon.getMotorOutputVoltage());
 		
-		return (leftRearTalon.getMotorOutputVoltage() + rightRearTalon.getMotorOutputVoltage()) / 4;
+		return (leftRearTalon.getMotorOutputVoltage() + rightRearTalon.getMotorOutputVoltage()) / 2;
 	}
 
 	public double getLeftMotorInput() {

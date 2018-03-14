@@ -1,5 +1,8 @@
 package org.usfirst.frc.team3021.robot;
 
+import org.usfirst.frc.team3021.robot.commands.auto.LeftToSWITCH;
+import org.usfirst.frc.team3021.robot.commands.auto.RightToSWITCH;
+import org.usfirst.frc.team3021.robot.commands.auto.Straight;
 import org.usfirst.frc.team3021.robot.configuration.AutonomousConfiguration;
 import org.usfirst.frc.team3021.robot.configuration.ControllerConfiguration;
 import org.usfirst.frc.team3021.robot.configuration.DeviceCommandConfiguration;
@@ -81,25 +84,38 @@ public class QBert extends IterativeRobot {
 		System.out.println("Entering Autonomous Init");
 		Scheduler.getInstance().removeAll();
 		
-		Command autoCommand = autonomousConfiguration.getAutonomousCommand();
+		Command autoCommand = null;
 		
 		while (gameData.isEmpty()) {
 			
 			System.out.println("Trying to get game data");
 
 			gameData = DriverStation.getInstance().getGameSpecificMessage();
-			System.out.println("Game Data: " + gameData);
+			
 
 			Timer.delay(0.005);
 		}
-
-		Scheduler.getInstance().add(autoCommand);
 		
-		if (autoCommand != null) {
-			System.out.println("AutoCommand Scheduled " + autoCommand.getName());
-		} else {
-			System.out.println("No Auto command scheduled");
-		}
+		System.out.println("Game Data: " + gameData);
+		
+		String autoMode = autonomousConfiguration.getAutonomousMode();
+		System.out.println(autoMode);
+		
+			if (gameData.charAt(0) == 'L' && autoMode.equals("[Left] to [SWITCH]")) {
+				autoCommand = new LeftToSWITCH();
+			}
+			else if (gameData.charAt(0) == 'R' && autoMode.equals("[Right] to [SWITCH]")) {
+				autoCommand = new RightToSWITCH();
+			}
+			else {
+				autoCommand = new Straight();
+				System.out.println("Scale was on opposite side, unknown command, or [ Straight] was chosen; initiating [Straight]");
+				
+			}
+		
+			
+		System.out.println("AutoCommand Scheduled " + autoCommand.getName());
+		Scheduler.getInstance().add(autoCommand);
 
 	}
 
