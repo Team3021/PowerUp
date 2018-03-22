@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3021.robot;
 
+import org.usfirst.frc.team3021.robot.commands.auto.LeftToSCALE;
 import org.usfirst.frc.team3021.robot.commands.auto.LeftToSWITCH;
+import org.usfirst.frc.team3021.robot.commands.auto.RightToSCALE;
 import org.usfirst.frc.team3021.robot.commands.auto.RightToSWITCH;
 import org.usfirst.frc.team3021.robot.commands.auto.Straight;
 import org.usfirst.frc.team3021.robot.configuration.AutonomousConfiguration;
@@ -100,20 +102,27 @@ public class QBert extends IterativeRobot {
 		
 		String autoMode = autonomousConfiguration.getAutonomousMode();
 		System.out.println(autoMode);
-		
-			if (gameData.charAt(0) == 'L' && autoMode.equals("[Left] to [SWITCH]")) {
-				autoCommand = new LeftToSWITCH();
-			}
-			else if (gameData.charAt(0) == 'R' && autoMode.equals("[Right] to [SWITCH]")) {
-				autoCommand = new RightToSWITCH();
-			}
-			else {
-				autoCommand = new Straight();
-				System.out.println("Scale was on opposite side, unknown command, or [ Straight] was chosen; initiating [Straight]");
-				
-			}
-		
-			
+
+		// Autonomous Modes: To Scale; first priority
+		if (gameData.charAt(0) == 'L' && autoMode.equals("[Left] to [SCALE]")) {
+			autoCommand = new LeftToSCALE();
+		}
+		else if (gameData.charAt(0) == 'R' && autoMode.equals("[Right] to [SCALE]")) {
+			autoCommand = new RightToSCALE();
+		}
+		// Autonomous Modes: To Switch
+		else if (gameData.charAt(1) == 'L' && !autoMode.equals("[Straight]")) {
+			autoCommand = new LeftToSWITCH();
+		}
+		else if (gameData.charAt(1) == 'R' && !autoMode.equals("[Straight]")) {
+			autoCommand = new RightToSWITCH();
+		}
+		// Autonomous Mode: Straight (Default)
+		else {
+			autoCommand = new Straight();
+			System.out.println("Scale was on opposite side, unknown command, or [Straight] was chosen; initiating [Straight]");
+		}
+
 		System.out.println("AutoCommand Scheduled " + autoCommand.getName());
 		Scheduler.getInstance().add(autoCommand);
 
