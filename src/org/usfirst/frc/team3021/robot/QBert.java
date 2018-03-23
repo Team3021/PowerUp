@@ -106,18 +106,23 @@ public class QBert extends IterativeRobot {
 		System.out.println(autoMode);
 
 		// Autonomous Modes: To Switch
-		if (gameData.charAt(0) == 'L' && autoMode.equals("[Left] to [SWITCH")) {
+		if (gameData.charAt(0) == 'L' && autoMode.equals("[Left] to [SWITCH]")) {
 			autoCommand = new LeftToSWITCH();
 		}
 		else if (gameData.charAt(0) == 'R' && autoMode.equals("[Right] to [SWITCH]")) {
 			autoCommand = new RightToSWITCH();
 		}
 		// Autonomous Modes: Middle To Left Switch
-		if (gameData.charAt(0) == 'L' && autoMode.equals("[Middle] to [Left SWITCH]")) {
-			autoCommand = new MiddleToLeftSWITCH();
+		else if (autoMode.startsWith("[Middle]")) {
+			if (gameData.charAt(0) == 'L') {
+				autoCommand = new MiddleToLeftSWITCH();
+			} 
+			else if (gameData.charAt(0) == 'R') {
+				autoCommand = new MiddleToRightSWITCH();
+			}
 		}
 		else if (gameData.charAt(0) == 'R' && autoMode.equals("[Middle] to [Right SWITCH]")) {
-			autoCommand = new MiddleToRightSWITCH();
+			
 		}
 		// Autonomous Modes: To Scale; first priority
 		else if (gameData.charAt(1) == 'L' && autoMode.equals("[Left] to [SCALE]")) {
