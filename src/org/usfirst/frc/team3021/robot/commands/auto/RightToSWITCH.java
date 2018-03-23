@@ -22,7 +22,7 @@ public class RightToSWITCH extends CommandGroup {
 		addSequential(new TurnLeftToAngle(90));
 		addSequential(new MoveForwardForDistance(speed, 1.1));
 
-		addSequential(new ExtendClimber(0.5));
+		addSequential(new ExtendClimber(1));
 		addSequential(new DeployTote(1));
 		addSequential(new DeliverTote(2));
 		addSequential(new StowTote(1));

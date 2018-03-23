@@ -85,16 +85,47 @@ public class AutonomousConfiguration extends BaseConfiguration {
 		return autonomousChooser.getSelected();
 	}
 
-	public Command getAutonomousCommand() {
+	public Command getAutonomousCommand(String gameData) {
 		
-		String name = getAutonomousMode();
+		System.out.println("Game Data: " + gameData);
+
+		Command autoCommand = null;
 		
-		for (Command command : autoCommands) {
-			if (command.getName().equals(name)) {
-				return command;
+		String autoMode = getAutonomousMode();
+		System.out.println("Auto command selected by DriverStation: " + autoMode);
+
+		// Autonomous Modes: To Switch
+		if (gameData.charAt(0) == 'L' && autoMode.equals("[Left] to [SWITCH]")) {
+			autoCommand = new LeftToSWITCH();
+		}
+		else if (gameData.charAt(0) == 'R' && autoMode.equals("[Right] to [SWITCH]")) {
+			autoCommand = new RightToSWITCH();
+		}
+		// Autonomous Modes: Middle To Left Switch
+		else if (autoMode.startsWith("[Middle]")) {
+			if (gameData.charAt(0) == 'L') {
+				autoCommand = new MiddleToLeftSWITCH();
+			} 
+			else if (gameData.charAt(0) == 'R') {
+				autoCommand = new MiddleToRightSWITCH();
 			}
 		}
+		else if (gameData.charAt(0) == 'R' && autoMode.equals("[Middle] to [Right SWITCH]")) {
+			
+		}
+		// Autonomous Modes: To Scale; first priority
+		else if (gameData.charAt(1) == 'L' && autoMode.equals("[Left] to [SCALE]")) {
+			autoCommand = new LeftToSCALE();
+		}
+		else if (gameData.charAt(1) == 'R' && autoMode.equals("[Right] to [SCALE]")) {
+			autoCommand = new RightToSCALE();
+		}
+		// Autonomous Mode: Straight (Default)
+		else {
+			autoCommand = new Straight();
+			System.out.println("Scale was on opposite side, unknown command, or [Straight] was chosen; initiating [Straight]");
+		}
 		
-		return null;
+		return autoCommand;
 	}
 }
