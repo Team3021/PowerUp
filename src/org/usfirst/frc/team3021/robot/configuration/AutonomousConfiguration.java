@@ -119,6 +119,8 @@ public class AutonomousConfiguration extends BaseConfiguration {
 			}
 			
 		}
+	
+		
 		/* Autonomous Modes: Middle To Left Switch*/
 		else if (autoMode.startsWith("[Middle]")) {
 			if (gameData.charAt(0) == 'L') {
@@ -128,6 +130,7 @@ public class AutonomousConfiguration extends BaseConfiguration {
 				autoCommand = new MiddleToRightSWITCH();
 			}
 		}
+
 		
 		/* Autonomous Modes: To Scale*/
 		else if (autoMode.equals("[Left] to [SCALE]")) {
