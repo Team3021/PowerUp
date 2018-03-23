@@ -18,7 +18,7 @@ public class DeliverTote extends CollectorCommand {
 	
 	@Override
 	protected void execute() {
-		collectorSystem.deliver();
+		collectorSystem.deliverAuto();
 	}
 
 	@Override
