@@ -46,6 +46,8 @@ public interface Controller {
 	
 	boolean isLaunching();
 	
+	boolean isLowVoltageLaunch();
+	
 	boolean isCollecting();
 	
 	boolean isCollectorDeploying();

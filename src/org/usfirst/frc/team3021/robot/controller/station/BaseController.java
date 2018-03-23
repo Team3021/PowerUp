@@ -116,6 +116,10 @@ public abstract class BaseController implements Controller {
 	public boolean isLaunching() {
 		return getRawButton("isLaunching");
 	}
+	
+	public boolean isLowVoltageLaunch() {
+		return getRawButton("isLowVoltageLaunch");
+	}
 
 	@Override
 	public boolean isCollecting() {

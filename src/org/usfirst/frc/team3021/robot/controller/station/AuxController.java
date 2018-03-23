@@ -9,7 +9,7 @@ public class AuxController extends BaseController {
 	}
 	
 	protected void setButtons() {
-		buttonActions.add(new ButtonAction(1, "RIGHT_TOGGLE_BUTTON", "UNASSIGNED"));
+		buttonActions.add(new ButtonAction(1, "RIGHT_TOGGLE_BUTTON", "isLowVoltageLaunch"));
 		buttonActions.add(new ButtonAction(2, "MIDDLE_TOGGLE_BUTTON", "UNASSIGNED"));
 		buttonActions.add(new ButtonAction(3, "LEFT_TOGGLE_BUTTON", "UNASSIGNED"));
 

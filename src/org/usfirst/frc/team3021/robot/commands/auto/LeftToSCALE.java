@@ -11,17 +11,16 @@ public class LeftToSCALE extends CommandGroup {
 
 	public LeftToSCALE() {
 		super("[Left] to [SCALE]");
-	}
-
-	@Override
-	protected void initialize() {
-		System.out.println("Entering Initialize LeftToScale");
-
+		
 		double speed = DriveCommand.getAutonomousMoveSpeed();
 
 		addSequential(new MoveForwardForDistance(speed, 26.75));
 		addSequential(new TurnRightToAngle(90));
 		addSequential(new OuttakeScale());
-		
+	}
+
+	@Override
+	protected void initialize() {
+		System.out.println("Initializing [Left] To [SCALE]");
 	}
 }

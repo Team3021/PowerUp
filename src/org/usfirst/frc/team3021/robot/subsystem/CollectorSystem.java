@@ -18,9 +18,12 @@ public class CollectorSystem extends Subsystem {
 	private boolean isEnabled = ENABLED_DEFAULT;
 
 	private static final String PREF_VOLTAGE = "Collector.motor.voltage";
+	private static final String PREF_OUTTAKE_VOLTAGE_LOW = "Collector.motor.voltage.outtake.low";
 	private static final double VOLTAGE_DEFAULT = 0.65;
+	private static final double PREF_OUTTAKE_VOLTAGE_LOW_DEFAULT = 0.325;
 
 	private double voltage = VOLTAGE_DEFAULT;
+	private double lowVoltage = 0.5;
 	
 	private static final double REVERSE_MULTIPLIER = -1.0;
 	
@@ -39,7 +42,8 @@ public class CollectorSystem extends Subsystem {
 
 	public CollectorSystem() {	
 		isEnabled =  Preferences.getInstance().getBoolean(PREF_ENABLED, ENABLED_DEFAULT);
-		voltage = Preferences.getInstance().getDouble(PREF_VOLTAGE, VOLTAGE_DEFAULT);
+		voltage = Preferences.getInstance().getDouble(PREF_VOLTAGE, VOLTAGE_DEFAULT); //0.7
+		lowVoltage = Preferences.getInstance().getDouble(PREF_OUTTAKE_VOLTAGE_LOW, PREF_OUTTAKE_VOLTAGE_LOW_DEFAULT); // 0.2
 
 		if (isEnabled) {
 			collector_deploy = new Solenoid(1);
@@ -91,6 +95,7 @@ public class CollectorSystem extends Subsystem {
 			else if (mainController.isLaunching() || auxController.isLaunching()) {
 				deliver();
 			}
+			
 			else {
 				stop();
 			}
@@ -102,8 +107,8 @@ public class CollectorSystem extends Subsystem {
 			return;
 		}
 		
-		right_motor.set(voltage*0.9);
-		left_motor.set(REVERSE_MULTIPLIER * voltage);
+		right_motor.set(voltage);
+		left_motor.set(REVERSE_MULTIPLIER * voltage * 0.9);
 	}
 	
 	public void deliver() {
@@ -111,8 +116,24 @@ public class CollectorSystem extends Subsystem {
 			return;
 		}
 		
-		right_motor.set(REVERSE_MULTIPLIER * voltage*0.5);//right_motor.set(voltage);
-		left_motor.set(voltage*0.5);//left_motor.set(REVERSE_MULTIPLIER * voltage);
+		if (auxController.isLowVoltageLaunch()) {
+			right_motor.set(REVERSE_MULTIPLIER * lowVoltage);
+			left_motor.set(lowVoltage);
+		}
+		else {
+			right_motor.set(REVERSE_MULTIPLIER * voltage);
+			left_motor.set(voltage);
+		}
+	}
+	
+	public void deliverAuto() {
+		if (!isEnabled) {
+			return;
+		}
+		
+		right_motor.set(REVERSE_MULTIPLIER * 0.55);
+		left_motor.set(0.55);
+		
 	}
 	
 	public void stop() {
