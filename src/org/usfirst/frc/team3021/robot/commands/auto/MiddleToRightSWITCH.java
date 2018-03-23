@@ -26,7 +26,7 @@ public class MiddleToRightSWITCH extends CommandGroup {
 		addSequential(new TurnLeftToAngle(90.0));
 		addSequential(new MoveForwardForDistance(speed, 4.583));
 		
-		addSequential(new ExtendClimber(0.5));
+		addSequential(new ExtendClimber(1.0));
 		addSequential(new DeployTote(1));
 		addSequential(new DeliverTote(2));
 		addSequential(new StowTote(1));
