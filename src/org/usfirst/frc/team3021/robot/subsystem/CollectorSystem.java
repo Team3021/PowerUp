@@ -126,13 +126,13 @@ public class CollectorSystem extends Subsystem {
 		}
 	}
 	
-	public void deliverAuto() {
+	public void deliver(double speed) {
 		if (!isEnabled) {
 			return;
 		}
 		
-		right_motor.set(REVERSE_MULTIPLIER * 0.55);
-		left_motor.set(0.55);
+		right_motor.set(REVERSE_MULTIPLIER * speed);
+		left_motor.set(speed);
 		
 	}
 	

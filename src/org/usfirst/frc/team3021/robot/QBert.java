@@ -2,6 +2,8 @@ package org.usfirst.frc.team3021.robot;
 
 import org.usfirst.frc.team3021.robot.commands.auto.LeftToSCALE;
 import org.usfirst.frc.team3021.robot.commands.auto.LeftToSWITCH;
+import org.usfirst.frc.team3021.robot.commands.auto.MiddleToLeftSWITCH;
+import org.usfirst.frc.team3021.robot.commands.auto.MiddleToRightSWITCH;
 import org.usfirst.frc.team3021.robot.commands.auto.RightToSCALE;
 import org.usfirst.frc.team3021.robot.commands.auto.RightToSWITCH;
 import org.usfirst.frc.team3021.robot.commands.auto.Straight;
@@ -103,20 +105,26 @@ public class QBert extends IterativeRobot {
 		String autoMode = autonomousConfiguration.getAutonomousMode();
 		System.out.println(autoMode);
 
-		// Autonomous Modes: To Scale; first priority
-		if (gameData.charAt(1) == 'L' && autoMode.equals("[Left] to [SCALE]")) {
-			autoCommand = new LeftToSCALE();
-		}
-		else if (gameData.charAt(1) == 'R' && autoMode.equals("[Right] to [SCALE]")) {
-			autoCommand = new RightToSCALE();
-			
-		}
 		// Autonomous Modes: To Switch
-		else if (gameData.charAt(0) == 'L' && autoMode.equals("[Left] to [SWITCH")) {
+		if (gameData.charAt(0) == 'L' && autoMode.equals("[Left] to [SWITCH")) {
 			autoCommand = new LeftToSWITCH();
 		}
 		else if (gameData.charAt(0) == 'R' && autoMode.equals("[Right] to [SWITCH]")) {
 			autoCommand = new RightToSWITCH();
+		}
+		// Autonomous Modes: Middle To Left Switch
+		if (gameData.charAt(0) == 'L' && autoMode.equals("[Middle] to [Left SWITCH]")) {
+			autoCommand = new MiddleToLeftSWITCH();
+		}
+		else if (gameData.charAt(0) == 'R' && autoMode.equals("[Middle] to [Right SWITCH]")) {
+			autoCommand = new MiddleToRightSWITCH();
+		}
+		// Autonomous Modes: To Scale; first priority
+		else if (gameData.charAt(1) == 'L' && autoMode.equals("[Left] to [SCALE]")) {
+			autoCommand = new LeftToSCALE();
+		}
+		else if (gameData.charAt(1) == 'R' && autoMode.equals("[Right] to [SCALE]")) {
+			autoCommand = new RightToSCALE();
 		}
 		// Autonomous Mode: Straight (Default)
 		else {

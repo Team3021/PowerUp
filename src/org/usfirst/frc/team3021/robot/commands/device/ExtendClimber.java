@@ -7,7 +7,7 @@ public class ExtendClimber extends ClimberCommand {
 	double duration; // seconds
 
 	public ExtendClimber() {
-		this(1.5);
+		this(1.0);
 	}
 	
 	public ExtendClimber(double duration) {

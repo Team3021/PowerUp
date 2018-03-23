@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.usfirst.frc.team3021.robot.commands.auto.LeftToSCALE;
 import org.usfirst.frc.team3021.robot.commands.auto.LeftToSWITCH;
-import org.usfirst.frc.team3021.robot.commands.auto.MiddleToSWITCH;
+import org.usfirst.frc.team3021.robot.commands.auto.MiddleToLeftSWITCH;
+import org.usfirst.frc.team3021.robot.commands.auto.MiddleToRightSWITCH;
 import org.usfirst.frc.team3021.robot.commands.auto.RightToSCALE;
 import org.usfirst.frc.team3021.robot.commands.auto.RightToSWITCH;
 import org.usfirst.frc.team3021.robot.commands.auto.Straight;
@@ -68,7 +69,8 @@ public class AutonomousConfiguration extends BaseConfiguration {
 		autoCommands.add(new LeftToSCALE());
 		autoCommands.add(new LeftToSWITCH());
 		
-		autoCommands.add(new MiddleToSWITCH());
+		autoCommands.add(new MiddleToLeftSWITCH());
+		autoCommands.add(new MiddleToRightSWITCH());
 		
 		autoCommands.add(new Straight());
 		

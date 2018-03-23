@@ -39,7 +39,7 @@ public class DeviceCommandConfiguration extends BaseConfiguration {
 		commands.add(new DeployTote(2));
 		
 		// Get or Give
-		commands.add(new DeliverTote());
+		commands.add(new DeliverTote(1));
 		commands.add(new CollectTote());
 		
 		// Combined Actions
