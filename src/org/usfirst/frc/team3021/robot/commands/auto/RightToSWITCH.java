@@ -19,8 +19,8 @@ public class RightToSWITCH extends CommandGroup {
 		double speed = DriveCommand.getAutonomousMoveSpeed();
 		
 		addSequential(new MoveForwardForDistance(speed, 10));
-		addSequential(new TurnLeftToAngle(90));
-		addSequential(new MoveForwardForDistance(speed, 1.1));
+		//addSequential(new TurnLeftToAngle(90));
+		//addSequential(new MoveForwardForDistance(speed, 1.1));
 
 		addSequential(new ExtendClimber(1));
 		addSequential(new DeployTote(1));

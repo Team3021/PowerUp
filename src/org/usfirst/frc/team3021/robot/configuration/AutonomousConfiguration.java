@@ -100,9 +100,6 @@ public class AutonomousConfiguration extends BaseConfiguration {
 			if (gameData.charAt(0) == 'L'){ //If Left Switch is ours then go to switch
 					autoCommand = new LeftToSWITCH();
 			}
-			else if (gameData.charAt(1) == 'L'){ //If Left Switch isn't ours and Scale is go to Scale
-					autoCommand = new LeftToSCALE();
-			}
 			else { //Neither Scale nor Switch is ours so go Straight
 				autoCommand = new Straight();
 			}
@@ -110,9 +107,6 @@ public class AutonomousConfiguration extends BaseConfiguration {
 		else if (autoMode.equals("[Right] to [SWITCH]")) {
 			if (gameData.charAt(0) == 'R') { //If Right Switch is ours go to switch
 				autoCommand = new RightToSWITCH();
-			}
-			else if (gameData.charAt(1)== 'R') {//If switch is not ours go to scale
-				autoCommand = new RightToSCALE();
 			}
 			else { //If neither are ours go straight
 				autoCommand = new Straight();
