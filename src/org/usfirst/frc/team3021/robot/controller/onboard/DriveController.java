@@ -66,6 +66,8 @@ public class DriveController {
 	//	rightFrontTalon = new WPI_TalonSRX(RIGHT_FRONT_PORT);
 		rightRearTalon = new WPI_TalonSRX(RIGHT_REAR_PORT);
 		
+//		rightRearTalon.configOpenloopRamp(0.35, 0)
+		
 		// DRIVE DECLARATION
 //		leftSpeedController = new SpeedControllerGroup(leftFrontTalon, leftRearTalon);
 //		rightSpeedController = new SpeedControllerGroup(rightFrontTalon, rightRearTalon);
