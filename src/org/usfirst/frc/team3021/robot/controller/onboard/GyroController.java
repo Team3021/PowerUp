@@ -165,7 +165,10 @@ public class GyroController implements PIDOutput {
 	public void zeroGyro() {
 		System.out.println("Zero the gyro [START]");
 		
-		navx.zeroYaw();
+		for (int i=0; i<20; i++) {
+		    navx.zeroYaw();
+		    System.out.println("zeroYaw call " + i + " : " + navx.getYaw());
+		}
 		
 		// wait for the navx to complete the zero of the yaw value
 		int checkCount = 0;
@@ -176,12 +179,12 @@ public class GyroController implements PIDOutput {
 			driveSystem.stop();
 			
 			// End the checking after a given number of checks
-			if (checkCount >= 700) {
+			if (checkCount >= 100) {
 				DriverStation.reportError("breaking from zero gyro", false);
 				break;
 			}
 			
-			Timer.delay(0.010);
+			Timer.delay(0.005);
 		}
 		
 		System.out.println("Zero the gyro [END]");
