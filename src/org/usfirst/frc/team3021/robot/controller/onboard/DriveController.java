@@ -22,16 +22,16 @@ public class DriveController {
 	private DifferentialDrive robotDrive;
 	
 	// TALON PORTS
-	//private static final int RIGHT_FRONT_PORT = 24;
+	private static final int RIGHT_FRONT_PORT = 22;
 	private static final int RIGHT_REAR_PORT = 25;
 	private static final int LEFT_REAR_PORT = 23;
-	//private static final int LEFT_FRONT_PORT = 22;
+	private static final int LEFT_FRONT_PORT = 24;
 
 	// TALONS
 	private WPI_TalonSRX rightRearTalon;
-//	private WPI_TalonSRX rightFrontTalon;
+	private WPI_TalonSRX rightFrontTalon;
 	private WPI_TalonSRX leftRearTalon;
-//	private WPI_TalonSRX leftFrontTalon;
+	private WPI_TalonSRX leftFrontTalon;
 	
 	// SPEED CONTROLLERS
 	private SpeedControllerGroup leftSpeedController;
@@ -61,14 +61,14 @@ public class DriveController {
 	
 	public DriveController() {
 		// TALONS
-		//leftFrontTalon = new WPI_TalonSRX(LEFT_FRONT_PORT);
+		leftFrontTalon = new WPI_TalonSRX(LEFT_FRONT_PORT);
 		leftRearTalon = new WPI_TalonSRX(LEFT_REAR_PORT);
-	//	rightFrontTalon = new WPI_TalonSRX(RIGHT_FRONT_PORT);
+		rightFrontTalon = new WPI_TalonSRX(RIGHT_FRONT_PORT);
 		rightRearTalon = new WPI_TalonSRX(RIGHT_REAR_PORT);
 		
 		// DRIVE DECLARATION
-//		leftSpeedController = new SpeedControllerGroup(leftFrontTalon, leftRearTalon);
-//		rightSpeedController = new SpeedControllerGroup(rightFrontTalon, rightRearTalon);
+		leftSpeedController = new SpeedControllerGroup(leftFrontTalon, leftRearTalon);
+		rightSpeedController = new SpeedControllerGroup(rightFrontTalon, rightRearTalon);
 		
 		robotDrive = new DifferentialDrive(leftRearTalon, rightRearTalon);
 		robotDrive.setExpiration(0.25);
@@ -107,9 +107,9 @@ public class DriveController {
 
 	public double getMotorOutput() {
 		
-//		Dashboard.putNumber("Drive : Motor Voltage : Left Front", leftFrontTalon.getMotorOutputVoltage());
+		Dashboard.putNumber("Drive : Motor Voltage : Left Front", leftFrontTalon.getMotorOutputVoltage());
 		Dashboard.putNumber("Drive : Motor Voltage : Left Rear", leftRearTalon.getMotorOutputVoltage());
-//		Dashboard.putNumber("Drive : Motor Voltage : Right Front", rightFrontTalon.getMotorOutputVoltage());
+		Dashboard.putNumber("Drive : Motor Voltage : Right Front", rightFrontTalon.getMotorOutputVoltage());
 		Dashboard.putNumber("Drive : Motor Voltage : Right Rear", rightRearTalon.getMotorOutputVoltage());
 		
 		return (leftRearTalon.getMotorOutputVoltage() + rightRearTalon.getMotorOutputVoltage()) / 2;
