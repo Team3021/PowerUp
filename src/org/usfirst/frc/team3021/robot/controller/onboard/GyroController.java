@@ -158,6 +158,8 @@ public class GyroController implements PIDOutput {
 		System.out.println("Recalibrating gyro [START]");
 		
 		navx.reset();
+		
+		Timer.delay(0.250);
 
 		System.out.println("Recalibrating gyro [END]");
 	}
@@ -170,7 +172,7 @@ public class GyroController implements PIDOutput {
 		// wait for the navx to complete the zero of the yaw value
 		int checkCount = 0;
 		
-		while (Math.abs(getGyroRotation()) > 1.0) {
+		while (Math.abs(getGyroRotation()) > 2.0) {
 			checkCount++;
 
 			driveSystem.stop();

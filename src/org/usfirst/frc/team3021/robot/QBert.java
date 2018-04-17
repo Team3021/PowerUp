@@ -88,8 +88,6 @@ public class QBert extends IterativeRobot {
 		System.out.println("Entering Autonomous Init");
 		Scheduler.getInstance().removeAll();
 		
-		Command autoCommand = null;
-		
 		while (gameData.isEmpty()) {
 			
 			System.out.println("Trying to get game data");
@@ -100,46 +98,11 @@ public class QBert extends IterativeRobot {
 			Timer.delay(0.005);
 		}
 		
-		System.out.println("Game Data: " + gameData);
+		Command autoCommand = autonomousConfiguration.getAutonomousCommand(gameData);
 		
-		String autoMode = autonomousConfiguration.getAutonomousMode();
-		System.out.println(autoMode);
-
-		// Autonomous Modes: To Switch
-		if (gameData.charAt(0) == 'L' && autoMode.equals("[Left] to [SWITCH]")) {
-			autoCommand = new LeftToSWITCH();
-		}
-		else if (gameData.charAt(0) == 'R' && autoMode.equals("[Right] to [SWITCH]")) {
-			autoCommand = new RightToSWITCH();
-		}
-		// Autonomous Modes: Middle To Left Switch
-		else if (autoMode.startsWith("[Middle]")) {
-			if (gameData.charAt(0) == 'L') {
-				autoCommand = new MiddleToLeftSWITCH();
-			} 
-			else if (gameData.charAt(0) == 'R') {
-				autoCommand = new MiddleToRightSWITCH();
-			}
-		}
-		else if (gameData.charAt(0) == 'R' && autoMode.equals("[Middle] to [Right SWITCH]")) {
-			
-		}
-		// Autonomous Modes: To Scale; first priority
-		else if (gameData.charAt(1) == 'L' && autoMode.equals("[Left] to [SCALE]")) {
-			autoCommand = new LeftToSCALE();
-		}
-		else if (gameData.charAt(1) == 'R' && autoMode.equals("[Right] to [SCALE]")) {
-			autoCommand = new RightToSCALE();
-		}
-		// Autonomous Mode: Straight (Default)
-		else {
-			autoCommand = new Straight();
-			System.out.println("Scale was on opposite side, unknown command, or [Straight] was chosen; initiating [Straight]");
-		}
-
 		System.out.println("AutoCommand Scheduled " + autoCommand.getName());
+		
 		Scheduler.getInstance().add(autoCommand);
-
 	}
 
 	@Override

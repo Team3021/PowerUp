@@ -66,12 +66,18 @@ public class DriveController {
 		rightFrontTalon = new WPI_TalonSRX(RIGHT_FRONT_PORT);
 		rightRearTalon = new WPI_TalonSRX(RIGHT_REAR_PORT);
 		
+//		rightRearTalon.configOpenloopRamp(0.35, 0)
+		
 		// DRIVE DECLARATION
 		leftSpeedController = new SpeedControllerGroup(leftFrontTalon, leftRearTalon);
 		rightSpeedController = new SpeedControllerGroup(rightFrontTalon, rightRearTalon);
 		
 		robotDrive = new DifferentialDrive(leftRearTalon, rightRearTalon);
 		robotDrive.setExpiration(0.25);
+		robotDrive.setSafetyEnabled(false);
+		
+		rightRearTalon.setSafetyEnabled(false);
+		leftRearTalon.setSafetyEnabled(false);
 
 		// Calculate encoder distance
 		double wheelDiameter = Preferences.getInstance().getDouble(PREF_DRIVE_WHEEL_SIZE, DRIVE_WHEEL_SIZE_DEFAULT);

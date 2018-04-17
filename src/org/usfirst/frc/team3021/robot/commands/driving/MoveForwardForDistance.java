@@ -68,6 +68,10 @@ public class MoveForwardForDistance extends DriveCommand {
 			
 			// Reset the heading
 			currentHeading = 0;
+			
+			ArcadeDriveInput input = new ArcadeDriveInput(moveValue, 0.15);
+			
+			return input;
 		}
 		
 		// current heading is correct
